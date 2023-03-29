@@ -27,6 +27,11 @@ def make_directory(dir_name):
         # If already exist, the pass.
         print("Output directory", OutputDir, "already exists.")
         pass
+
+    if not OutputDir.endswith('/'):
+        OutputDir += "/"
+
+    return OutputDir
 # *************************************************************************
 
 

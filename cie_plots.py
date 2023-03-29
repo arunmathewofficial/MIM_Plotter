@@ -15,19 +15,19 @@ from species import *
 
 
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
+output_folder = make_directory('MIM_Publication_1')
 
 '''
 1. Ion fraction of Hydrogen, Helium and Carbon for CIE with Asplund 2009 abundances
 '''
-file = '/home/tony/Desktop/Simulations/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
+file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
 
 
 '''
 2. Compare the ion fraction of Helium, Carbon  and Nitrogen for Asplund2009 and Eatson2022 abundances 
 '''
-asplund_cie_silofile = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
-eatson_cie_silofile = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Eatson2022/CIE_Eatson2002_n128_0000.02284404.silo'
+asplund_cie_silofile = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
+eatson_cie_silofile = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Eatson2022/CIE_Eatson2002_n128_0000.02284404.silo'
 
 
 OPTION = 1
@@ -304,7 +304,7 @@ if OPTION == 1:
     plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
     onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('CIE_Asplund2002.png')
+    plt.savefig(output_folder + 'CIE_Asplund2002.png')
 # END OF OPTION 1 ***************************************************************
 
 
