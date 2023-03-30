@@ -52,10 +52,13 @@ IRON_CIE_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4+}
                 r"$Fe^{25+}$", r"$Fe^{26+}$"]
 
 
-# Shock LABELS
-HYDROGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$"]
 
-HELIUM_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$"]
+
+'''
+# Shock LABELS
+HYDROGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textbf{\huge\textrm{II}}$"]
+
+HELIUM_SHOCK_LABELS = [r"$\textbf{\textrm{I}}$", r"$\textrm{II}$", r"$\textrm{III}$"]
 CARBON_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
                      r"$\textrm{VI}$", r"$\textrm{VII}$"]
 NITROGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
@@ -75,9 +78,31 @@ IRON_SHOCK_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4
                 r"$Fe^{13+}$", r"$Fe^{14+}$", r"$Fe^{15+}$", r"$Fe^{16+}$", r"$Fe^{17+}$", r"$Fe^{18+}$",
                 r"$Fe^{19+}$", r"$Fe^{20+}$", r"$Fe^{21+}$", r"$Fe^{22+}$", r"$Fe^{23+}$", r"$Fe^{24+}$",
                 r"$Fe^{25+}$", r"$Fe^{26+}$"]
+'''
 
+# Shock LABELS
+HYDROGEN_SHOCK_LABELS = [r"$\textbf{\Large\textrm{I}}$", r"$\textbf{\Large\textrm{II}}$"]
 
-
+HELIUM_SHOCK_LABELS = [r"$\textbf{\textrm{I}}$", r"$\textrm{II}$", r"$\textrm{III}$"]
+CARBON_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
+                     r"$\textrm{VI}$", r"$\textrm{VII}$"]
+NITROGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
+                     r"$\textrm{VI}$", r"$\textrm{VII}$", r"$\textrm{VIII}$"]
+OXYGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$", r"$\textrm{VI}$", r"$\textrm{VII}$",
+                     r"$\textrm{VIII}$", r"$\textrm{IX}$"]
+NEON_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$", r"$\textrm{VI}$", r"$\textrm{VII}$",
+                     r"$\textrm{VIII}$", r"$\textrm{IX}$", r"$\textrm{X}$", r"$\textrm{XI}$"]
+SILICON_SHOCK_LABELS = [r"$Si$", r"$Si^{1+}$", r"$Si^{2+}$", r"$Si^{3+}$", r"$Si^{4+}$", r"$Si^{5+}$", r"$Si^{6+}$",
+                r"$Si^{7+}$", r"$Si^{8+}$", r"$Si^{9+}$", r"$Si^{10+}$", r"$Si^{11+}$", r"$Si^{12+}$", r"$Si^{13+}$",
+                r"$Si^{14+}$"]
+SULFUR_SHOCK_LABELS = [r"$S$", r"$S^{1+}$", r"$S^{2+}$", r"$S^{3+}$", r"$S^{4+}$", r"$S^{5+}$", r"$S^{6+}$", r"$S^{7+}$",
+                r"$S^{8+}$", r"$S^{9+}$", r"$S^{10+}$", r"$S^{11+}$", r"$S^{12+}$", r"$S^{13+}$", r"$S^{14+}$",
+                r"$S^{15+}$", r"$S^{16+}$"]
+IRON_SHOCK_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4+}$", r"$Fe^{5+}$", r"$Fe^{6+}$",
+                r"$Fe^{7+}$", r"$Fe^{8+}$", r"$Fe^{9+}$", r"$Fe^{10+}$", r"$Fe^{11+}$", r"$Fe^{12+}$",
+                r"$Fe^{13+}$", r"$Fe^{14+}$", r"$Fe^{15+}$", r"$Fe^{16+}$", r"$Fe^{17+}$", r"$Fe^{18+}$",
+                r"$Fe^{19+}$", r"$Fe^{20+}$", r"$Fe^{21+}$", r"$Fe^{22+}$", r"$Fe^{23+}$", r"$Fe^{24+}$",
+                r"$Fe^{25+}$", r"$Fe^{26+}$"]
 
 
 

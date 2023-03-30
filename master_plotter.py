@@ -247,33 +247,40 @@ def onedim_master_plotter(plot_data, plot_style):
              # loop over species
              for n in range(len(plot_data[plot_index])):
 
-                 try:
-                     linestyle = plot_data[plot_index][n]['line-style']
-                     color = plot_data[plot_index][n]['line-color']
-                     marker = plot_data[plot_index][n]['line-marker']
-                 except:
-                     linestyle = None; color = None; marker = None
+                 try: linestyle = plot_data[plot_index][n]['line-style']
+                 except: linestyle = None
+                 try: color = plot_data[plot_index][n]['line-color']
+                 except: color = None
+                 try: marker = plot_data[plot_index][n]['line-marker']
+                 except: marker = None
 
                  ax[r, c].plot(plot_data[plot_index][n]['x'], plot_data[plot_index][n]['y'],
                                label=plot_data[plot_index][n]['labels'],
-                               linestyle=linestyle, color=color, marker=marker
+                               linestyle=linestyle, linewidth=2,
+                               color=color,
+                               marker=marker, markersize=10
                                )
 
                  if len(plot_data[plot_index][n]['label-position']) == 2:
                      x_position = plot_data[plot_index][n]['label-position'][0]
                      y_position = plot_data[plot_index][n]['label-position'][1]
-                     ax[r, c].text(x_position, y_position, plot_data[plot_index][n]['labels'], fontsize=label_font_size)
+                     ax[r, c].text(x_position, y_position, plot_data[plot_index][n]['labels'],
+                                   fontsize=label_font_size)
 
-             ax[r, c].xaxis.set_minor_locator(AutoMinorLocator())
-             ax[r, c].yaxis.set_minor_locator(AutoMinorLocator())
+             #ax[r, c].xaxis.set_minor_locator(AutoMinorLocator())
+             #ax[r, c].yaxis.set_minor_locator(AutoMinorLocator())
              ax[r, c].tick_params(axis="both", direction="in", which="both",
-                                  bottom=True, top=True, left=True, right=True, length=3)
+                                  bottom=True, top=True, left=True, right=True,
+                                  length=5, width=3, labelsize=15)
 
-             ax[r, c].set_xlabel(plot_style['axis-label'][fig_index][0])
-             ax[r, c].set_ylabel(plot_style['axis-label'][fig_index][1])
+             ax[r, c].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=10)
+             ax[r, c].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=10)
 
              ax[r, c].set_xlim(plot_style['xlimit'][fig_index])
              ax[r, c].set_ylim(plot_style['ylimit'][fig_index])
+
+             for location in ['left', 'right', 'top', 'bottom']:
+                 ax[r, c].spines[location].set_linewidth(2)
 
              if plot_style['legend'] == True: ax[r, c].legend(frameon=False)
 
@@ -286,5 +293,7 @@ def onedim_master_plotter(plot_data, plot_style):
                      plot_style['insert-txt'][j][0], rotation=plot_style['insert-txt'][j][3])
 
     plt.subplots_adjust(left=left, bottom=bottom, right=right, top=top, wspace=wspace, hspace=hspace)
+
+
 
     return fig
