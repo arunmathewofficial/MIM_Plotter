@@ -25,7 +25,7 @@ from cycler import cycler
 plt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 plt.rc('text', usetex=True)
 plt.rc('font',**{'size': 12})
-plt.rc('lines', linewidth=1)
+plt.rc('lines', linewidth=1.25)
 
 plt.rcParams["font.weight"] = "normal"
 from matplotlib.font_manager import FontProperties
@@ -226,8 +226,8 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].set_xlim(plot_style['xlimit'][fig_index])
                 ax[fig_index].set_ylim(plot_style['ylimit'][fig_index])
 
-                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0])
-                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1])
+                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14)
+                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14)
 
                 if plot_style['legend'] == True: ax[fig_index].legend(frameon=False)
 

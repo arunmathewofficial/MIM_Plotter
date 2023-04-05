@@ -15,6 +15,8 @@ make_directory('MIM_Publi_Plots')
 Asplund_coolfn = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n128_Asplund2009_CoolFunc.txt'
 Eatson_coolfn = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Eatson2022/CIE_n128_Eatson2022_CoolFunc.txt'
 
+Eatson_coolfn_original = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/Eatson2022_original/Eatson_cooling_curve_WC_logT4-9.txt'
+
 plot_data = []
 
 # 1. Cooling function for Asplund 2002 abuandance ############################################
@@ -94,9 +96,10 @@ Asplund_Fe = [[np.log10(dataset_1[73]), 'Fe'], [np.log10(dataset_1[74]), 'Fe1+']
 asplund_element_list = [Asplund_H, Asplund_He, Asplund_C, Asplund_N, Asplund_O,
                         Asplund_Ne, Asplund_Si, Asplund_S, Asplund_Fe]
 asplund_element_list_name = ['H', 'He', 'C', 'N', 'O', 'Ne', 'Si', 'S', 'Fe']
-label_position = [[], [], [], [], [], [], [], [], []]
-line_color = ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green']
-line_style = ['-', '-', '-', '-', '-', '-', '-', '-', '-']
+label_position = [[4.25, -22.5], [4.9, -22.5], [4.9, -22], [5.2, -22.2], [5.3, -21.6],
+                  [5.7, -22.1], [6.1, -22.6], [6.4, -23.0], [7, -22.9]]
+line_color = ['black', 'black', 'darkblue', 'darkblue', 'crimson', 'crimson', 'darkblue', 'darkgreen', 'darkgreen']
+line_style = ['-.', '--', '--', '-', '-', '--', 'dotted', '--', '-']
 
 net_asplund_coolfn = [0.0] * N_Temp
 
@@ -113,8 +116,8 @@ for element in range(len(asplund_element_list)):
     single_element_data['y'] = np.log10(element_net)
     single_element_data['labels'] = asplund_element_list_name[element]
     single_element_data['label-position'] = label_position[element]
-    #single_element_data['line-color'] = line_color[element]
-    #single_element_data['line-style'] = line_style[element]
+    single_element_data['line-color'] = line_color[element]
+    single_element_data['line-style'] = line_style[element]
     asplund_elements_data.append(single_element_data.copy())
 
     net_asplund_coolfn = net_asplund_coolfn + element_net
@@ -193,9 +196,9 @@ Eatson_Fe = [[np.log10(dataset_2[63]), 'Fe'], [np.log10(dataset_2[64]), 'Fe1+'],
 eatson_element_list = [Eatson_He, Eatson_C, Eatson_O,
                        Eatson_Ne, Eatson_Si, Eatson_S, Eatson_Fe]
 eatson_element_list_name = ['He', 'C', 'O', 'Ne', 'Si', 'S', 'Fe']
-eatson_label_position = [[], [], [], [], [], [], []]
-line_color = ['green', 'green', 'green', 'green', 'green', 'green', 'green']
-line_style = ['-', '-', '-', '-', '-', '-', '-']
+eatson_label_position = [[4.95, -22.2], [4.95, -20.2], [5.33, -21.0], [5.4, -22.5], [5.0, -22.9], [6.25, -23.0], [6.0, -22.3]]
+line_color = ['black', 'black', 'crimson', 'darkgreen', 'darkblue', 'crimson', 'darkgreen']
+line_style = ['--', '--', '-', '--', '-', '--', '-']
 
 net_eatson_coolfn = [0.0] * N_Temp
 
@@ -211,9 +214,9 @@ for element in range(len(eatson_element_list)):
     single_element_data['x'] = eatson_log_temperature
     single_element_data['y'] = np.log10(element_net)
     single_element_data['labels'] = eatson_element_list_name[element]
-    single_element_data['label-position'] = label_position[element]
-    #element_dataset_1['line-color'] = line_color[element]
-    #single_element_dataset_1['line-style'] = line_style[element]
+    single_element_data['label-position'] = eatson_label_position[element]
+    single_element_data['line-color'] = line_color[element]
+    single_element_data['line-style'] = line_style[element]
     eatson_elements_data.append(single_element_data.copy())
 
     net_eatson_coolfn = net_eatson_coolfn + element_net
@@ -223,10 +226,10 @@ plot_data.append(eatson_elements_data)
 # 3. Net cooling for Asplund 2002 abundance #####################################
 asplund_net_data = []
 net_cooling_data = {}
-asplund_element_list_name = ['Asplund 2009']
+asplund_element_list_name = ['Solar']
 label_position = [[]]
 line_color = ['black']
-line_style = ['--']
+line_style = ['-']
 net_cooling_data['x'] = asplund_log_temperature
 net_cooling_data['y'] = np.log10(net_asplund_coolfn)
 net_cooling_data['labels'] = asplund_element_list_name[0]
@@ -240,10 +243,10 @@ plot_data.append(asplund_net_data)
 # 4. Net cooling for Eatson 2022 abundance #####################################
 eatson_net_data = []
 net_cooling_data = {}
-eatson_element_list_name = ['Eatson 2022']
+eatson_element_list_name = ['WC']
 label_position = [[]]
-line_color = ['black']
-line_style = [':']
+line_color = ['darkblue']
+line_style = ['-']
 net_cooling_data['x'] = eatson_log_temperature
 net_cooling_data['y'] = np.log10(net_eatson_coolfn)
 net_cooling_data['labels'] = eatson_element_list_name[0]
@@ -260,30 +263,57 @@ plot_data.append(eatson_net_data)
 del asplund_net_data
 del eatson_net_data
 
+# table 3 original eatson 2022 data ###########################################
+table_3 = ReadTable_Advance(Eatson_coolfn_original)
+print("Table Size: ( row =", table_3['N_row'], ", columns = ", table_3['N_col'], ")")
+
+dataset_3 = table_3['columns']
+
+# x-dataset_3, temperature is given in log
+eatson_orig_log_T = dataset_3[0]
+
+eatson_orig_net_data = []
+net_cooling_data = {}
+eatson_orig_element_list_name = ['Eatson 2022 original']
+label_position = [[]]
+line_color = ['crimson']
+line_style = ['--']
+net_cooling_data['x'] = eatson_orig_log_T
+# y data (rates) are not in log, so we convert them to log
+net_cooling_data['y'] = np.log10(dataset_3[1])
+print(net_cooling_data['y'])
+net_cooling_data['labels'] = eatson_orig_element_list_name[0]
+net_cooling_data['label-position'] = label_position[0]
+net_cooling_data['line-color'] = line_color[0]
+net_cooling_data['line-style'] = line_style[0]
+eatson_orig_net_data.append(net_cooling_data.copy())
+plot_data.append(eatson_orig_net_data)
+
+
 
 
 # plot style #################################################################
 plot_style = {}
-plot_style['figsize'] = (12.5, 25)
+plot_style['figsize'] = (6, 12)
 plot_style['label-font-size'] = 12
 plot_style['matrix'] = [3, 1]
 plot_style['legend'] = True  # options: True/False
 plot_style['sharex'] = False  # options: True/False, 'col', 'all'
 plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
-plot_style['xlimit'] = [[3.8, 8.5], [3.8, 8.3], [3.8, 8.5]]
-plot_style['ylimit'] = [[-26, -21], [-25, -19.5], [-25, -19.5]]
+plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
+plot_style['ylimit'] = [[-25.5, -21], [-25, -19.5], [-25, -19.5]]
 
-plot_style['force-plotting_1d'] = [[3,1], [4, 2], [6, 3]]
+plot_style['force-plotting_1d'] = [[3,1], [4, 2], [6, 3], [7, 3]]
 
-plot_style['axis-label'] = [[None, r"${ \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"],
+plot_style['axis-label'] = [[None, r"${\Large \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"],
                             [None, r"${ \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"],
                             [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"]]
 
 plot_style['insert-txt'] = []
 
 # plot margin adjustments
-plot_style['left'] = 0.1  # the left side of the subplots of the figure
+plot_style['left'] = 0.125  # the left side of the subplots of the figure
 plot_style['right'] = 0.95  # the right side of the subplots of the figure
 plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
 plot_style['top'] = 0.95  # the top of the subplots of the figure
@@ -291,5 +321,5 @@ plot_style['wspace'] = 0.0  # the amount of width reserved for blank space betwe
 plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
 onedim_master_plotter(plot_data, plot_style)
-plt.savefig('cooling_function.png')
+plt.savefig('cooling_function.png', dpi=300)
 
