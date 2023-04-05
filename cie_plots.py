@@ -15,12 +15,12 @@ from species import *
 
 
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
+output_dir = make_directory('MIM_Publication_1')
 
 '''
 1. Ion fraction of Hydrogen, Helium and Carbon for CIE with Asplund 2009 abundances
 '''
-file = '/home/tony/Desktop/Simulations/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
+file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
 
 
 '''
@@ -49,8 +49,8 @@ if OPTION == 1:
     tracer_list = HYDROGEN_CIE_ASPLUND2009
     tracer_labels = HYDROGEN_CIE_LABELS
     label_position = [[4.0, 0.88], [4.4, 0.88]]
-    line_color = ['green', 'green']
-    line_style = ['-', '-']
+    line_color = ['black', 'black']
+    line_style = ['-', 'dashed']
     tracer_data_list = get_tracers(file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -74,7 +74,7 @@ if OPTION == 1:
     tracers_labels = HELIUM_CIE_LABELS
     label_position = [[], [4.6, 0.8], [5.05, 0.8]]
     line_color = ['orange', 'orange', 'orange']
-    line_style = ['--', '--', '--']
+    line_style = ['-', 'dashed', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -97,8 +97,8 @@ if OPTION == 1:
     tracers_list = CARBON_CIE_ASPLUND2009
     tracers_labels = CARBON_CIE_LABELS
     label_position = [[4.05, 0.6], [4.75, 0.3], [4.86, 0.73], [5.15, 0.2], [5.5, 0.85], [6.01, 0.6], [6.5, 0.85]]
-    line_color = ['black', 'black', 'black', 'black', 'black', 'black', 'black']
-    line_style = [':', ':', ':', ':', ':', ':', ':']
+    line_color = ['darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen']
+    line_style = ['-', 'dashed', '-', 'dashed', '-', 'dashed', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -121,8 +121,8 @@ if OPTION == 1:
     tracers_list = NITROGEN_CIE_ASPLUND2009
     tracers_labels = NITROGEN_CIE_LABELS
     label_position = [[4.0, 0.9], [4.46, 0.85], [4.86, .68], [5.13, 0.62], [5.35, 0.2], [5.5, 1.0], [6.2, 0.36], [6.6, 1.0]]
-    line_color = ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green']
-    line_style = ['--', '--', '--', '--', '--', '--', '--', '--']
+    line_color = ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black']
+    line_style = ['-', 'dashed', '-', 'dashed', '-', 'dashed', '-', 'dashed']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -146,8 +146,8 @@ if OPTION == 1:
     tracers_list = OXYGEN_CIE_ASPLUND2009
     tracers_labels = OXYGEN_CIE_LABELS
     label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85]]
-    line_color = ['orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange']
-    line_style = [':', ':', ':', ':', ':', ':', ':', ':', ':']
+    line_color = ['darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen']
+    line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -172,7 +172,7 @@ if OPTION == 1:
     tracers_labels = NEON_CIE_LABELS
     label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], []]
     line_color = ['orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange' ]
-    line_style = [':', ':', ':', ':', ':', ':', ':', ':', ':', ':', ':']
+    line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -196,9 +196,9 @@ if OPTION == 1:
     tracers_labels = SILICON_CIE_LABELS
     label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], [],
                       [], [], [], [], ]
-    line_color = ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
-                  'green', 'green', 'green', 'green', 'green', 'green', 'green']
-    line_style = ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
+    line_color = ['orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange',
+                  'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange']
+    line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -223,9 +223,9 @@ if OPTION == 1:
     tracers_labels = SULFUR_CIE_LABELS
     label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], [],
                       [], [], [], [], [], []]
-    line_color = ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
-                  'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green']
-    line_style = ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
+    line_color = ['darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen',
+                  'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen']
+    line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -255,8 +255,8 @@ if OPTION == 1:
                   'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
                   'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
                   'green', 'green', 'green']
-    line_style = ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--',
-                  '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
+    line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-',
+                  '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -285,6 +285,7 @@ if OPTION == 1:
     plot_style['sharey'] = False       # options: True/False, 'col', 'all'
 
     plot_style['xlimit'] = [[3.7, 6.8], [3.7, 7], [3.7, 8], [3.7, 8.5]]
+    plot_style['ylimit'] = [[0.0, 1.1], [0.0, 1.1], [0.0, 1.1], [0.0, 1.1]]
 
     plot_style['force-plotting_1d'] = [[2, 1], [3, 1], [5, 2], [6, 2], [8, 3]]
 
@@ -298,24 +299,24 @@ if OPTION == 1:
     # plot margin adjustments
     plot_style['left'] = 0.1  # the left side of the subplots of the figure
     plot_style['right'] = 0.9   # the right side of the subplots of the figure
-    plot_style['bottom'] = 0.1  # the bottom of the subplots of the figure
+    plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
     plot_style['top'] = 0.95    # the top of the subplots of the figure
     plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
     plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
     onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('CIE_Asplund2002.png')
+    plt.savefig(output_dir + 'CIE_Asplund2002.png', dpi=300)
 # END OF OPTION 1 ***************************************************************
 
 
-
+'''
 
 # OPTION: 2 ****************************************************************************
 if OPTION == 2:
-    '''
-    Compare the ion fraction of Helium, Carbon  and Nitrogen for Asplund2009 and
-    Eatson2022 abundances 
-    '''
+
+    #Compare the ion fraction of Helium, Carbon  and Nitrogen for Asplund2009 and
+    #Eatson2022 abundances
+
     # make plotting data and append to plot_data array
     plot_data = []
 
@@ -451,69 +452,5 @@ if OPTION == 2:
     plt.show()
 # END OF OPTION 2 ***************************************************************
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-
-#############################################################
-print('*************** PYPION TOOLKIT : TRACER PLOT *****************')
-# Exit if not 1D data
-if dimension == "1D":
-    print('Plotting 1D silo data ...')
-else:
-    print('Not 1D data, exiting ...')
-    quit()
-
-
-
-# Figure parameters ############################################################
-fig_rows = 2 # number of rows in the figure
-fig_cols = 1 # number of cols in the figure
-#xlimit = [0e+15, 1.6e+15] # limit x range of the plot with this interval, empty = default
-xlimit = [3.0,8.5] # limit x range of the plot with this interval, empty = default
-ylimit = [] # limit y range of the plot with this interval, empty = default
-resolution = 300 # control the resolution of the output image
-figsize = (3,4) # set the size of the image, set to 'None' for default
-axislabel = [r'log(T) K', 'ionisation fraction'] # axis labels
-split = [14,13]
-print2file = True
-plot_info = [fig_rows, fig_cols, xlimit, ylimit, figsize, axislabel, split, print2file]
-
-
-imagefile_count = 0
-# Call OneDGrid_Advanced_Plotter for every time instant
-for frame in timeline:
-    data = timeline[frame]
-
-    silo_tracer_plot = Silo_Plotter(data)
-    output = silo_tracer_plot.OneDGrid_Advanced_Tracer_Plotter(x_info, tracer_list, tracer_namelist, plot_info)
-    print('[Time {:.2e}]'.format(output['time']), 'Saving image:' + str(imagefile_count).zfill(4))
-    imagefile = "%s%s%s_%s.png" % (OutputDir, Inputs.img_file, plot_name, str(imagefile_count).zfill(3))
-
-    if print2file == True:
-        textfile = "%s%s%s_%s.txt" % (OutputDir, Inputs.img_file, plot_name, str(imagefile_count).zfill(3))
-        table = pd.DataFrame(output['data'])
-        table.to_csv(textfile, float_format='%.5e')
-
-    plt.savefig(imagefile, bbox_inches='tight', dpi=resolution)
-    imagefile_count += 1
-    plt.close()
-    silo_tracer_plot.close()
-
-
-print('*************** PYPION TOOLKIT : TRACER PLOT *****************')
 
 '''
