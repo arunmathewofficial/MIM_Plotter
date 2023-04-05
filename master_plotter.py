@@ -21,11 +21,12 @@ import astropy.units as unit
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 import warnings
 from cycler import cycler
+from matplotlib.lines import Line2D
 
 plt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 plt.rc('text', usetex=True)
 plt.rc('font',**{'size': 12})
-plt.rc('lines', linewidth=1.25)
+plt.rc('lines', linewidth=1.5)
 
 plt.rcParams["font.weight"] = "normal"
 from matplotlib.font_manager import FontProperties
@@ -235,6 +236,9 @@ def onedim_master_plotter(plot_data, plot_style):
 
                 fig_index = plot_indexing_1Dfunc(plot_index, total_fig, fig_index, force_plotting_1d)
 
+        custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
+                        Line2D([0], [0], linestyle=':', color='m')]
+        plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
 
     # 3. two dimensional array =================================================================
     else:

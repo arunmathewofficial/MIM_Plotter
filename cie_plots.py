@@ -48,7 +48,7 @@ if OPTION == 1:
     # y data - Hydrogen species.
     tracer_list = HYDROGEN_CIE_ASPLUND2009
     tracer_labels = HYDROGEN_CIE_LABELS
-    label_position = [[4.0, 0.88], [4.4, 0.88]]
+    label_position = [[4.0, 1.02], [4.4, 1.02]]
     line_color = ['black', 'black']
     line_style = ['-', 'dashed']
     tracer_data_list = get_tracers(file, tracer_list)
@@ -72,8 +72,8 @@ if OPTION == 1:
     # y data - Helium species.
     tracers_list = HELIUM_CIE_ASPLUND2009
     tracers_labels = HELIUM_CIE_LABELS
-    label_position = [[], [4.6, 0.8], [5.05, 0.8]]
-    line_color = ['orange', 'orange', 'orange']
+    label_position = [[], [4.65, 0.91], [4.96, 0.93]]
+    line_color = ['crimson', 'crimson', 'crimson']
     line_style = ['-', 'dashed', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
@@ -96,8 +96,8 @@ if OPTION == 1:
     # y data - Carbon species.
     tracers_list = CARBON_CIE_ASPLUND2009
     tracers_labels = CARBON_CIE_LABELS
-    label_position = [[4.05, 0.6], [4.75, 0.3], [4.86, 0.73], [5.15, 0.2], [5.5, 0.85], [6.01, 0.6], [6.5, 0.85]]
-    line_color = ['darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen']
+    label_position = [[], [], [4.86, 0.9], [5.15, 0.2], [5.5, 0.9], [6, 0.55], [6.25, 0.9]]
+    line_color = ['darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue']
     line_style = ['-', 'dashed', '-', 'dashed', '-', 'dashed', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
@@ -120,7 +120,7 @@ if OPTION == 1:
     # y data - Nitrogen species.
     tracers_list = NITROGEN_CIE_ASPLUND2009
     tracers_labels = NITROGEN_CIE_LABELS
-    label_position = [[4.0, 0.9], [4.46, 0.85], [4.86, .68], [5.13, 0.62], [5.35, 0.2], [5.5, 1.0], [6.2, 0.36], [6.6, 1.0]]
+    label_position = [[4.0, 1.02], [4.46, 1.02], [4.9, 0.83], [5.15, 0.75], [5.31, 0.25], [5.5, 1.0], [6.2, 0.52], [6.6, 1.0]]
     line_color = ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black']
     line_style = ['-', 'dashed', '-', 'dashed', '-', 'dashed', '-', 'dashed']
     tracer_data_list = get_tracers(file, tracers_list)
@@ -145,8 +145,8 @@ if OPTION == 1:
     # y data - Oxygen species.
     tracers_list = OXYGEN_CIE_ASPLUND2009
     tracers_labels = OXYGEN_CIE_LABELS
-    label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85]]
-    line_color = ['darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen']
+    label_position = [[], [], [], [], [5.4, 0.55], [5.54, 0.15], [6.0, 1.02], [6.35, 0.48], [6.56, 0.85]]
+    line_color = ['crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson']
     line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
@@ -170,8 +170,8 @@ if OPTION == 1:
     # y data - neon species.
     tracers_list = NEON_CIE_ASPLUND2009
     tracers_labels = NEON_CIE_LABELS
-    label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], []]
-    line_color = ['orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange' ]
+    label_position = [[], [], [], [], [5.4, 0.7], [5.6, 0.6], [5.72, 0.42], [5.9, 0.18], [6.3, 1.0], [6.67, 0.45], [6.8, 0.8]]
+    line_color = ['darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue', 'darkblue' ]
     line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
@@ -194,10 +194,11 @@ if OPTION == 1:
     # y data - silicon species.
     tracers_list = SILICON_CIE_ASPLUND2009
     tracers_labels = SILICON_CIE_LABELS
-    label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], [],
-                      [], [], [], [], ]
-    line_color = ['orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange',
-                  'orange', 'orange', 'orange', 'orange', 'orange', 'orange', 'orange']
+    label_position = [[3.9, 1.02], [4.2, 1.02], [4.65, 0.93], [], [5.2, 1.02],
+                      [5.6, 0.58], [5.75, 0.58], [], [], [], [],
+                      [], [6.6, 0.98], [6.9, 0.35], [7.5, 0.98] ]
+    line_color = ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black',
+                  'black', 'black', 'black', 'black', 'black', 'black', 'black']
     line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
@@ -221,10 +222,11 @@ if OPTION == 1:
     # y data - sulfur species.
     tracers_list = SULFUR_CIE_ASPLUND2009
     tracers_labels = SULFUR_CIE_LABELS
-    label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], [],
-                      [], [], [], [], [], []]
-    line_color = ['darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen',
-                  'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen', 'darkgreen']
+    label_position = [[], [], [], [4.95, 0.66], [5.15, 0.65], [], [5.52, 1.0], [5.95, 0.52],
+                      [6.1, 0.51], [], [],
+                      [], [6.52, 0.25], [6.7, 0.15], [6.9, 0.98], [7.6, 0.25], [7.5, 0.8]]
+    line_color = ['crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson',
+                  'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson', 'crimson']
     line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-']
     tracer_data_list = get_tracers(file, tracers_list)
     normalisation_factor = tracer_data_list[0]
@@ -248,13 +250,15 @@ if OPTION == 1:
     # y data - iron species.
     tracers_list = IRON_CIE_ASPLUND2009
     tracers_labels = IRON_CIE_LABELS
-    label_position = [[], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96], [6.35, 0.48], [6.7, 0.85], [], [],
-                      [], [], [], [], [], [], [], [], [], [], [5.4, 0.55], [5.6, 0.15], [6.1, 0.96],
-                      [6.35, 0.48], [6.7, 0.85], [], []]
-    line_color = ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
-                  'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
-                  'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green',
-                  'green', 'green', 'green']
+    label_position = [[3.8, 1.02], [4.05, 1.02], [4.4, 1], [4.7, 0.92], [4.95, 0.78],
+                      [5.08, 0.65], [5.2, 0.65], [5.45, 0.93], [5.5, 0.2], [5.55, 0.3], [5.67, 0.45],
+                      [5.93, 0.88], [6.05, 0.36], [6.25, 0.32], [6.5, 0.2], [6.4, 0.42], [6.62, 0.53],
+                      [6.85, 0.345], [6.9, 0.3], [], [7.07, 0.3], [], [7.4, 0.15], [7.35, 0.3],
+                      [7.65, 0.79], [8.1, 0.47], [8.3, 0.6]]
+    line_color = ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black',
+                  'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black',
+                  'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black',
+                  'black', 'black', 'black']
     line_style = ['-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-',
                   '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--', '-', '--']
     tracer_data_list = get_tracers(file, tracers_list)
@@ -284,7 +288,7 @@ if OPTION == 1:
     plot_style['sharex'] = False       # options: True/False, 'col', 'all'
     plot_style['sharey'] = False       # options: True/False, 'col', 'all'
 
-    plot_style['xlimit'] = [[3.7, 6.8], [3.7, 7], [3.7, 8], [3.7, 8.5]]
+    plot_style['xlimit'] = [[3.9, 6.6], [3.9, 7.1], [3.8, 8], [3.7, 8.5]]
     plot_style['ylimit'] = [[0.0, 1.1], [0.0, 1.1], [0.0, 1.1], [0.0, 1.1]]
 
     plot_style['force-plotting_1d'] = [[2, 1], [3, 1], [5, 2], [6, 2], [8, 3]]
@@ -305,7 +309,7 @@ if OPTION == 1:
     plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
     onedim_master_plotter(plot_data, plot_style)
-    plt.savefig(output_dir + 'CIE_Asplund2002.png', dpi=300)
+    plt.savefig(output_dir + 'CIE_Asplund2009.png', dpi=300)
 # END OF OPTION 1 ***************************************************************
 
 

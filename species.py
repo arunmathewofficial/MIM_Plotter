@@ -28,28 +28,28 @@ IRON_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4+}$", 
                 r"$Fe^{25+}$", r"$Fe^{26+}$"]
 
 # CIE LABELS
-HYDROGEN_CIE_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$"]
+HYDROGEN_CIE_LABELS = [r"$0$", r"$1+$"]
 
-HELIUM_CIE_LABELS = [r"$He$", r"$\textrm{II}$", r"$\textrm{III}$"]
-CARBON_CIE_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
-                     r"$\textrm{VI}$", r"$\textrm{VII}$"]
-NITROGEN_CIE_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
-                     r"$\textrm{VI}$", r"$\textrm{VII}$", r"$\textrm{VIII}$"]
-OXYGEN_CIE_LABELS = [r"$O$", r"$O^{1+}$", r"$O^{2+}$", r"$O^{3+}$", r"$\textrm{V}$", r"$\textrm{VI}$", r"$\textrm{VII}$",
-                     r"$\textrm{VIII}$", r"$\textrm{IX}$"]
-NEON_CIE_LABELS = [r"$Ne$", r"$Ne^{1+}$", r"$Ne^{2+}$", r"$Ne^{3+}$", r"$Ne^{4+}$", r"$Ne^{5+}$", r"$Ne^{6+}$",
-                r"$Ne^{7+}$", r"$Ne^{8+}$", r"$Ne^{9+}$", r"$Ne^{10+}$"]
-SILICON_CIE_LABELS = [r"$Si$", r"$Si^{1+}$", r"$Si^{2+}$", r"$Si^{3+}$", r"$Si^{4+}$", r"$Si^{5+}$", r"$Si^{6+}$",
-                r"$Si^{7+}$", r"$Si^{8+}$", r"$Si^{9+}$", r"$Si^{10+}$", r"$Si^{11+}$", r"$Si^{12+}$", r"$Si^{13+}$",
-                r"$Si^{14+}$"]
-SULFUR_CIE_LABELS = [r"$S$", r"$S^{1+}$", r"$S^{2+}$", r"$S^{3+}$", r"$S^{4+}$", r"$S^{5+}$", r"$S^{6+}$", r"$S^{7+}$",
-                r"$S^{8+}$", r"$S^{9+}$", r"$S^{10+}$", r"$S^{11+}$", r"$S^{12+}$", r"$S^{13+}$", r"$S^{14+}$",
-                r"$S^{15+}$", r"$S^{16+}$"]
-IRON_CIE_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4+}$", r"$Fe^{5+}$", r"$Fe^{6+}$",
-                r"$Fe^{7+}$", r"$Fe^{8+}$", r"$Fe^{9+}$", r"$Fe^{10+}$", r"$Fe^{11+}$", r"$Fe^{12+}$",
-                r"$Fe^{13+}$", r"$Fe^{14+}$", r"$Fe^{15+}$", r"$Fe^{16+}$", r"$Fe^{17+}$", r"$Fe^{18+}$",
-                r"$Fe^{19+}$", r"$Fe^{20+}$", r"$Fe^{21+}$", r"$Fe^{22+}$", r"$Fe^{23+}$", r"$Fe^{24+}$",
-                r"$Fe^{25+}$", r"$Fe^{26+}$"]
+HELIUM_CIE_LABELS = [r"$0$", r"$1+$", r"$2+$"]
+CARBON_CIE_LABELS = [r"$0$", r"$1+$", r"$2+$", r"$3+$", r"$4+$",
+                     r"$5+$", r"$6+$"]
+NITROGEN_CIE_LABELS = [r"$0$", r"$1+$", r"$2+$", r"$3+$", r"$4+$",
+                     r"$5+$", r"$6+$", r"$7+$"]
+OXYGEN_CIE_LABELS = [r"$O$", r"$O^{1+}$", r"$O^{2+}$", r"$O^{3+}$", r"$4+$", r"$5+$", r"$6+$",
+                     r"$7+$", r"$8+$"]
+NEON_CIE_LABELS = [r"$Ne$", r"$Ne^{1+}$", r"$Ne^{2+}$", r"$Ne^{3+}$", r"$4+$", r"$5+$", r"$6+$",
+                r"$7+$", r"$8+$", r"$9+$", r"$10+$"]
+SILICON_CIE_LABELS = [r"$0$", r"$1+$", r"$2+$", r"$3+$", r"$4+$", r"$5+$", r"$6+$",
+                r"$7+$", r"$8+$", r"$9+$", r"$10+$", r"$11+$", r"$12+$", r"$13+$",
+                r"$14+$"]
+SULFUR_CIE_LABELS = [r"$S$", r"$1+$", r"$2+$", r"$3+$", r"$4+$", r"$5+$", r"$6+$", r"$7+$",
+                r"$8+$", r"$9+$", r"$10+$", r"$11+$", r"$12+$", r"$13+$", r"$14+$",
+                r"$15+$", r"$16+$"]
+IRON_CIE_LABELS = [r"$0$", r"$1+$", r"$2+$", r"$3+$", r"$4+$", r"$5+$", r"$6+$",
+                r"$7+$", r"$8+$", r"$9+$", r"$10+$", r"$11+$", r"$12+$",
+                r"$13+$", r"$14+$", r"$15+$", r"$16+$", r"$17+$", r"$18+$",
+                r"$19+$", r"$20+$", r"$21+$", r"$22+$", r"$23+$", r"$24+$",
+                r"$25+$", r"$26+$"]
 
 
 
