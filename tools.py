@@ -189,3 +189,31 @@ def ReadTable_Advance(Table):
     return {'N_row': N_row, 'N_col': N_col, 'columns': columns}
 
 
+
+def add_data_to_dict(dict, column_data, column_name):
+
+    '''
+    This function will update dict with given data and
+    return the dict
+    :param dict:
+    :param column_data: given data
+    :param column_name: name of the data
+    :return: dict
+    '''
+
+    # if column data is in perfect array format
+    if isinstance(column_data, np.ndarray):
+        if column_data.ndim == 1:
+            dict[column_name] = column_data
+
+        if column_data.ndim > 1 :
+            for i in range(len(column_data)):
+                dict[column_name[i]] = column_data[i]
+
+    # If column data is not in array format
+    if not isinstance(column_data, np.ndarray):
+        if len(column_data) > 1:
+            for i in range(len(column_data)):
+                dict[column_name[i]] = column_data[i]
+
+    return dict
