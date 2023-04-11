@@ -8,14 +8,22 @@ from master_plotter import *
 import numpy as np
 import matplotlib.pyplot as plt
 from species import *
+from matplotlib.lines import Line2D
 
 # MAIN ##################################################################################
-make_directory('MIM_Publi_Plots')
+make_directory('MIM_Publication_1')
 
-Asplund_coolfn = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n128_Asplund2009_CoolFunc.txt'
-Eatson_coolfn = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Eatson2022/CIE_n128_Eatson2022_CoolFunc.txt'
+Asplund_coolfn = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n128_Asplund2009_CoolFunc.txt'
+Eatson_coolfn = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Eatson2022/CIE_n128_Eatson2022_CoolFunc.txt'
 
-Eatson_coolfn_original = '/home/tony/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/Eatson2022_original/Eatson_cooling_curve_WC_logT4-9.txt'
+# Both the simulations use the following relevant parameters
+rho = 2.26739E-24 # gas density in the units of g/cm^3
+m_H = 1.67356E-24 # mass of Hydrogen atom in g
+# Hence, the normalisation factor is
+norm_factor = np.power(m_H/rho, 2.0)
+
+
+Eatson_coolfn_original = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/Eatson2022_original/Eatson_cooling_curve_WC_logT4-9.txt'
 
 plot_data = []
 
@@ -30,6 +38,7 @@ asplund_log_temperature = np.log10(dataset_1[0])
 N_Temp = table_1['N_row']
 
 # y-dataset_1 for Asplund 2002 abuandance
+# y dataset is the L function of individual ions.
 Asplund_H  = [[np.log10(dataset_1[1]), 'H'], [np.log10(dataset_1[2]), 'H1+']]
 
 Asplund_He = [[np.log10(dataset_1[3]), 'He'], [np.log10(dataset_1[4]), 'He1+'],
@@ -96,21 +105,23 @@ Asplund_Fe = [[np.log10(dataset_1[73]), 'Fe'], [np.log10(dataset_1[74]), 'Fe1+']
 asplund_element_list = [Asplund_H, Asplund_He, Asplund_C, Asplund_N, Asplund_O,
                         Asplund_Ne, Asplund_Si, Asplund_S, Asplund_Fe]
 asplund_element_list_name = ['H', 'He', 'C', 'N', 'O', 'Ne', 'Si', 'S', 'Fe']
-label_position = [[4.25, -22.5], [4.9, -22.5], [4.9, -22], [5.2, -22.2], [5.3, -21.6],
-                  [5.7, -22.1], [6.1, -22.6], [6.4, -23.0], [7, -22.9]]
+label_position = [[4.24, -22.6], [4.9, -22.8], [4.92, -22.3], [5.2, -22.4], [5.3, -21.9],
+                  [5.63, -22.35], [6.1, -22.85], [6.37, -23.32], [7, -23.2]]
 line_color = ['black', 'black', 'darkblue', 'darkblue', 'crimson', 'crimson', 'darkblue', 'darkgreen', 'darkgreen']
 line_style = ['-.', '--', '--', '-', '-', '--', 'dotted', '--', '-']
 
+# net Lambda
 net_asplund_coolfn = [0.0] * N_Temp
 
 asplund_elements_data = []
 
 for element in range(len(asplund_element_list)):
+    # elemental Lambda
     element_net = [0.0] * N_Temp
 
     single_element_data = {}
     for species in range(len(asplund_element_list[element])):
-        element_net = element_net + np.power(10, asplund_element_list[element][species][0])
+        element_net = element_net + norm_factor*np.power(10, asplund_element_list[element][species][0])
 
     single_element_data['x'] = asplund_log_temperature
     single_element_data['y'] = np.log10(element_net)
@@ -196,7 +207,7 @@ Eatson_Fe = [[np.log10(dataset_2[63]), 'Fe'], [np.log10(dataset_2[64]), 'Fe1+'],
 eatson_element_list = [Eatson_He, Eatson_C, Eatson_O,
                        Eatson_Ne, Eatson_Si, Eatson_S, Eatson_Fe]
 eatson_element_list_name = ['He', 'C', 'O', 'Ne', 'Si', 'S', 'Fe']
-eatson_label_position = [[4.95, -22.2], [4.95, -20.2], [5.33, -21.0], [5.4, -22.5], [5.0, -22.9], [6.25, -23.0], [6.0, -22.3]]
+eatson_label_position = [[4.9, -22.4], [4.96, -20.4], [5.34, -21.3], [5.4, -22.7], [5.0, -23.2], [6.25, -23.25], [6.0, -22.55]]
 line_color = ['black', 'black', 'crimson', 'darkgreen', 'darkblue', 'crimson', 'darkgreen']
 line_style = ['--', '--', '-', '--', '-', '--', '-']
 
@@ -209,7 +220,7 @@ for element in range(len(eatson_element_list)):
 
     single_element_data = {}
     for species in range(len(eatson_element_list[element])):
-        element_net = element_net + np.power(10, eatson_element_list[element][species][0])
+        element_net = element_net + norm_factor*np.power(10, eatson_element_list[element][species][0])
 
     single_element_data['x'] = eatson_log_temperature
     single_element_data['y'] = np.log10(element_net)
@@ -265,6 +276,7 @@ del eatson_net_data
 
 # table 3 original eatson 2022 data ###########################################
 table_3 = ReadTable_Advance(Eatson_coolfn_original)
+# This original data already is normalised  with norm_factor
 print("Table Size: ( row =", table_3['N_row'], ", columns = ", table_3['N_col'], ")")
 
 dataset_3 = table_3['columns']
@@ -274,14 +286,13 @@ eatson_orig_log_T = dataset_3[0]
 
 eatson_orig_net_data = []
 net_cooling_data = {}
-eatson_orig_element_list_name = ['Eatson 2022 original']
+eatson_orig_element_list_name = ['Eatson et al. `22']
 label_position = [[]]
 line_color = ['crimson']
 line_style = ['--']
 net_cooling_data['x'] = eatson_orig_log_T
 # y data (rates) are not in log, so we convert them to log
 net_cooling_data['y'] = np.log10(dataset_3[1])
-print(net_cooling_data['y'])
 net_cooling_data['labels'] = eatson_orig_element_list_name[0]
 net_cooling_data['label-position'] = label_position[0]
 net_cooling_data['line-color'] = line_color[0]
@@ -302,13 +313,13 @@ plot_style['sharex'] = False  # options: True/False, 'col', 'all'
 plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
 plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
-plot_style['ylimit'] = [[-25.5, -21], [-25, -19.5], [-25, -19.5]]
+plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
 
 plot_style['force-plotting_1d'] = [[3,1], [4, 2], [6, 3], [7, 3]]
 
-plot_style['axis-label'] = [[None, r"${\Large \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"],
-                            [None, r"${ \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"],
-                            [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda) \,  erg \, cm^3 \, s^{-1}}$"]]
+plot_style['axis-label'] = [[None, r"${\Large \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                            [None, r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                            [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
 plot_style['insert-txt'] = []
 
@@ -319,6 +330,11 @@ plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
 plot_style['top'] = 0.95  # the top of the subplots of the figure
 plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
 plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+
+
+plot_style['custom-legend'] = [
+    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
+]
 
 onedim_master_plotter(plot_data, plot_style)
 plt.savefig('cooling_function.png', dpi=300)
