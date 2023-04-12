@@ -182,10 +182,6 @@ def onedim_master_plotter(plot_data, plot_style):
         force_plotting_1d = None
     else: force_plotting_1d = plot_style['force-plotting_1d']
 
-    if not 'custom-legend' in plot_style.keys() or len(plot_style['custom-legend']) == 0:
-        custom_legend_array = None
-    else: custom_legend_array = plot_style['custom-legend']
-    fig_index_dummy = None
 
     fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize, sharex=sharex, sharey=sharey)
 
@@ -251,21 +247,15 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14)
                 ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14)
 
-
-                '''
-                # Insert custom legend at a specific position
-                if not custom_legend_array == None and fig_index_dummy != fig_index:
-                    ax[fig_index].legend(handles=custom_legend(custom_legend_array, fig_index), frameon=False)
-                    fig_index_dummy = fig_index
-                '''
-
                 if plot_style['legend'] == True: ax[fig_index].legend(frameon=False)
 
-
+                #ax[fig_index].legend(['First List', '', 'Second List'], loc='upper left')
 
                 fig_index = plot_indexing_1Dfunc(plot_index, total_fig, fig_index, force_plotting_1d)
 
-
+        custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
+                        Line2D([0], [0], linestyle=':', color='m')]
+        plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
 
     # 3. two dimensional array =================================================================
     else:
