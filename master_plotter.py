@@ -253,9 +253,9 @@ def onedim_master_plotter(plot_data, plot_style):
 
                 fig_index = plot_indexing_1Dfunc(plot_index, total_fig, fig_index, force_plotting_1d)
 
-        custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
-                        Line2D([0], [0], linestyle=':', color='m')]
-        plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
+        #custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
+        #                Line2D([0], [0], linestyle=':', color='m')]
+        #plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
 
     # 3. two dimensional array =================================================================
     else:
