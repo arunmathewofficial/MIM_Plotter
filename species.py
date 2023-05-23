@@ -81,17 +81,16 @@ IRON_SHOCK_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4
 '''
 
 # Shock LABELS
-HYDROGEN_SHOCK_LABELS = [r"$\textbf{\Large\textrm{I}}$", r"$\textbf{\Large\textrm{II}}$"]
+HYDROGEN_SHOCK_LABELS = [r"\Large$0$", r"\Large$1+$"]
 
-HELIUM_SHOCK_LABELS = [r"$\textbf{\textrm{I}}$", r"$\textrm{II}$", r"$\textrm{III}$"]
-CARBON_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
-                     r"$\textrm{VI}$", r"$\textrm{VII}$"]
-NITROGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$",
-                     r"$\textrm{VI}$", r"$\textrm{VII}$", r"$\textrm{VIII}$"]
-OXYGEN_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$", r"$\textrm{VI}$", r"$\textrm{VII}$",
-                     r"$\textrm{VIII}$", r"$\textrm{IX}$"]
-NEON_SHOCK_LABELS = [r"$\textrm{I}$", r"$\textrm{II}$", r"$\textrm{III}$", r"$\textrm{IV}$", r"$\textrm{V}$", r"$\textrm{VI}$", r"$\textrm{VII}$",
-                     r"$\textrm{VIII}$", r"$\textrm{IX}$", r"$\textrm{X}$", r"$\textrm{XI}$"]
+HELIUM_SHOCK_LABELS = [r"\Large$0$", r"\Large$1+$", r"\Large$2+$"]
+CARBON_SHOCK_LABELS = [r"\Large$0$", r"\Large$1+$", r"\Large$2+$", r"\Large$3+$", r"\Large$4+$", r"\Large$5+$", r"\Large$6+$"]
+NITROGEN_SHOCK_LABELS = [r"\Large$0$", r"\Large$1+$", r"\Large$2+$", r"\Large$3+$", r"\Large$4+$", r"\Large$5+$",
+                         r"\Large$6+$", r"\Large$7+$"]
+OXYGEN_SHOCK_LABELS = [r"\Large$0$", r"\Large$1+$", r"\Large$2+$", r"\Large$3+$", r"\Large$4+$", r"\Large$5+$",
+                       r"\Large$6+$", r"\Large$7+$", r"\Large$8+$"]
+NEON_SHOCK_LABELS = [r"\Large$0$", r"\Large$1+$", r"\Large$2+$", r"\Large$3+$", r"\Large$4+$", r"\Large$5+$",
+                       r"\Large$6+$", r"\Large$7+$", r"\Large$8+$", r"$\textrm{X}$", r"$\textrm{XI}$"]
 SILICON_SHOCK_LABELS = [r"$Si$", r"$Si^{1+}$", r"$Si^{2+}$", r"$Si^{3+}$", r"$Si^{4+}$", r"$Si^{5+}$", r"$Si^{6+}$",
                 r"$Si^{7+}$", r"$Si^{8+}$", r"$Si^{9+}$", r"$Si^{10+}$", r"$Si^{11+}$", r"$Si^{12+}$", r"$Si^{13+}$",
                 r"$Si^{14+}$"]
