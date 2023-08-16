@@ -13,7 +13,7 @@ from species import *
 
 
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
+output_dir = make_directory('INAM_2023')
 
 
 '''

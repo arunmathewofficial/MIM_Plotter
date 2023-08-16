@@ -196,19 +196,31 @@ def onedim_master_plotter(plot_data, plot_style):
                 # loop over species
                 for n in range(len(plot_data[m])):
 
-                    ax.plot(plot_data[m][n]['x'], plot_data[m][n]['y'], label=plot_data[m][n]['labels'])
+                    ax.plot(plot_data[m][n]['x'], plot_data[m][n]['y'], label=plot_data[m][n]['labels'],
+                            linestyle=plot_data[m][n]['line-style'],
+                            color=plot_data[m][n]['line-color'])
+
+
 
                     if len(plot_data[m][n]['label-position']) == 2:
                         x_position = plot_data[m][n]['label-position'][0]
                         y_position = plot_data[m][n]['label-position'][1]
-                        ax.text(x_position, y_position, plot_data[m][n]['labels'], fontsize=label_font_size)
+                        ax.text(x_position, y_position, plot_data[m][n]['labels'], fontsize=8)
+
 
                 ax.xaxis.set_minor_locator(AutoMinorLocator())
                 ax.yaxis.set_minor_locator(AutoMinorLocator())
                 ax.tick_params(axis="both", direction="in", which="both",
-                               bottom=True, top=True, left=True, right=True, length=2)
+                               bottom=True, top=True, left=True, right=True, length=2, labelsize=8)
 
-                if plot_style['legend'] == True: ax.legend(frameon=False)
+                ax.set_xlim([4, 8.5])
+                ax.set_ylim([-25.5, -19.5])
+                ax.set_xlabel(r"${\rm log(T) \, K}$", fontsize=8)
+                ax.set_ylabel(r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$", fontsize=8)
+
+                if plot_style['legend'] == True: ax.legend(frameon=False, loc='right')
+
+                ax.legend(frameon=False, loc='upper right', fontsize='8')
 
         # 2. one dimensional multiple plots ===================================================
         else:
@@ -239,7 +251,7 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator())
                 ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator())
                 ax[fig_index].tick_params(axis="both", direction="in", which="both",
-                                  bottom=True, top=True, left=True, right=True, length=3)
+                                  bottom=True, top=True, left=True, right=True, length=2)
 
                 ax[fig_index].set_xlim(plot_style['xlimit'][fig_index])
                 ax[fig_index].set_ylim(plot_style['ylimit'][fig_index])
@@ -256,11 +268,11 @@ def onedim_master_plotter(plot_data, plot_style):
         #custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
         #                Line2D([0], [0], linestyle=':', color='m')]
         #plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
-        plt.legend(frameon=False, loc='lower center')
-        plt.legend( loc='upper center',
-                    bbox_to_anchor=(0.51, 0.99),
-                    ncol=9,
-                    bbox_transform=fig.transFigure)
+        #plt.legend(frameon=False, loc='lower center')
+        #plt.legend( loc='upper center',
+        #            bbox_to_anchor=(0.51, 0.99),
+        #            ncol=9,
+        #            bbox_transform=fig.transFigure)
 
 
     # 3. two dimensional array =================================================================
