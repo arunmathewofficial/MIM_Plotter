@@ -11,7 +11,7 @@ from species import *
 from matplotlib.lines import Line2D
 
 # MAIN ##################################################################################
-make_directory('MIM_Publication_1')
+plot_dir =make_directory('MIM_Publication_1')
 
 Asplund_coolfn = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n128_Asplund2009_CoolFunc.txt'
 Eatson_coolfn = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Cooling_Func/CoolFunc_Eatson2022/CIE_n128_Eatson2022_CoolFunc.txt'
@@ -283,7 +283,6 @@ dataset_3 = table_3['columns']
 
 # x-dataset_3, temperature is given in log
 eatson_orig_log_T = dataset_3[0]
-
 eatson_orig_net_data = []
 net_cooling_data = {}
 eatson_orig_element_list_name = ['Eatson et al. `22']
@@ -298,7 +297,7 @@ net_cooling_data['label-position'] = label_position[0]
 net_cooling_data['line-color'] = line_color[0]
 net_cooling_data['line-style'] = line_style[0]
 eatson_orig_net_data.append(net_cooling_data.copy())
-plot_data.append(eatson_orig_net_data)
+#plot_data.append(eatson_orig_net_data)
 
 
 
@@ -310,7 +309,7 @@ plot_style['label-font-size'] = 12
 plot_style['matrix'] = [3, 1]
 plot_style['legend'] = True  # options: True/False
 plot_style['sharex'] = False  # options: True/False, 'col', 'all'
-plot_style['sharey'] = False  # options: True/False, 'col', 'all'
+plot_style['sharey'] = False # options: True/False, 'col', 'all'
 
 plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
 plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
@@ -322,6 +321,7 @@ plot_style['axis-label'] = [[None, r"${\Large \rm log(\Lambda_N) \,  erg \, cm^3
                             [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
 plot_style['insert-txt'] = []
+
 
 # plot margin adjustments
 plot_style['left'] = 0.125  # the left side of the subplots of the figure
@@ -336,6 +336,32 @@ plot_style['custom-legend'] = [
     [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
 ]
 
+###################################################################
+# Making INAM 2023 presentation plots
+plot_dir = make_directory('INAM_2023')
+plot_style['figsize'] = (14, 6)
+plot_style['matrix'] = [1, 2]
+plot_style['sharex'] = True  # options: True/False, 'col', 'all'
+plot_style['sharey'] = True  # options: True/False, 'col', 'all'
+plot_style['force-plotting_1d'] = [[3,1], [4, 2]]
+plot_style['axis-label'] = [[r"${\rm log(T) \, K}$", r"${\Large \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                            [r"${\rm log(T) \, K}$", None],
+                            [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
+
+
+plot_style['insert-txt'] = [[r'{With Solar Abundance}', -0.2, -20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
+
+# plot margin adjustments
+plot_style['left'] = 0.05  # the left side of the subplots of the figure
+plot_style['right'] = 0.98  # the right side of the subplots of the figure
+plot_style['bottom'] = 0.1  # the bottom of the subplots of the figure
+plot_style['top'] = 0.95  # the top of the subplots of the figure
+plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
+plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+###################################################################
+
+
+# Plotting and saving the image to the file
 onedim_master_plotter(plot_data, plot_style)
-plt.savefig('cooling_function.png', dpi=300)
+plt.savefig(plot_dir + 'cooling_function.png', dpi=300)
 

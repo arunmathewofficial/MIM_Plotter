@@ -16,12 +16,12 @@ import pandas as pd
 
 
 # MAIN **********************************************************************
-output_dir = make_directory('MIM_Publication_1')
+output_dir = make_directory('MIM_Publication')
 
 '''
 1. Ion fraction of Hydrogen, Helium and Carbon for CIE with Asplund 2009 abundances
 '''
-file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009/testCIE_mpv10_0000.06963200.silo'
+file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009_1024/CIE_Asplund09_n1024_0000.08577024.silo'
 
 
 '''
@@ -328,7 +328,53 @@ if OPTION == 1:
     print('Saving image to file', plot_file)
     plt.savefig(output_dir + 'CIE_Asplund2009.png', dpi=300)
 
-    # save data to file
+
+
+
+# END OF OPTION 1 ***************************************************************
+
+
+
+# INAM 2023 presentation plots ####################################################
+    output_dir = make_directory('INAM_2023')
+    plot_style = {}
+    plot_style['figsize'] = (12, 16)
+    plot_style['label-font-size'] = 12
+    plot_style['matrix'] = [4, 1]
+    plot_style['legend'] = False  # options: True/False
+    plot_style['sharex'] = False  # options: True/False, 'col', 'all'
+    plot_style['sharey'] = False  # options: True/False, 'col', 'all'
+
+    plot_style['xlimit'] = [[3.9, 6.6], [3.9, 7.1], [3.8, 8], [3.7, 8.5]]
+    plot_style['ylimit'] = [[0.0, 1.1], [0.0, 1.1], [0.0, 1.1], [0.0, 1.1]]
+
+    plot_style['force-plotting_1d'] = [[2, 1], [3, 1], [5, 2], [6, 2], [8, 3]]
+
+    plot_style['axis-label'] = [[None, 'ioniastion fraction'],
+                                [None, 'ioniastion fraction'],
+                                [None, 'ioniastion fraction'],
+                                ['log(T) K', 'ioniastion fraction']]
+
+    plot_style['insert-txt'] = []
+
+    # plot margin adjustments
+    plot_style['left'] = 0.1  # the left side of the subplots of the figure
+    plot_style['right'] = 0.9  # the right side of the subplots of the figure
+    plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
+    plot_style['top'] = 0.95  # the top of the subplots of the figure
+    plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
+    plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+
+    onedim_master_plotter(plot_data, plot_style)
+    plot_file = output_dir + 'CIE_Asplund2009.png'
+    print('Saving image to file', plot_file)
+    plt.savefig(output_dir + 'CIE_Asplund2009.png', dpi=300)
+##############################################################################
+
+
+
+
+    # common cammand: save data to file
     df = pd.DataFrame(data_dict)
     data_file = output_dir + 'CIE_ion_fractions.txt'
     print('Writing data to file', data_file)
@@ -338,5 +384,3 @@ if OPTION == 1:
         file.seek(0, 0)
         file.write('# Collisional ionization equilibrium (CIE) ion-fractions\n' + contents)
 
-
-# END OF OPTION 1 ***************************************************************

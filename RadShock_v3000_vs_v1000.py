@@ -13,10 +13,10 @@ from species import *
 
 
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
+output_dir = make_directory('INAM_2023')
 
-v1000_file = '/home/tony/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v1000_Ray79E_0000.00122880.silo'
-v3000_file = '/home/tony/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v3000_Ray79E_0000.00512000.silo'
+v1000_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v1000_Ray79E_0000.00122880.silo'
+v3000_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v3000_Ray79E_0000.00512000.silo'
 
 #OPTION = 1
 '''
@@ -51,7 +51,7 @@ Resolution - 10240 grid
 # for iron
 '''
 
-OPTION = 5
+OPTION = 4
 
 # OPTION: 1 ****************************************************************************
 if OPTION == 1:
@@ -263,7 +263,7 @@ if OPTION == 1:
     # plot_style['force-plotting'] = [[2, 1, 1], [4, 1, 2], [6, 2, 1], [8, 2, 2], [10, 3, 1], [12, 3, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v1000_HHeCN0Ne.png')
+    plt.savefig(output_dir + 'RadShock_v1000_HHeCN0Ne.png')
 
 
 
@@ -473,7 +473,7 @@ if OPTION == 2:
     #plot_style['force-plotting'] = [[2, 1, 1], [4, 1, 2], [6, 2, 1], [8, 2, 2], [10, 3, 1], [12, 3, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v3000_HHeCN0Ne.png')
+    plt.savefig(output_dir + 'RadShock_v3000_HHeCN0Ne.png')
 
 
 # OPTION: 3 SILICON ****************************************************************
@@ -584,7 +584,7 @@ if OPTION == 3:
     #plot_style['force-plotting_1d'] = [[2, 1], [4, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v3000_vs_v1000_Si.png')
+    plt.savefig(output_dir + 'RadShock_v3000_vs_v1000_Si.png')
 
 
 
@@ -669,8 +669,8 @@ if OPTION == 4:
     # insert text in the figure (add several number of text)
     #plot_style['insert-txt'] = [['text', 0, 2, 45],['hi-text', -2, 2, 90]]
     #plot_style['insert-txt'] = []
-    plot_style['axis-label'] = [[None, r'\Large{Ioniastion fraction}'],
-                                [r'\Large{x (cm)}', r'\Large{Ioniastion fraction}']]
+    plot_style['axis-label'] = [[None, r'\Large{\rm Ioniastion fraction}'],
+                                [r'\Large{\rm x (cm)}', r'\Large{\rm Ioniastion fraction}']]
     #plot_style['axis-label'] = []
 
     plot_style['xlimit'] = [[2e+15, 8e+15], [6e+15, 8.7e+15], [6e+15, 8.7e+15], [6e+15, 8.7e+15]]
@@ -683,11 +683,11 @@ if OPTION == 4:
 
     # plot margin adjustments
     plot_style['left'] = 0.05  # the left side of the subplots of the figure
-    plot_style['right'] = 0.9   # the right side of the subplots of the figure
+    plot_style['right'] = 0.980   # the right side of the subplots of the figure
     plot_style['bottom'] = 0.09  # the bottom of the subplots of the figure
-    plot_style['top'] = 0.95    # the top of the subplots of the figure
+    plot_style['top'] = 0.88    # the top of the subplots of the figure
     #plot_style['wspace'] = 0.05  # the amount of width reserved for blank space between subplots
-    plot_style['hspace'] = 0.13  # the amount of height reserved for white space between subplots
+    plot_style['hspace'] = 0.23  # the amount of height reserved for white space between subplots
 
     # this option will force the plot into any subplots
     # syntax: [plot-index, plot-location] first enter plot-index and then row and col location of
@@ -698,7 +698,7 @@ if OPTION == 4:
     #plot_style['force-plotting_1d'] = [[2, 1], [4, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v3000_vs_v1000_S.png')
+    plt.savefig(output_dir + 'RadShock_v3000_vs_v1000_S.png')
 
 
 
@@ -784,15 +784,15 @@ if OPTION == 5:
     plot_style['figsize'] = (12, 8)
     plot_style['label-font-size'] = 12
     plot_style['matrix'] = [2, 1]
-    plot_style['legend'] = False       # options: True/False
+    plot_style['legend'] = True       # options: True/False
     plot_style['sharex'] = False       # options: True/False, 'col', 'all'
     plot_style['sharey'] = True       # options: True/False, 'col', 'all'
 
     # insert text in the figure (add several number of text)
     #plot_style['insert-txt'] = [['text', 0, 2, 45],['hi-text', -2, 2, 90]]
     #plot_style['insert-txt'] = []
-    plot_style['axis-label'] = [[None, r'\Large{Ioniastion fraction}'],
-                                [r'\Large{x (cm)}', r'\Large{Ioniastion fraction}']]
+    plot_style['axis-label'] = [[None, r'\Large{\rm Ioniastion fraction}'],
+                                [r'\Large{\rm x (cm)}', r'\Large{\rm Ioniastion fraction}']]
     #plot_style['axis-label'] = []
 
     plot_style['xlimit'] = [[6e+15, 8.0e+15], [7e+15, 8.7e+15]]
@@ -804,11 +804,11 @@ if OPTION == 5:
 
     # plot margin adjustments
     plot_style['left'] = 0.05  # the left side of the subplots of the figure
-    plot_style['right'] = 0.9   # the right side of the subplots of the figure
+    plot_style['right'] = 0.97   # the right side of the subplots of the figure
     plot_style['bottom'] = 0.1  # the bottom of the subplots of the figure
-    plot_style['top'] = 0.95    # the top of the subplots of the figure
-    #plot_style['wspace'] = 0.05  # the amount of width reserved for blank space between subplots
-    plot_style['hspace'] = 0.13  # the amount of height reserved for white space between subplots
+    plot_style['top'] = 0.85    # the top of the subplots of the figure
+    #plot_style['wspace'] = 0.1  # the amount of width reserved for blank space between subplots
+    plot_style['hspace'] = 0.23  # the amount of height reserved for white space between subplots
 
     # this option will force the plot into any subplots
     # syntax: [plot-index, plot-location] first enter plot-index and then row and col location of
@@ -819,4 +819,4 @@ if OPTION == 5:
     #plot_style['force-plotting_1d'] = [[2, 1], [4, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v3000_vs_v1000_Fe.png')
+    plt.savefig(output_dir + 'RadShock_v3000_vs_v1000_Fe.png')

@@ -247,7 +247,7 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14)
                 ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14)
 
-                if plot_style['legend'] == True: ax[fig_index].legend(frameon=False)
+                #if plot_style['legend'] == True: ax[fig_index].legend(frameon=False, loc='lower center')
 
                 #ax[fig_index].legend(['First List', '', 'Second List'], loc='upper left')
 
@@ -256,6 +256,12 @@ def onedim_master_plotter(plot_data, plot_style):
         #custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
         #                Line2D([0], [0], linestyle=':', color='m')]
         #plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
+        plt.legend(frameon=False, loc='lower center')
+        plt.legend( loc='upper center',
+                    bbox_to_anchor=(0.51, 0.99),
+                    ncol=9,
+                    bbox_transform=fig.transFigure)
+
 
     # 3. two dimensional array =================================================================
     else:
