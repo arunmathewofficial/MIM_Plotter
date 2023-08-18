@@ -11,25 +11,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 from species import *
 
-
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
-
+output_dir = make_directory('INAM_2023')
 
 '''
-1. Compare flow quanties of low and high resolution shock test.
-low resolution - 1024 grid
-high resolution - 10240 grid
+Compare flow quanties of for radiavive flow at two different time
+ - 2024 grid
 '''
-low_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/Compare_HL_NRShock/SH1D_n1024_v100_Ray79E_0000.00017408.silo'
-high_resolution_file = '/home/tony/Desktop/Simulations/High_Resolution_SH_Test/SH1D_n10240_v100_Ray79E/SH1D_n10240_v100_Ray79E_0000.00174080.silo'
+time1_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/Planar_RadShock_v100/RadShock_n2048_v100_Ray78ModelE/RSH1D_n2048_v100_Ray79E_0000.00020480.silo'
+time2_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/Planar_RadShock_v100/RadShock_n2048_v100_Ray78ModelE/RSH1D_n2048_v100_Ray79E_0000.01071104.silo'
 
 OPTION = 1
 
-
 # OPTION: 1 ****************************************************************************
 if OPTION == 1:
-
     '''
 
     # check for match
@@ -37,18 +32,18 @@ if OPTION == 1:
         'time'].value) <= 1.0E-04:
         warnings.warn(message='Time in two silo file do not match, exiting ...', stacklevel=2)
         exit(0)
-        
+
     '''
 
     # make plotting data and append to plot_data array
     plot_data = []
 
     # x data
-    x_low = get_basic_data(low_resolution_file)['x']
-    x_high = get_basic_data(high_resolution_file)['x']
+    x_time1 = get_basic_data(time1_file)['x']
+    x_time2 = get_basic_data(time2_file)['x']
 
-    #modify x_low data by shifting to left
-    x_low = x_low - 2.7e13*np.ones_like(x_low)
+    # modify x_low data by shifting to left
+    #x_low = x_low - 2.7e13 * np.ones_like(x_low)
 
     '''
     # density ###########################################################
@@ -81,7 +76,7 @@ if OPTION == 1:
     data_2.append(flow_data.copy())
     plot_data.append(data_2)
     del data_2
-    
+
     '''
 
     plt.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
@@ -89,36 +84,41 @@ if OPTION == 1:
     plt.rc('font', **{'size': 12})
     plt.rc('lines', linewidth=1.5)
 
-    fig, ax = plt.subplots(figsize=(8,6))
+    fig, ax = plt.subplots(figsize=(8, 6))
 
-    color = 'tab:red'
+    color = 'tab:orange'
     ax.set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
-    ax.set_ylabel(r'$\rm \rho \, (g/cm^3)$', fontsize=18)
-    ax.plot(x_high, get_density(high_resolution_file), color=color, label = r'$\rm \rho$')
+    ax.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=18)
+    ax.plot(x_time1, np.log10(get_temperature(time1_file)), color=color)
     ax.tick_params(axis='y')
-    ax.set_xlim(2e+16, 3e+16)
-    ax.set_ylim(7e-24, 10e-23)
-    ax.legend( loc=(0.85, 0.9), frameon=False)
+    ax.set_xlim(1e+14, 1.8e+15)
+    ax.set_ylim(2.0, 6.0)
+    #ax.legend(loc=(0.75, 0.85), frameon=False, fontsize=24)
 
-    ax_2 = ax.twinx()  # instantiate a second axes that shares the same x-axis
+    text = "time = 5.62 yr"
+    plt.text(3.5e+14, 5.7, text, fontsize=12, color='red', ha='center')
 
-    color = 'blue'
-    ax_2.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=18)  # we already handled the x-label with ax1
-    ax_2.plot(x_high, np.log10(get_temperature(high_resolution_file)), color=color, linestyle='-', label = r'$\rm T$')
-    ax_2.tick_params(axis='y')
-    ax_2.set_xlim(2.4e+16, 2.7e+16)
-    ax_2.set_ylim(3, 7)
-    ax_2.legend(loc=(0.85, 0.84), frameon=False)
+
+
+    color = 'darkgreen'
+    #ax.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=18)  # we already handled the x-label with ax1
+    ax.plot(x_time2, np.log10(get_temperature(time2_file)), color=color, linestyle='-')
+    ax.tick_params(axis='y')
+    ax.set_xlim(1.0e+14, 1.8e+15)   # ax_2.set_ylim(3, 7)
+    #ax.legend(loc=(0.75, 0.75), frameon=False, fontsize=24)
 
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())
     ax.tick_params(axis="both", direction="in", which="both",
                    bottom=True, top=True, left=True, right=True, length=2)
 
-    time = get_basic_data(high_resolution_file)['time']
+    text = "time = 294.97 yr"
+    plt.text(1.5e+15, 5.6, text, fontsize=12, color='red', ha='center')
 
-    print(time)
+    #time = get_basic_data(high_resolution_file)['time']
 
-    plt.savefig('Shock_LH_FQ.png')
+    #print(time)
+
+    plt.savefig(output_dir + 'RS_logT.png', dpi=300)
 
 

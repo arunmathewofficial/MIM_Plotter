@@ -24,7 +24,7 @@ high resolution - 10240 grid
 low_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/HighLow_Resol_NRShock/SH1D_n1024_v100_Ray79E_0000.00017408.silo'
 high_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/HighLow_Resol_NRShock/SH1D_n10240_v100_Ray79E_0000.00174080.silo'
 
-OPTION = 2
+OPTION = 1
 
 # OPTION: 1 ****************************************************************************
 if OPTION == 1:
@@ -53,10 +53,10 @@ if OPTION == 1:
     # y data - Hydrogen species - low resolution
     tracer_list = HYDROGEN_SHOCK_RAY79E
     tracer_labels = HYDROGEN_SHOCK_LABELS
-    label_position = [[2.566e16,0.92], [2.545e16,0.92]]
-    line_color = ['black', 'darkgreen']
+    label_position = [[2.567e16,0.9], [2.545e16,0.9]]
+    line_color = ['black', 'crimson']
     line_style = ['dashed', '--']
-    line_marker = ['s', 's']
+    line_marker = ['D', 'D']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -80,7 +80,7 @@ if OPTION == 1:
     tracer_list = HYDROGEN_SHOCK_RAY79E
     tracer_labels = HYDROGEN_LABELS
     label_position = [[], []]
-    line_color = ['black', 'darkgreen']
+    line_color = ['black', 'crimson']
     line_style = ['-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -104,10 +104,10 @@ if OPTION == 1:
     # y data - Helium species - low resolution
     tracer_list = HELIUM_SHOCK_RAY79E
     tracer_labels = HELIUM_SHOCK_LABELS
-    label_position = [[2.565e16, 0.92], [2.55e16, 0.75], [2.545e16, 0.3]]
-    line_color = ['black', 'darkblue', 'darkgreen']
+    label_position = [[2.57e16,0.9], [2.55e16,0.75], [2.545e16,0.35]]
+    line_color = ['black', 'crimson', 'darkgreen']
     line_style = ['--', '--', '--']
-    line_marker = ['s', 's', 's']
+    line_marker = ['D', 'D', 'D']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -131,7 +131,7 @@ if OPTION == 1:
     tracer_list = HELIUM_SHOCK_RAY79E
     tracer_labels = HELIUM_LABELS
     label_position = [[], [], []]
-    line_color = ['black', 'darkblue', 'darkgreen']
+    line_color = ['black', 'crimson', 'darkgreen']
     line_style = ['-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -155,10 +155,10 @@ if OPTION == 1:
     # y data - Carbon species -     line_color = ['black', 'crimson', 'darkgreen', 'gold', 'royalblue', 'darkorange', 'magenta']low resolution
     tracer_list = CARBON_SHOCK_RAY79E
     tracer_labels = CARBON_SHOCK_LABELS
-    label_position = [[2.56e16,0.92], [2.559e16,0.68], [2.5565e16,0.8], [2.546e16,0.67], [2.546e16,0.07], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple']
+    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.8], [2.546e16,0.7], [2.546e16,0.1], [], []]
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -183,7 +183,7 @@ if OPTION == 1:
     tracer_list = CARBON_SHOCK_RAY79E
     tracer_labels = CARBON_LABELS
     label_position = [[], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -208,8 +208,8 @@ if OPTION == 1:
     # y data - nitrogen species - low resolution
     tracer_list = NITROGEN_SHOCK_RAY79E
     tracer_labels = NITROGEN_SHOCK_LABELS
-    label_position = [[2.56e16,0.92], [2.5585e16,0.68], [2.555e16,0.68], [2.546e16,0.72], [2.546e16,0.08], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], []]
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['--', '--', '--', '--', '--', '--', '--']
     line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
@@ -237,7 +237,7 @@ if OPTION == 1:
     tracer_list = NITROGEN_SHOCK_RAY79E
     tracer_labels = NITROGEN_LABELS
     label_position = [[], [], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['-', '-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -261,10 +261,10 @@ if OPTION == 1:
     # y data - oxygen species - low resolution
     tracer_list = OXYGEN_SHOCK_RAY79E
     tracer_labels = OXYGEN_SHOCK_LABELS
-    label_position = [[2.56e16,0.92], [2.558e16,0.68], [2.555e16,0.67], [2.546e16,0.66], [2.546e16,0.08], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], [], []]
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -289,7 +289,7 @@ if OPTION == 1:
     tracer_list = OXYGEN_SHOCK_RAY79E
     tracer_labels = OXYGEN_LABELS
     label_position = [[], [], [], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['-', '-', '-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -314,10 +314,10 @@ if OPTION == 1:
     # y data - Neon species - low resolution
     tracer_list = NEON_SHOCK_RAY79E
     tracer_labels = NEON_SHOCK_LABELS
-    label_position = [[2.559e16,0.92], [2.557e16,0.7], [2.550e16,0.6], [2.546e16,0.38], [2.547e16,0.04], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    label_position = [[2.5625e16,0.92], [2.558e16,0.7], [2.550e16,0.62], [2.546e16,0.4], [2.547e16,0.04], [], [], [], [], [], []]
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -342,7 +342,7 @@ if OPTION == 1:
     tracer_list = NEON_SHOCK_RAY79E
     tracer_labels = NEON_LABELS
     label_position = [[], [], [], [], [], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'gold', 'magenta']
+    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
     line_style = ['-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -366,7 +366,7 @@ if OPTION == 1:
 
     # plot style ================================================================
     plot_style = {}
-    plot_style['figsize'] = (16, 18)
+    plot_style['figsize'] = (14, 18)
     plot_style['label-font-size'] = 12
     plot_style['matrix'] = [3, 2]
     plot_style['legend'] = False       # options: True/False
@@ -374,16 +374,16 @@ if OPTION == 1:
     plot_style['sharey'] = True       # options: True/False, 'col', 'all'
 
     # insert text in the figure (add several number of text)
-    plot_style['insert-txt'] = [[r'\LARGE{\rm Hydrogen}', 2.514E+16, 3.4, 0],
-                                [r'\LARGE{\rm Helium}', 2.541E+16, 3.5, 0],
-                                [r'\LARGE{\rm Carbon}', 2.514E+16, 2.2, 0],
-                                [r'\LARGE{\rm Nitrogen}', 2.541E+16, 2.2,0],
-                                [r'\LARGE{\rm Oxygen}', 2.514E+16, 0.9, 0],
-                                [r'\LARGE{\rm Neon}', 2.541E+16, 0.9, 0]]
+    plot_style['insert-txt'] = [[r'\textbf{Hydrogen}', 2.514E+16, 3.4, 0],
+                                [r'\textbf{Helium}', 2.541E+16, 3.5, 0],
+                                [r'\textbf{Carbon}', 2.514E+16, 2.2, 0],
+                                [r'\textbf{Nitrogen}', 2.541E+16, 2.2,0],
+                                [r'\textbf{Oxygen}', 2.514E+16, 0.9, 0],
+                                [r'\textbf{Neon}', 2.541E+16, 0.9, 0]]
     #plot_style['insert-txt'] = []
-    plot_style['axis-label'] = [[None, r'\huge{\rm Ioniastion fraction}'], [None, None],
-                                [None, r'\huge{\rm Ioniastion fraction}'], [None, None],
-                                [r'\huge{\rm x (cm)}', r'\huge{\rm Ioniastion fraction}'], [r'\huge{\rm x (cm)}', None]]
+    plot_style['axis-label'] = [[None, r'\huge{Ioniastion fraction}'], [None, None],
+                                [None, r'\huge{Ioniastion fraction}'], [None, None],
+                                [r'\huge{x (cm)}', r'\huge{Ioniastion fraction}'], [r'\huge{x (cm)}', None]]
     #plot_style['axis-label'] = []
 
     plot_style['xlimit'] = [[2.54E+16, 2.57E+16],
@@ -412,7 +412,7 @@ if OPTION == 1:
     plot_style['force-plotting'] = [[2, 1, 1], [4, 1, 2], [6, 2, 1], [8, 2, 2], [10, 3, 1], [12, 3, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('Shock_LH_HHeCN0.png', dpi=200)
+    plt.savefig('Shock_LH_HHeCN0.png')
 
 
 
@@ -447,12 +447,10 @@ if OPTION == 2:
     tracer_labels = SILICON_SHOCK_LABELS
     label_position = [[2.5625e16,0.92], [2.558e16,0.7], [2.550e16,0.62], [2.546e16,0.4], [2.547e16,0.04],
                       [], [], [], [], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'magenta',
+    line_color = ['magenta', 'magenta', 'magenta', 'magenta', 'magenta', 'magenta',
                   'magenta', 'magenta', 'magenta', 'magenta', 'magenta',
-                  'magenta', 'magenta', 'magenta', 'magenta'
-                  ]
+                  'magenta', 'magenta', 'magenta', 'magenta']
     line_style = ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -466,7 +464,6 @@ if OPTION == 2:
         single_species_data['label-position'] = label_position[i]
         single_species_data['line-color'] = line_color[i]
         single_species_data['line-style'] = line_style[i]
-        single_species_data['line-marker'] = line_marker[i]
         species_data.append(single_species_data.copy())
     # add neon species to final plot data
     plot_data.append(species_data)
@@ -474,9 +471,9 @@ if OPTION == 2:
 
     # y data - SILICON species - high resolution
     tracer_list = SILICON_SHOCK_RAY79E
-    tracer_labels = SILICON_SHOCK_LABELS
+    tracer_labels = SILICON_LABELS
     label_position = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-    line_color = ['black', 'darkgreen', 'firebrick', 'darkblue', 'purple', 'blue', 'blue',
+    line_color = ['blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue',
                   'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue']
     line_style = ['-', '-', '-', '-', '-', '-', '-',
                   '-', '-', '-', '-', '-', '-', '-', '-']
