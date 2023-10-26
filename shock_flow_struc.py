@@ -13,7 +13,7 @@ from species import *
 
 
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
+output_dir = make_directory('INAM_2023')
 
 
 '''
@@ -21,8 +21,8 @@ make_directory('MIM_Publi_Plots')
 low resolution - 1024 grid
 high resolution - 10240 grid
 '''
-low_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/Compare_HL_NRShock/SH1D_n1024_v100_Ray79E_0000.00017408.silo'
-high_resolution_file = '/home/tony/Desktop/Simulations/High_Resolution_SH_Test/SH1D_n10240_v100_Ray79E/SH1D_n10240_v100_Ray79E_0000.00174080.silo'
+low_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/HighLow_Resol_NRShock/SH1D_n1024_v100_Ray79E_0000.00017408.silo'
+high_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/HighLow_Resol_NRShock/SH1D_n10240_v100_Ray79E_0000.00174080.silo'
 
 OPTION = 1
 
@@ -119,6 +119,6 @@ if OPTION == 1:
 
     print(time)
 
-    plt.savefig('Shock_LH_FQ.png')
+    plt.savefig(output_dir + 'Shock_LH_FQ.png', dpi=300)
 
 
