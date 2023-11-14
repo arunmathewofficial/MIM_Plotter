@@ -14,6 +14,7 @@ import pandas as pd
 from matplotlib.ticker import MaxNLocator
 from SiloReader import GetSiloData
 import numpy as np
+from matplotlib import colors as mcolors
 
 parsec = 3.086e+18
 
@@ -27,37 +28,249 @@ cloudyfile_C = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/H
 cloudyfile_N = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_N'
 cloudyfile_O = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_O'
 cloudyfile_Ne = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_Ne'
-cloudyfile_S = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_S'
+cloudyfile_S = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworthh/HII_region.ele_S'
 
-pionfile_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/pion_Haworth/HIIregion_Haworth_0000.00024064.silo'
+pionfile_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/pion_Haworth/HIIregion_Haworth_0000.00023552.silo'
+
+torus_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/torus_Haworth/photoionradial.dat'
 
 
-# Temperature profile ##############################################################
+# common variables #################################################################
 table_T = ReadTable_Advance(cloudyfile_T)
 print("Table Size: ( row =", table_T['N_row'], ", columns = ", table_T['N_col'], ")")
 dataset_T = table_T['columns']
-cloudy_radius = np.array(dataset_T[0])/parsec
+cloudy_radius = np.array(dataset_T[0]) / parsec
 
 object = GetSiloData([pionfile_haworth])
-basic_data = object.get_basic_data()
-pion_temp = object.get_parameter('Temperature')
 pion_radius = object.get_radial_coordinate() / parsec
 
-fig, ax = plt.subplots()
-ax.plot(cloudy_radius, dataset_T[1], label='Cloudy', linestyle='--', color='red')
-ax.plot(pion_radius, pion_temp, label='PION', linestyle='-', color='black')
+torus_data = np.loadtxt(torus_haworth)
+torus_radius = torus_data[:,0] / 3.08e8
+
+# Temperature profile ##############################################################
+print("Plotting temperature profile:")
+print("Reading silo file:", pionfile_haworth)
+pion_temp = object.get_parameter('Temperature')
+cloudy_temp = dataset_T[1]
+torus_temp = torus_data[:,2]
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.plot(cloudy_radius, cloudy_temp, label='Cloudy', linestyle='--', color='red')
+ax.plot(pion_radius, pion_temp, label='PION', linestyle='-.', color='blue')
+ax.plot(torus_radius, torus_temp, label='Torus', linestyle=':', color='black')
 ax.xaxis.set_minor_locator(AutoMinorLocator())
 ax.yaxis.set_minor_locator(AutoMinorLocator())
 ax.tick_params(axis="both", direction="in", which="both",
-               bottom=True, top=True, left=True, right=True, length=2, labelsize=8)
+               bottom=True, top=True, left=True, right=True, length=2, labelsize=10)
 
-ax.set_xlim([0.0, 8])
-#ax.set_ylim([-25.5, -19.5])
-ax.set_xlabel(r"${\rm radius \, (pc)}$", fontsize=8)
-ax.set_ylabel(r"$\rm T \, (K)$", fontsize=8)
+ax.set_xlim([0.0, 6])
+ax.set_ylim([0.0, 12000])
+ax.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=10)
+ax.set_ylabel(r"$\rm T \, (K)$", fontsize=10)
 
 ax.legend(frameon=False, loc='upper right', fontsize='8')
-plt.savefig(plot_dir + 'HII_temperature.png', dpi=300)
+image_file = plot_dir + 'HII_temperature.png'
+print("Saving image to", image_file)
+plt.savefig(image_file, dpi=300)
+
+
+# Hydrogen and Helium profile ##############################################################
+print("Plotting Hydrogen and Helium profile:")
+table_H = ReadTable_Advance(cloudyfile_H)
+print("Table Size: ( row =", table_H['N_row'], ", columns = ", table_H['N_col'], ")")
+dataset_H = table_H['columns']
+table_He = ReadTable_Advance(cloudyfile_He)
+print("Table Size: ( row =", table_He['N_row'], ", columns = ", table_He['N_col'], ")")
+dataset_He = table_He['columns']
+
+print("Reading silo file:", pionfile_haworth)
+H1p = object.get_parameter('Tr007_H1p') / object.get_parameter('Tr000_X_H')
+H0 = np.ones_like(H1p) - H1p
+
+He2p = object.get_parameter('Tr009_He2p') / object.get_parameter('Tr001_X_He')
+He1p = object.get_parameter('Tr008_He1p') / object.get_parameter('Tr001_X_He')
+He0 = np.ones_like(He2p) - He2p - He1p
+
+fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=(6, 14))
+ax1.plot(cloudy_radius, dataset_H[1], label=r'$\rm Cloudy - H$', linestyle=':', color='C0')
+ax1.plot(cloudy_radius, dataset_H[2], label=r'$\rm Cloudy - H^{1+}$', linestyle=':', color='C1')
+ax1.plot(cloudy_radius, dataset_He[1], label=r'$\rm Cloudy - He$', linestyle=':', color='C2')
+ax1.plot(cloudy_radius, dataset_He[2], label=r'$\rm Cloudy - He^{1+}$', linestyle=':', color='C3')
+ax1.plot(cloudy_radius, dataset_He[3], label=r'$\rm Cloudy - He^{2+}$', linestyle=':', color='C4')
+
+ax1.plot(pion_radius, H0, label=r'$\rm PION - H$', linestyle='-', color='C0')
+ax1.plot(pion_radius, H1p, label=r'$\rm PION - H^{1+}$', linestyle='-', color='C1')
+ax1.plot(pion_radius, He0, label=r'$\rm PION - He$', linestyle='-', color='C2')
+ax1.plot(pion_radius, He1p, label=r'$\rm PION - He^{1+}$', linestyle='-', color='C3')
+ax1.plot(pion_radius, He2p, label=r'$\rm PION - He^{2+}$', linestyle='-', color='C4')
+
+ax1.xaxis.set_minor_locator(AutoMinorLocator())
+ax1.yaxis.set_minor_locator(AutoMinorLocator())
+ax1.tick_params(axis="both", direction="in", which="both",
+               bottom=True, top=True, left=True, right=True, length=2, labelsize=8)
+
+ax1.set_xlim([0.0, 6])
+ax1.grid()
+#ax.set_ylim([-25.5, -19.5])
+ax1.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=8)
+ax1.set_ylabel(r"$\rm Ionisation \, \, Fraction $", fontsize=8)
+ax1.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.23), ncol=5, fontsize=8)
+
+
+# Carbom profile ##############################################################
+
+print("Plotting Carbon profile:")
+table_C = ReadTable_Advance(cloudyfile_C)
+print("Table Size: ( row =", table_C['N_row'], ", columns = ", table_C['N_col'], ")")
+dataset_C = table_C['columns']
+
+print("Reading silo file:", pionfile_haworth)
+C1p = object.get_parameter('Tr010_C1p') / object.get_parameter('Tr002_X_C')
+C2p = object.get_parameter('Tr011_C2p') / object.get_parameter('Tr002_X_C')
+C3p = object.get_parameter('Tr012_C3p') / object.get_parameter('Tr002_X_C')
+C4p = object.get_parameter('Tr013_C4p') / object.get_parameter('Tr002_X_C')
+C5p = object.get_parameter('Tr014_C5p') / object.get_parameter('Tr002_X_C')
+C6p = object.get_parameter('Tr015_C6p') / object.get_parameter('Tr002_X_C')
+C0 = np.ones_like(C1p) - C1p - C2p - C3p - C4p - C5p - C6p
+
+ax2.plot(cloudy_radius, dataset_C[1], label=r'$\rm Cloudy - C$', linestyle=':', color='C0')
+ax2.plot(cloudy_radius, dataset_C[2], label=r'$\rm Cloudy - C^{1+}$', linestyle=':', color='C1')
+ax2.plot(cloudy_radius, dataset_C[3], label=r'$\rm Cloudy - C^{2+}$', linestyle=':', color='C2')
+ax2.plot(cloudy_radius, dataset_C[4], label=r'$\rm Cloudy - C^{3+}$', linestyle=':', color='C3')
+ax2.plot(cloudy_radius, dataset_C[5], label=r'$\rm Cloudy - C^{4+}$', linestyle=':', color='C4')
+ax2.plot(cloudy_radius, dataset_C[6], label=r'$\rm Cloudy - C^{5+}$', linestyle=':', color='C5')
+ax2.plot(cloudy_radius, dataset_C[7], label=r'$\rm Cloudy - C^{6+}$', linestyle=':', color='C6')
+
+ax2.plot(pion_radius, C0, label=r'$\rm PION - C$', linestyle='-', color='C0')
+ax2.plot(pion_radius, C1p, label=r'$\rm PION - C^{1+}$', linestyle='-', color='C1')
+ax2.plot(pion_radius, C2p, label=r'$\rm PION - C^{2+}$', linestyle='-', color='C2')
+ax2.plot(pion_radius, C3p, label=r'$\rm PION - C^{3+}$', linestyle='-', color='C3')
+ax2.plot(pion_radius, C4p, label=r'$\rm PION - C^{4+}$', linestyle='-', color='C4')
+ax2.plot(pion_radius, C5p, label=r'$\rm PION - C^{5+}$', linestyle='-', color='C5')
+ax2.plot(pion_radius, C6p, label=r'$\rm PION - C^{6+}$', linestyle='-', color='C6')
+
+ax2.xaxis.set_minor_locator(AutoMinorLocator())
+ax2.yaxis.set_minor_locator(AutoMinorLocator())
+ax2.tick_params(axis="both", direction="in", which="both",
+               bottom=True, top=True, left=True, right=True, length=2, labelsize=8)
+
+ax2.set_xlim([0.0, 6])
+ax2.grid()
+#ax.set_ylim([-25.5, -19.5])
+ax2.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=8)
+ax2.set_ylabel(r"$\rm Ionisation \, \, Fraction $", fontsize=8)
+ax2.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.23), ncol=5, fontsize=8)
+
+
+# Nitrogen profile ##############################################################
+print("Plotting Nitrogen profile:")
+table_N = ReadTable_Advance(cloudyfile_N)
+print("Table Size: ( row =", table_N['N_row'], ", columns = ", table_N['N_col'], ")")
+dataset_N = table_N['columns']
+
+print("Reading silo file:", pionfile_haworth)
+N1p = object.get_parameter('Tr016_N1p') / object.get_parameter('Tr003_X_N')
+N2p = object.get_parameter('Tr017_N2p') / object.get_parameter('Tr003_X_N')
+N3p = object.get_parameter('Tr018_N3p') / object.get_parameter('Tr003_X_N')
+N4p = object.get_parameter('Tr019_N4p') / object.get_parameter('Tr003_X_N')
+N5p = object.get_parameter('Tr020_N5p') / object.get_parameter('Tr003_X_N')
+N6p = object.get_parameter('Tr021_N6p') / object.get_parameter('Tr003_X_N')
+N7p = object.get_parameter('Tr022_N7p') / object.get_parameter('Tr003_X_N')
+N0 = np.ones_like(N1p) - N1p - N2p - N3p - N4p - N5p - N6p - N7p
+
+ax3.plot(cloudy_radius, dataset_N[1], label=r'$\rm Cloudy - N$', linestyle=':', color='C0')
+ax3.plot(cloudy_radius, dataset_N[2], label=r'$\rm Cloudy - N^{1+}$', linestyle=':', color='C1')
+ax3.plot(cloudy_radius, dataset_N[3], label=r'$\rm Cloudy - N^{2+}$', linestyle=':', color='C2')
+ax3.plot(cloudy_radius, dataset_N[4], label=r'$\rm Cloudy - N^{3+}$', linestyle=':', color='C3')
+ax3.plot(cloudy_radius, dataset_N[5], label=r'$\rm Cloudy - N^{4+}$', linestyle=':', color='C4')
+ax3.plot(cloudy_radius, dataset_N[6], label=r'$\rm Cloudy - N^{5+}$', linestyle=':', color='C5')
+ax3.plot(cloudy_radius, dataset_N[7], label=r'$\rm Cloudy - N^{6+}$', linestyle=':', color='C6')
+ax3.plot(cloudy_radius, dataset_N[8], label=r'$\rm Cloudy - N^{7+}$', linestyle=':', color='C7')
+
+
+ax3.plot(pion_radius, N0, label=r'$\rm PION - N$', linestyle='-', color='C0')
+ax3.plot(pion_radius, N1p, label=r'$\rm PION - N^{1+}$', linestyle='-', color='C1')
+ax3.plot(pion_radius, N2p, label=r'$\rm PION - N^{2+}$', linestyle='-', color='C2')
+ax3.plot(pion_radius, N3p, label=r'$\rm PION - N^{3+}$', linestyle='-', color='C3')
+ax3.plot(pion_radius, N4p, label=r'$\rm PION - N^{4+}$', linestyle='-', color='C4')
+ax3.plot(pion_radius, N5p, label=r'$\rm PION - N^{5+}$', linestyle='-', color='C5')
+ax3.plot(pion_radius, N6p, label=r'$\rm PION - N^{6+}$', linestyle='-', color='C6')
+ax3.plot(pion_radius, N7p, label=r'$\rm PION - N^{7+}$', linestyle='-', color='C7')
+
+
+ax3.xaxis.set_minor_locator(AutoMinorLocator())
+ax3.yaxis.set_minor_locator(AutoMinorLocator())
+ax3.tick_params(axis="both", direction="in", which="both",
+               bottom=True, top=True, left=True, right=True, length=2, labelsize=8)
+
+ax3.set_xlim([0.0, 6])
+ax3.grid()
+#ax.set_ylim([-25.5, -19.5])
+ax3.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=8)
+ax3.set_ylabel(r"$\rm Ionisation \, \, Fraction $", fontsize=8)
+ax3.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.23), ncol=5, fontsize=8)
+
+
+# Oxygen profile ##############################################################
+print("Plotting Oxygen profile:")
+table_O = ReadTable_Advance(cloudyfile_O)
+print("Table Size: ( row =", table_O['N_row'], ", columns = ", table_O['N_col'], ")")
+dataset_O = table_O['columns']
+
+print("Reading silo file:", pionfile_haworth)
+O1p = object.get_parameter('Tr023_O1p') / object.get_parameter('Tr004_X_O')
+O2p = object.get_parameter('Tr024_O2p') / object.get_parameter('Tr004_X_O')
+O3p = object.get_parameter('Tr025_O3p') / object.get_parameter('Tr004_X_O')
+O4p = object.get_parameter('Tr026_O4p') / object.get_parameter('Tr004_X_O')
+O5p = object.get_parameter('Tr027_O5p') / object.get_parameter('Tr004_X_O')
+O6p = object.get_parameter('Tr028_O6p') / object.get_parameter('Tr004_X_O')
+O7p = object.get_parameter('Tr029_O7p') / object.get_parameter('Tr004_X_O')
+O8p = object.get_parameter('Tr030_O8p') / object.get_parameter('Tr004_X_O')
+
+O0 = np.ones_like(O1p) - O1p - O2p - O3p - O4p - O5p - O6p - O7p - O8p
+
+ax4.plot(cloudy_radius, dataset_O[1], label=r'$\rm Cloudy - O$', linestyle=':', color='C0')
+ax4.plot(cloudy_radius, dataset_O[2], label=r'$\rm Cloudy - O^{1+}$', linestyle=':', color='C1')
+ax4.plot(cloudy_radius, dataset_O[3], label=r'$\rm Cloudy - O^{2+}$', linestyle=':', color='C2')
+ax4.plot(cloudy_radius, dataset_O[4], label=r'$\rm Cloudy - O^{3+}$', linestyle=':', color='C3')
+ax4.plot(cloudy_radius, dataset_O[5], label=r'$\rm Cloudy - O^{4+}$', linestyle=':', color='C4')
+ax4.plot(cloudy_radius, dataset_O[6], label=r'$\rm Cloudy - O^{5+}$', linestyle=':', color='C5')
+ax4.plot(cloudy_radius, dataset_O[7], label=r'$\rm Cloudy - O^{6+}$', linestyle=':', color='C6')
+ax4.plot(cloudy_radius, dataset_O[8], label=r'$\rm Cloudy - O^{7+}$', linestyle=':', color='C7')
+ax4.plot(cloudy_radius, dataset_O[9], label=r'$\rm Cloudy - O^{8+}$', linestyle=':', color='C8')
+
+
+ax4.plot(pion_radius, O0, label=r'$\rm PION - O$', linestyle='-', color='C0')
+ax4.plot(pion_radius, O1p, label=r'$\rm PION - O^{1+}$', linestyle='-', color='C1')
+ax4.plot(pion_radius, O2p, label=r'$\rm PION - O^{2+}$', linestyle='-', color='C2')
+ax4.plot(pion_radius, O3p, label=r'$\rm PION - O^{3+}$', linestyle='-', color='C3')
+ax4.plot(pion_radius, O4p, label=r'$\rm PION - O^{4+}$', linestyle='-', color='C4')
+ax4.plot(pion_radius, O5p, label=r'$\rm PION - O^{5+}$', linestyle='-', color='C5')
+ax4.plot(pion_radius, O6p, label=r'$\rm PION - O^{6+}$', linestyle='-', color='C6')
+ax4.plot(pion_radius, O7p, label=r'$\rm PION - O^{7+}$', linestyle='-', color='C7')
+ax4.plot(pion_radius, O8p, label=r'$\rm PION - O^{8+}$', linestyle='-', color='C8')
+
+ax4.xaxis.set_minor_locator(AutoMinorLocator())
+ax4.yaxis.set_minor_locator(AutoMinorLocator())
+ax4.tick_params(axis="both", direction="in", which="both",
+               bottom=True, top=True, left=True, right=True, length=2, labelsize=8)
+
+ax4.set_xlim([0.0, 6])
+ax4.grid()
+#ax.set_ylim([-25.5, -19.5])
+ax4.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=8)
+ax4.set_ylabel(r"$\rm Ionisation \, \, Fraction $", fontsize=8)
+ax4.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.23), ncol=5, fontsize=8)
+
+
+
+
+plt.subplots_adjust(left=0.1, right=0.95, top=0.95, bottom=0.2)
+image_file = plot_dir + 'HII_Ionisa.png'
+print("Saving image to", image_file)
+plt.savefig(image_file, dpi=300)
+
+
+
 
 '''
 
