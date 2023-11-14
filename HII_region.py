@@ -30,7 +30,7 @@ cloudyfile_O = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/H
 cloudyfile_Ne = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_Ne'
 cloudyfile_S = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworthh/HII_region.ele_S'
 
-pionfile_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/pion_Haworth/HIIregion_Haworth_0000.00023552.silo'
+pionfile_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/pion_Haworth/HIIregion_Haworth_0000.00026112.silo'
 
 torus_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/torus_Haworth/photoionradial.dat'
 
