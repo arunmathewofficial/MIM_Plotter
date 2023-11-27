@@ -16,13 +16,13 @@ import pandas as pd
 
 
 # MAIN **********************************************************************
-output_dir = make_directory('MIM_Publication')
+output_dir = make_directory('MIM2023_Images')
 
 '''
 1. Ion fraction of Hydrogen, Helium and Carbon for CIE with Asplund 2009 abundances
 '''
-file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009_1024/CIE_Asplund09_n1024_0000.08577024.silo'
-
+#file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009_1024/CIE_Asplund09_n1024_0000.08577024.silo'
+file = '/home/mathew/Desktop/Simula/CIE_Asplund09_n1024_silo/CIE_Asplund09_n1024_0000.02727936.silo'
 
 '''
 2. Compare the ion fraction of Helium, Carbon  and Nitrogen for Asplund2009 and Eatson2022 abundances 
@@ -308,10 +308,10 @@ if OPTION == 1:
 
     plot_style['force-plotting_1d'] = [[2, 1], [3, 1], [5, 2], [6, 2], [8, 3]]
 
-    plot_style['axis-label'] = [[None, 'ioniastion fraction'],
-                                [None, 'ioniastion fraction'],
-                                [None, 'ioniastion fraction'],
-                                ['log(T) K', 'ioniastion fraction']]
+    plot_style['axis-label'] = [[None, r'$\rm Ioniastion \, fraction$'],
+                                [None, r'$\rm Ioniastion \, fraction$'],
+                                [None, r'$\rm Ioniastion \, fraction$'],
+                                [r'$\rm log(T) \, K$', r'$\rm Ioniastion \, fraction$']]
 
     plot_style['insert-txt'] = []
 
@@ -322,6 +322,8 @@ if OPTION == 1:
     plot_style['top'] = 0.95    # the top of the subplots of the figure
     plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
     plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+
+
 
     onedim_master_plotter(plot_data, plot_style)
     plot_file = output_dir + 'CIE_Asplund2009.png'
@@ -338,8 +340,8 @@ if OPTION == 1:
 # INAM 2023 presentation plots ####################################################
     output_dir = make_directory('INAM_2023')
     plot_style = {}
-    plot_style['figsize'] = (12, 16)
-    plot_style['label-font-size'] = 12
+    plot_style['figsize'] = (18, 18)
+    plot_style['label-font-size'] = 14
     plot_style['matrix'] = [4, 1]
     plot_style['legend'] = False  # options: True/False
     plot_style['sharex'] = False  # options: True/False, 'col', 'all'
@@ -350,10 +352,10 @@ if OPTION == 1:
 
     plot_style['force-plotting_1d'] = [[2, 1], [3, 1], [5, 2], [6, 2], [8, 3]]
 
-    plot_style['axis-label'] = [[None, 'ioniastion fraction'],
-                                [None, 'ioniastion fraction'],
-                                [None, 'ioniastion fraction'],
-                                ['log(T) K', 'ioniastion fraction']]
+    plot_style['axis-label'] = [[r'\huge{\rm log(T) K}', r'\huge{\rm Ioniastion\, fraction}'],
+                                [None, r'\huge{\rm Ioniastion\, fraction}'],
+                                [None, r'\huge{\rm Ioniastion\, fraction}'],
+                                [r'\huge{\rm log(T) K}', r'\huge{\rm Ioniastion\, fraction}']]
 
     plot_style['insert-txt'] = []
 
@@ -363,7 +365,7 @@ if OPTION == 1:
     plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
     plot_style['top'] = 0.95  # the top of the subplots of the figure
     plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
-    plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+    plot_style['hspace'] = 0.2  # the amount of height reserved for white space between subplots
 
     onedim_master_plotter(plot_data, plot_style)
     plot_file = output_dir + 'CIE_Asplund2009.png'

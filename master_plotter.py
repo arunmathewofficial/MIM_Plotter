@@ -252,13 +252,13 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator())
                 ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator())
                 ax[fig_index].tick_params(axis="both", direction="in", which="both",
-                                  bottom=True, top=True, left=True, right=True, length=2)
+                                  bottom=True, top=True, left=True, right=True, length=4)
 
                 ax[fig_index].set_xlim(plot_style['xlimit'][fig_index])
                 ax[fig_index].set_ylim(plot_style['ylimit'][fig_index])
 
-                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14)
-                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14)
+                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=18)
+                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=18)
 
                 #if plot_style['legend'] == True: ax[fig_index].legend(frameon=False, loc='lower center')
 
@@ -266,14 +266,14 @@ def onedim_master_plotter(plot_data, plot_style):
 
                 fig_index = plot_indexing_1Dfunc(plot_index, total_fig, fig_index, force_plotting_1d)
 
-        #custom_lines = [Line2D([0], [0], linestyle='-.', color='g'),
-        #                Line2D([0], [0], linestyle=':', color='m')]
-        #plt.legend(custom_lines, ['Custom Line 1', 'Custom Line 2'])
-        #plt.legend(frameon=False, loc='lower center')
-        #plt.legend( loc='upper center',
-        #            bbox_to_anchor=(0.51, 0.99),
-        #            ncol=9,
-        #            bbox_transform=fig.transFigure)
+
+
+
+
+
+
+
+
 
 
     # 3. two dimensional array =================================================================

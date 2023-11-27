@@ -15,8 +15,8 @@ from species import *
 # MAIN **********************************************************************
 output_dir = make_directory('INAM_2023')
 
-v1000_file = '/home/tony/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v1000_Ray79E_0000.00122880.silo'
-v3000_file = '/home/tony/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v3000_Ray79E_0000.00512000.silo'
+v1000_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v1000_Ray79E_0000.00122880.silo'
+v3000_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v3000_Ray79E_0000.00512000.silo'
 
 #OPTION = 1
 '''
@@ -676,7 +676,7 @@ if OPTION == 4:
     plot_style['xlimit'] = [[2e+15, 8e+15], [6e+15, 8.7e+15], [6e+15, 8.7e+15], [6e+15, 8.7e+15]]
 
     plot_style['insert-txt'] = [[r"${\rm \huge v_0 = 1000 \, km/s}$", 6.2E+15, 2.2, 0],
-                                [r"${\rm \huge v_0 = 3000 \, km/s}$", 6.2E+15, 0.9, 0]]
+                                [r"${\rm v_0 = 3000 \, km/s}$", 6.2E+15, 0.9, 0]]
 
 
     #plot_style['ylimit'] = []
@@ -792,13 +792,13 @@ if OPTION == 5:
     #plot_style['insert-txt'] = [['text', 0, 2, 45],['hi-text', -2, 2, 90]]
     #plot_style['insert-txt'] = []
     plot_style['axis-label'] = [[None, r'\Large{\rm Ioniastion fraction}'],
-                                [r'\Large{\rm x (cm)}', r'\Large{\rm \textbf Ioniastion fraction}']]
+                                [r'\Large{\rm x (cm)}', r'\Large{\rm Ioniastion fraction}']]
     #plot_style['axis-label'] = []
 
     plot_style['xlimit'] = [[6e+15, 8.0e+15], [7e+15, 8.7e+15]]
 
-    plot_style['insert-txt'] = [[r"${\rm \mathbf v_0 = 1000 \, km/s}$", 7.1E+15, 2.2, 0],
-                                [r"${\rm  v_0 = 3000 \, km/s}$", 7.1E+15, 0.9, 0]]
+    plot_style['insert-txt'] = [[r"${\rm \huge v_0 = 1000 \, km/s}$", 7.1E+15, 2.2, 0],
+                                [r"${\rm v_0 = 3000 \, km/s}$", 7.1E+15, 0.9, 0]]
 
     #plot_style['ylimit'] = []
 

@@ -19,27 +19,27 @@ from matplotlib import colors as mcolors
 parsec = 3.086e+18
 
 # MAIN ##################################################################################
-plot_dir =make_directory('mim_paper_images')
+plot_dir =make_directory('MIM2023_Images')
 
-cloudyfile_T = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ovr'
-cloudyfile_H = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_H'
-cloudyfile_He = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_He'
-cloudyfile_C = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_C'
-cloudyfile_N = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_N'
-cloudyfile_O = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_O'
-cloudyfile_Ne = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworth/HII_region.ele_Ne'
-cloudyfile_S = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/cloudy_Haworthh/HII_region.ele_S'
+cloudyfile_T = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ovr'
+cloudyfile_H = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_H'
+cloudyfile_He = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_He'
+cloudyfile_C = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_C'
+cloudyfile_N = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_N'
+cloudyfile_O = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_O'
+cloudyfile_Ne = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_Ne'
+cloudyfile_S = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_S'
 
-pionfile_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/pion_Haworth/HIIregion_Haworth_0000.00026112.silo'
+pionfile_haworth = '/home/mathew/Desktop/pion/photoionisation_test/silo/HIIregion_Haworth_0000.00022016.silo'
 
-torus_haworth = '/home/tony/Desktop/MIM_Pub_Datafiles/HII_region/torus_Haworth/photoionradial.dat'
+torus_haworth = '/home/mathew/Desktop/pion/photoionisation_test/From_Tom/photoionradial.dat'
 
 
 # common variables #################################################################
 table_T = ReadTable_Advance(cloudyfile_T)
 print("Table Size: ( row =", table_T['N_row'], ", columns = ", table_T['N_col'], ")")
 dataset_T = table_T['columns']
-cloudy_radius = np.array(dataset_T[0]) / parsec
+cloudy_radius = (np.array(dataset_T[0]) + 3.e18) / parsec
 
 object = GetSiloData([pionfile_haworth])
 pion_radius = object.get_radial_coordinate() / parsec
@@ -62,7 +62,7 @@ ax.yaxis.set_minor_locator(AutoMinorLocator())
 ax.tick_params(axis="both", direction="in", which="both",
                bottom=True, top=True, left=True, right=True, length=2, labelsize=10)
 
-ax.set_xlim([0.0, 6])
+ax.set_xlim([1.0, 6])
 ax.set_ylim([0.0, 12000])
 ax.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=10)
 ax.set_ylabel(r"$\rm T \, (K)$", fontsize=10)

@@ -33,7 +33,7 @@ normalized_walltime = Walltime/Walltime[0]
 
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4, 3), sharex=False, sharey=False)
 ax.plot(NTracers, normalized_walltime, label='', color='red', linestyle='-',
-        marker='o', linewidth=0.7, markersize=4, markerfacecolor='orange', markeredgecolor='none')
+        marker='o', linewidth=0.7, markersize=4, markerfacecolor='black', markeredgecolor='none')
 
 #ax.xaxis.set_minor_locator(AutoMinorLocator())
 #ax.yaxis.set_minor_locator(AutoMinorLocator())
@@ -44,7 +44,7 @@ ax.xaxis.set_minor_locator(AutoMinorLocator())
 ax.yaxis.set_minor_locator(AutoMinorLocator())
 
 ax.set_xlabel(r'\rm No of species', fontsize=8)
-ax.set_ylabel(r'\rm Walltime', fontsize=8)
+ax.set_ylabel(r'\rm Normalized walltime', fontsize=8)
 #ax.ticklabel_format(axis='y', style='sci', scilimits=(4,4))
 left = 0.15  # the left side of the subplots of the figure
 right = 0.95  # the right side of the subplots of the figure
