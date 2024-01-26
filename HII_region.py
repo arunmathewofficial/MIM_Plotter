@@ -83,7 +83,7 @@ print("Table Size: ( row =", table_He['N_row'], ", columns = ", table_He['N_col'
 dataset_He = table_He['columns']
 
 print("Reading silo file:", pionfile_haworth)
-H = object.get_parameter('Tr007_H1p')  object.get_parameter('Tr000_X_H')
+H = object.get_parameter('Tr007_H1p')  / object.get_parameter('Tr000_X_H')
 H0 = np.ones_like(H1p) - H1p
 
 He2p = object.get_parameter('Tr009_He2p') / object.get_parameter('Tr001_X_He')
