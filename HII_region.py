@@ -30,7 +30,7 @@ cloudyfile_O = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB
 cloudyfile_Ne = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_Ne'
 cloudyfile_S = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_S'
 
-pionfile_haworth = '/home/mathew/Desktop/pion/photoionisation_test/silo/HIIregion_Haworth_0000.00022016.silo'
+pionfile_haworth = '/home/mathew/Desktop/pion/refactor-test/silo/mpv10_HIIregion_0000.00002266.silo'
 
 torus_haworth = '/home/mathew/Desktop/pion/photoionisation_test/From_Tom/photoionradial.dat'
 
@@ -63,7 +63,7 @@ ax.tick_params(axis="both", direction="in", which="both",
                bottom=True, top=True, left=True, right=True, length=2, labelsize=10)
 
 ax.set_xlim([1.0, 6])
-ax.set_ylim([0.0, 12000])
+#ax.set_ylim([0.0, 12000])
 ax.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=10)
 ax.set_ylabel(r"$\rm T \, (K)$", fontsize=10)
 
@@ -83,7 +83,7 @@ print("Table Size: ( row =", table_He['N_row'], ", columns = ", table_He['N_col'
 dataset_He = table_He['columns']
 
 print("Reading silo file:", pionfile_haworth)
-H1p = object.get_parameter('Tr007_H1p') / object.get_parameter('Tr000_X_H')
+H = object.get_parameter('Tr007_H1p')  object.get_parameter('Tr000_X_H')
 H0 = np.ones_like(H1p) - H1p
 
 He2p = object.get_parameter('Tr009_He2p') / object.get_parameter('Tr001_X_He')

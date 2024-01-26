@@ -260,20 +260,11 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=18)
                 ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=18)
 
-                #if plot_style['legend'] == True: ax[fig_index].legend(frameon=False, loc='lower center')
+                if plot_style['legend'] == True: ax[fig_index].legend(frameon=False, loc='upper right')
 
                 #ax[fig_index].legend(['First List', '', 'Second List'], loc='upper left')
 
                 fig_index = plot_indexing_1Dfunc(plot_index, total_fig, fig_index, force_plotting_1d)
-
-
-
-
-
-
-
-
-
 
 
     # 3. two dimensional array =================================================================

@@ -13,7 +13,7 @@ from species import *
 
 
 # MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
+output_dir = make_directory('MIM2023_Images')
 
 
 '''
@@ -22,9 +22,9 @@ low resolution - 1024 grid
 high resolution - 10240 grid
 '''
 
-v100_file = '/home/tony/Desktop/MIM_Pub_Datafiles/Rad_Shock/RSH_n2048_v100/RSH1D_n2048_v100_Ray79E_0000.01071104.silo'
+v100_file = '/home/mathew/Desktop/Simula/RadShock/RSH1D_n2048_v1000_Ray79E/RSH1D_n2048_v1000_Ray79E_0000.00172032.silo'
 
-OPTION = 1
+OPTION = 2
 
 # OPTION: 1 ****************************************************************************
 if OPTION == 1:
@@ -383,8 +383,8 @@ if OPTION == 1:
                                 [r'\huge{x (cm)}', r'\huge{Ioniastion fraction}'], [r'\huge{x (cm)}', None]]
     #plot_style['axis-label'] = []
 
-    plot_style['xlimit'] = [[0, 2E+15], [0, 2E+15], [0, 2E+15], [0, 2E+15],
-                            [0, 2E+15], [0, 2E+15]]
+    plot_style['xlimit'] = [[0, 2.3E+20], [0, 2.3E+20], [0, 2.3E+20], [0, 2.3E+20],
+                           [0, 2.3E+20], [0, 2.3E+20]]
 
     #plot_style['ylimit'] = []
 
@@ -405,7 +405,7 @@ if OPTION == 1:
     #plot_style['force-plotting'] = [[2, 1, 1], [4, 1, 2], [6, 2, 1], [8, 2, 2], [10, 3, 1], [12, 3, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v100_HHeCN0.png')
+    plt.savefig(output_dir + 'RadShock_v100_HHeCN0.png')
 
 
 
@@ -630,7 +630,7 @@ if OPTION == 2:
                                 [r'\Large{x (cm)}', r'\Large{Ioniastion fraction}']]
     #plot_style['axis-label'] = []
 
-    plot_style['xlimit'] = [[0, 2E+15], [0, 2E+15], [0, 2E+15]]
+    #plot_style['xlimit'] = [[0, 2E+15], [0, 2E+15], [0, 2E+15]]
 
     plot_style['insert-txt'] = [[r'\textbf{Silicon}', 5E+14, 3.5, 0],
                                 [r'\textbf{Sulfur}', 5E+14, 2.2, 0],
@@ -655,5 +655,5 @@ if OPTION == 2:
     #plot_style['force-plotting_1d'] = [[2, 1], [4, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('RadShock_v100_SiSFe.png')
+    plt.savefig(output_dir + 'RadShock_v100_SiSFe.png')
 

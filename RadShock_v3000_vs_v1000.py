@@ -13,7 +13,7 @@ from species import *
 
 
 # MAIN **********************************************************************
-output_dir = make_directory('INAM_2023')
+output_dir = make_directory('MIM2023_Images')
 
 v1000_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v1000_Ray79E_0000.00122880.silo'
 v3000_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/RadShock_v3000_vs_v1000/RSH1D_n10240_v3000_Ray79E_0000.00512000.silo'

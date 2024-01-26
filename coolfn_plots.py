@@ -14,7 +14,7 @@ from matplotlib.lines import Line2D
 plot_dir =make_directory('MIM2023_Images')
 
 Asplund_coolfn = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n1024_Asplund2009_CoolFunc.txt'
-Eatson_coolfn = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n1024_Asplund2009_CoolFunc.txt'
+Eatson_coolfn = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/CoolFunc_Eatson2022/CIE_n128_Eatson2022_CoolFunc.txt'
 
 # Both the simulations use the following relevant parameters
 rho = 2.26739E-24 # gas density in the units of g/cm^3
@@ -23,7 +23,7 @@ m_H = 1.67356E-24 # mass of Hydrogen atom in g
 norm_factor = np.power(m_H/rho, 2.0)
 
 
-Eatson_coolfn_original = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/Eatson2022_original/Eatson_cooling_curve_WC_logT4-9.txt'
+Eatson_coolfn_original = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/Eatson2022_original/Eatson_cooling_curve_WC_logT.txt'
 
 plot_data = []
 
@@ -297,7 +297,7 @@ net_cooling_data['label-position'] = label_position[0]
 net_cooling_data['line-color'] = line_color[0]
 net_cooling_data['line-style'] = line_style[0]
 eatson_orig_net_data.append(net_cooling_data.copy())
-#plot_data.append(eatson_orig_net_data)
+plot_data.append(eatson_orig_net_data)
 
 
 
@@ -320,7 +320,8 @@ plot_style['axis-label'] = [[None, r"${\Large \rm log(\Lambda_N) \,  erg \, cm^3
                             [None, r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
                             [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
-plot_style['insert-txt'] = []
+#plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
+
 
 
 # plot margin adjustments
@@ -332,9 +333,9 @@ plot_style['wspace'] = 0.0  # the amount of width reserved for blank space betwe
 plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
 
-plot_style['custom-legend'] = [
-    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
-]
+#plot_style['custom-legend'] = [
+#    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
+#]
 
 ###################################################################
 '''
