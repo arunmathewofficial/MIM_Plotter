@@ -152,6 +152,7 @@ def get_tracers(silo_file, tracer_list):
 
 # process tracer data before pplotting ######################################
 def process_tracer_data(tracer_data_list, norm):
+
     '''
     process the tracer data list for plotting
     :param tracer_data_list:
@@ -160,25 +161,24 @@ def process_tracer_data(tracer_data_list, norm):
     '''
 
     processed_tracer_data = []
-    for m in range(len(tracer_data_list)):
 
-        if m == 0:
-            neutral_tracer = tracer_data_list[0] / norm
-            for j in range(1, len(tracer_data_list)):
-                neutral_tracer -= tracer_data_list[j] / norm
-
-            zero_vector = np.zeros_like(neutral_tracer)
-            # checking for negative number
-            for i in range(np.size(neutral_tracer)):
-                neutral_tracer[i] = max(neutral_tracer[i], zero_vector[i])
-
-            tracer_data = neutral_tracer
-
-        else:
-            non_neutral_tracers = tracer_data_list[m] / norm
-            tracer_data = non_neutral_tracers
-
+    # all other species
+    for m in range(1, len(tracer_data_list)):
+        tracer_data = tracer_data_list[m] / norm
         processed_tracer_data.append(tracer_data)
+
+    # top-ion calculation
+    topion_tracer = np.ones_like(tracer_data_list[0])
+    zero_vector = np.zeros_like(topion_tracer)
+    for j in range(1, len(tracer_data_list)):
+        topion_tracer -= tracer_data_list[j] / norm
+
+    # correct negative numbers
+    for i in range(np.size(topion_tracer)):
+        topion_tracer[i] = max(topion_tracer[i], zero_vector[i])
+
+    tracer_data = topion_tracer
+    processed_tracer_data.append(tracer_data)
 
     return processed_tracer_data
 # ***************************************************************************

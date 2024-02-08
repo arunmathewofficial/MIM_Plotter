@@ -16,13 +16,13 @@ import pandas as pd
 
 
 # MAIN **********************************************************************
-output_dir = make_directory('MIM2023_Images')
+output_dir = make_directory('/home/mathew/Desktop/Simulations/MIM-Paper')
 
 '''
 1. Ion fraction of Hydrogen, Helium and Carbon for CIE with Asplund 2009 abundances
 '''
 #file = '/home/mathew/Desktop/MIM_Pub_Datafiles/CIE_Asplund2009_1024/CIE_Asplund09_n1024_0000.08577024.silo'
-file = '/home/mathew/Desktop/Simula/CIE_Asplund09_n1024_silo/CIE_Asplund09_n1024_0000.02727936.silo'
+file = '/home/mathew/Desktop/Simulations/CIEAsplund09_n1024/CIE_Asplund09_n1024_0000.01656832.silo'
 
 '''
 2. Compare the ion fraction of Helium, Carbon  and Nitrogen for Asplund2009 and Eatson2022 abundances 
@@ -59,6 +59,7 @@ if OPTION == 1:
     line_style = ['-', 'dashed']
     tracer_data_list = get_tracers(file, tracer_list)
     normalisation_factor = tracer_data_list[0]
+    print(normalisation_factor)
     pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
     data_dict = add_data_to_dict(data_dict, pro_tracer_data_list, HYDROGEN_LABELS)
     # loop over hydrogen ions
@@ -331,12 +332,22 @@ if OPTION == 1:
     plt.savefig(output_dir + 'CIE_Asplund2009.png', dpi=300)
 
 
+    df = pd.DataFrame(data_dict)
+    data_file = output_dir + 'CIE_ion_fractions.txt'
+    print('Writing data to file', data_file)
+    df.to_csv(data_file, sep=' ', index=False, float_format='%.8e')
+    with open(data_file, 'r+') as file:
+        contents = file.read()
+        file.seek(0, 0)
+        file.write('# Collisional ionization equilibrium (CIE) ion-fractions\n' + contents)
+
+
 
 
 # END OF OPTION 1 ***************************************************************
 
 
-
+'''
 # INAM 2023 presentation plots ####################################################
     output_dir = make_directory('INAM_2023')
     plot_style = {}
@@ -372,17 +383,5 @@ if OPTION == 1:
     print('Saving image to file', plot_file)
     plt.savefig(output_dir + 'CIE_Asplund2009.png', dpi=300)
 ##############################################################################
-
-
-
-
-    # common cammand: save data to file
-    df = pd.DataFrame(data_dict)
-    data_file = output_dir + 'CIE_ion_fractions.txt'
-    print('Writing data to file', data_file)
-    df.to_csv(data_file, sep=' ', index=False, float_format='%.8e')
-    with open(data_file, 'r+') as file:
-        contents = file.read()
-        file.seek(0, 0)
-        file.write('# Collisional ionization equilibrium (CIE) ion-fractions\n' + contents)
+'''
 

@@ -30,7 +30,7 @@ cloudyfile_O = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB
 cloudyfile_Ne = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_Ne'
 cloudyfile_S = '/home/mathew/Desktop/pion/photoionisation_test/cloudy_Haworth_BB/HII_region.ele_S'
 
-pionfile_haworth = '/home/mathew/Desktop/pion/refactor-test/silo/mpv10_HIIregion_0000.00002487.silo'
+pionfile_haworth = '/home/mathew/Desktop/pion/refactor-test/silo/mpv10_HIIregion_HHeCNONe_0000.00003584.silo'
 
 torus_haworth = '/home/mathew/Desktop/pion/photoionisation_test/From_Tom/photoionradial.dat'
 
