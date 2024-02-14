@@ -105,6 +105,31 @@ def get_temperature(silo_file):
     return temperature
 # ***************************************************************************
 
+def get_velocityX(silo_file):
+    '''
+    read the silo file for temperature array
+
+    :param silo_file:
+    :return: temperature array
+    '''
+    read_data = ReadData([silo_file])
+    vx = read_data.get_1Darray("VelocityX")['data'][0]
+    return vx
+
+# get tracer data from the given silo file ##################################
+def get_tracer(silo_file, tracer):
+    '''
+    read the silo file for tracer array
+
+    :param silo_file:
+    :return: tracer array
+    '''
+    read_data = ReadData([silo_file])
+    tracer_data = read_data.get_1Darray(tracer)['data'][0]
+    return tracer_data
+# ***************************************************************************
+
+
 # get tracer data from the given silo file ##################################
 def get_tracers(silo_file, tracer_list):
     '''
