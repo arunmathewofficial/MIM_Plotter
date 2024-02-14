@@ -12,7 +12,7 @@ mH = 1.6735575e-24 # in gms
 parser = argparse.ArgumentParser()
 parser.add_argument("input_silo_file", type=str, help="give the input silo file path")
 parser.add_argument("output_dir", type=str, help="give the output image dir path")
-parser.add_argument("whatplot", type=str, help="mention what to plot?")
+parser.add_argument("whatplot", type=str, help="mention what to plot? options: flow_quantities, chemical_tracers")
 
 args = parser.parse_args()
 input_silo = args.input_silo_file
@@ -40,14 +40,14 @@ if what2plot == 'flow_quantities':
     X_H = get_tracer(input_silo, 'Tr000_X_H')
     nH = X_H * density / mH
     # Create a plot
-    plt.plot(radius, temperature/10**6, label='T', linestyle='-')
-    plt.plot(radius, density/10**-23, label=r'$\rho$', linestyle='--')
-    plt.plot(radius, vx/10**8, label=r'$v_x$', linestyle='-.')
-    plt.plot(radius, nH, label=r'$n_H$', linestyle=':')
+    plt.plot(radius, temperature/(1.5*10**7), label=r'$T\, (1.5\times 10^{7} K)$', linestyle='-')
+    plt.plot(radius, density/(5*10**-23), label=r'$\rho \, (5.0\times 10^{22})$', linestyle='--')
+    plt.plot(radius, vx/10**8, label=r'$v_r \, (1.0\times 10^{8})$', linestyle='-.')
+    plt.plot(radius, nH/30, label=r'$n_H (3.0\times 10^1)$', linestyle=':')
     # Add labels and title
     plt.xlabel('radius (pc)')
     plt.ylabel('various quantities')
-    plt.xlim(0, 2)
+    plt.xlim(0, 5)
     # Show the plot
     plt.grid(True)
     plt.legend()
@@ -232,7 +232,7 @@ if what2plot == 'chemical_tracers':
     axs[1].legend(fontsize=12, loc="lower right")
     axs[1].set_ylabel("Ion Fraction", fontsize=16)
     axs[1].set_xlabel("radius (pc)", fontsize=16)
-    axs[1].set_xlim(0, 20.0)  # Set the x-axis limits from 4.0 to 9.0
+    axs[1].set_xlim(0, 10.0)  # Set the x-axis limits from 4.0 to 9.0
 
     axs[2].plot(radius, Ne0 / X_Ne, label="$\mathrm{Ne}^{0}$")
     axs[2].plot(radius, Ne1p / X_Ne, label="$\mathrm{Ne}^{+}$")
@@ -250,7 +250,7 @@ if what2plot == 'chemical_tracers':
     axs[2].legend(fontsize=12, loc="lower right")
     axs[2].set_ylabel("Ion Fraction", fontsize=16)
     axs[2].set_xlabel("radius (pc)", fontsize=16)
-    axs[2].set_xlim(0, 20.0)  # Set the x-axis limits from 4.0 to 9.0
+    axs[2].set_xlim(0, 10.0)  # Set the x-axis limits from 4.0 to 9.0
 
     outfile = output_dir + "HHeCNONe_ionfrac.png"
     print("saving " + outfile)
@@ -280,8 +280,8 @@ if what2plot == 'chemical_tracers':
     axs[0].grid()
     axs[0].legend(fontsize=12, loc="lower right")
     axs[0].set_ylabel("Ion Fraction", fontsize=16)
-    axs[0].set_xlabel("$\log_{10}T$ (K)", fontsize=16)
-    axs[0].set_xlim(0, 20)  # Set the x-axis limits from 4.0 to 9.0
+    axs[0].set_xlabel("radius (pc)", fontsize=16)
+    axs[0].set_xlim(0, 4)  # Set the x-axis limits from 4.0 to 9.0
 
     axs[1].plot(radius, S0 / X_S, label="$\mathrm{S}^{0}$")
     axs[1].plot(radius, S1p / X_S, label="$\mathrm{S}^{+}$")
@@ -304,8 +304,8 @@ if what2plot == 'chemical_tracers':
     axs[1].grid()
     axs[1].legend(fontsize=12, loc="lower right")
     axs[1].set_ylabel("Ion Fraction", fontsize=16)
-    axs[1].set_xlabel("$\log_{10}T$ (K)", fontsize=16)
-    axs[1].set_xlim(0, 20)  # Set the x-axis limits from 4.0 to 9.0
+    axs[1].set_xlabel("radius (pc)", fontsize=16)
+    axs[1].set_xlim(0, 4)  # Set the x-axis limits from 4.0 to 9.0
 
     axs[2].plot(radius, Fe0 / X_Fe, label="$\mathrm{Fe}^{0}$")
     axs[2].plot(radius, Fe1p / X_Fe, label="$\mathrm{Fe}^{+}$")
@@ -339,7 +339,7 @@ if what2plot == 'chemical_tracers':
     axs[2].legend(fontsize=12, loc="lower right")
     axs[2].set_ylabel("Ion Fraction", fontsize=16)
     axs[2].set_xlabel("radius (pc)", fontsize=16)
-    axs[1].set_xlim(0, 20)  # Set the x-axis limits from 4.0 to 9.0
+    axs[2].set_xlim(0, 4)  # Set the x-axis limits from 4.0 to 9.0
 
     outfile = output_dir + "SiSFe_ionfrac.png"
     print("saving " + outfile)
