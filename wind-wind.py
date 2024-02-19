@@ -47,7 +47,7 @@ if what2plot == 'flow_quantities':
     # Add labels and title
     plt.xlabel('radius (pc)')
     plt.ylabel('various quantities')
-    plt.xlim(0, 5)
+    plt.xlim(0, 2)
     # Show the plot
     plt.grid(True)
     plt.legend()

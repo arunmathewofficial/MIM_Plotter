@@ -18,11 +18,13 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("input_silo_file", type=str, help="give the input silo input_silo path")
 parser.add_argument("output_dir", type=str, help="give the output image dir path")
+parser.add_argument("abundance", type=str, help="give the name of the abundance")
 
 args = parser.parse_args()
 input_silo = args.input_silo_file
 output_dir = args.output_dir
 output_dir = make_directory(output_dir)
+abundance  = args.abundance
 
 # make plotting data and append to plot_data array
 plot_data = []
@@ -308,15 +310,16 @@ plot_style['wspace'] = 0.0  # the amount of width reserved for blank space betwe
 plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
 onedim_master_plotter(plot_data, plot_style)
-plot_input_silo = output_dir + 'CIE_Asplund2009.png'
+plot_input_silo = output_dir + 'CIE_' + abundance +'.png'
 print('Saving image to input_silo', plot_input_silo)
-plt.savefig(output_dir + 'CIE_Asplund2009.png', dpi=300)
+plt.savefig(output_dir + 'CIE_' + abundance +'.png', dpi=300)
 
 df = pd.DataFrame(data_dict)
-data_input_silo = output_dir + 'CIE_ion_fractions.txt'
+data_input_silo = output_dir + 'CIE_' + abundance + '.txt'
 print('Writing data to input_silo', data_input_silo)
 df.to_csv(data_input_silo, sep=' ', index=False, float_format='%.8e')
 with open(data_input_silo, 'r+') as input_silo:
     contents = input_silo.read()
     input_silo.seek(0, 0)
     input_silo.write('# Collisional ionization equilibrium (CIE) ion-fractions\n' + contents)
+    input_silo.write('# Abundances:' + abundance)
