@@ -138,26 +138,26 @@ IRON_CIE_ASPLUND2009 = ["Tr008_X_Fe", "Tr073_Fe", "Tr074_Fe1p", "Tr075_Fe2p", "T
 
 # CIE EATSON 2022
 
-HELIUM_CIE_EATSON2022 = ["Tr000_X_He", "Tr007_He1p", "Tr008_He2p"]
-CARBON_CIE_EATSON2022 = ["Tr001_X_C", "Tr009_C1p", "Tr010_C2p", "Tr011_C3p", "Tr012_C4p", "Tr013_C5p", "Tr014_C6p"]
-OXYGEN_CIE_EATSON2022 = ["Tr002_X_O", "Tr015_O1p", "Tr016_O2p", "Tr017_O3p", "Tr018_O4p", "Tr019_O5p", "Tr020_O6p",
-                 "Tr021_O7p", "Tr022_O8p"]
+HELIUM_CIE_EATSON2022 = ["Tr000_X_He", "Tr007_He", "Tr008_He1p"]
+CARBON_CIE_EATSON2022 = ["Tr001_X_C", "Tr009_C", "Tr010_C1p", "Tr011_C2p", "Tr012_C3p", "Tr013_C4p", "Tr014_C5p"]
+OXYGEN_CIE_EATSON2022 = ["Tr002_X_O", "Tr015_O", "Tr016_O1p", "Tr017_O2p", "Tr018_O3p", "Tr019_O4p", "Tr020_O5p",
+                 "Tr021_O6p", "Tr022_O7p"]
 
-NEON_CIE_EATSON2022 = ["Tr003_X_Ne", "Tr023_Ne1p", "Tr024_Ne2p", "Tr025_Ne3p", "Tr026_Ne4p", "Tr027_Ne5p", "Tr028_Ne6p",
-           "Tr029_Ne7p", "Tr030_Ne8p", "Tr031_Ne9p", "Tr032_Ne10p"]
+NEON_CIE_EATSON2022 = ["Tr003_X_Ne", "Tr023_Ne", "Tr024_Ne1p", "Tr025_Ne2p", "Tr026_Ne3p", "Tr027_Ne4p", "Tr028_Ne5p",
+           "Tr029_Ne6p", "Tr030_Ne7p", "Tr031_Ne8p", "Tr032_Ne9p"]
 
-SILICON_CIE_EATSON2022 = ["Tr004_X_Si", "Tr033_Si1p", "Tr034_Si2p", "Tr035_Si3p", "Tr036_Si4p", "Tr037_Si5p", "Tr038_Si6p",
-           "Tr039_Si7p", "Tr040_Si8p", "Tr041_Si9p", "Tr042_Si10p", "Tr043_Si11p", "Tr044_Si12p", "Tr045_Si13p",
-           "Tr046_Si14p"]
+SILICON_CIE_EATSON2022 = ["Tr004_X_Si", "Tr033_Si", "Tr034_Si1p", "Tr035_Si2p", "Tr036_Si3p", "Tr037_Si4p", "Tr038_Si5p",
+           "Tr039_Si6p", "Tr040_Si7p", "Tr041_Si8p", "Tr042_Si9p", "Tr043_Si10p", "Tr044_Si11p", "Tr045_Si12p",
+           "Tr046_Si13p"]
 
-SULFUR_CIE_EATSON2022 = ["Tr005_X_S", "Tr047_S1p", "Tr048_S2p", "Tr049_S3p", "Tr050_S4p", "Tr051_S5p", "Tr052_S6p", "Tr053_S7p",
-           "Tr054_S8p", "Tr055_S9p", "Tr056_S10p", "Tr057_S11p", "Tr058_S12p", "Tr059_S13p", "Tr060_S14p",
-           "Tr061_S15p", "Tr062_S16p"]
+SULFUR_CIE_EATSON2022 = ["Tr005_X_S", "Tr047_S", "Tr048_S1p", "Tr049_S2p", "Tr050_S3p", "Tr051_S4p", "Tr052_S5p", "Tr053_S6p",
+           "Tr054_S7p", "Tr055_S8p", "Tr056_S9p", "Tr057_S10p", "Tr058_S11p", "Tr059_S12p", "Tr060_S13p",
+           "Tr061_S14p", "Tr062_S15p"]
 
-IRON_CIE_EATSON2022 = ["Tr006_X_Fe", "Tr063_Fe1p", "Tr064_Fe2p", "Tr065_Fe3p", "Tr066_Fe4p", "Tr067_Fe5p", "Tr068_Fe6p",
-           "Tr069_Fe7p", "Tr070_Fe8p", "Tr071_Fe9p", "Tr072_Fe10p", "Tr073_Fe11p", "Tr074_Fe12p", "Tr075_Fe13p",
-           "Tr076_Fe14p", "Tr077_Fe15p", "Tr078_Fe16p", "Tr079_Fe17p", "Tr080_Fe18p", "Tr081_Fe19p", "Tr082_Fe20p",
-           "Tr083_Fe21p", "Tr084_Fe22p", "Tr085_Fe23p", "Tr086_Fe24p", "Tr087_Fe25p", "Tr088_Fe26p"]
+IRON_CIE_EATSON2022 = ["Tr006_X_Fe", "Tr063_Fe", "Tr064_Fe1p", "Tr065_Fe2p", "Tr066_Fe3p", "Tr067_Fe4p", "Tr068_Fe5p",
+           "Tr069_Fe6p", "Tr070_Fe7p", "Tr071_Fe8p", "Tr072_Fe9p", "Tr073_Fe10p", "Tr074_Fe11p", "Tr075_Fe12p",
+           "Tr076_Fe13p", "Tr077_Fe14p", "Tr078_Fe15p", "Tr079_Fe16p", "Tr080_Fe17p", "Tr081_Fe18p", "Tr082_Fe19p",
+           "Tr083_Fe20p", "Tr084_Fe21p", "Tr085_Fe22p", "Tr086_Fe23p", "Tr087_Fe24p", "Tr088_Fe25p"]
 
 
 

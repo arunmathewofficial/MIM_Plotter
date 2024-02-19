@@ -1,6 +1,6 @@
 # Author: Arun Mathew
 # Created: 07-03-2023
-# Multi-ion-module-publication plots:
+# To plot CIE ASPLUND 2009
 
 # New comments:
 # 2022-11-09 AM: scripted H and He OneDGrid_Plotter
