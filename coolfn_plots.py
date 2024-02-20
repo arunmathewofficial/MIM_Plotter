@@ -1,6 +1,7 @@
 # Author: Arun Mathew
 # Created: 10-11-2022
 # Plotting Cooling functions with Asplund2002 and Eatson2022 Abundances
+# Compare with original cooling data of Eatson 2022 for WC abundances
 
 # Import required libraries: ##########################################
 from tools import *
@@ -10,20 +11,31 @@ import matplotlib.pyplot as plt
 from species import *
 from matplotlib.lines import Line2D
 
-# MAIN ##################################################################################
-plot_dir =make_directory('MIM2023_Images')
+import argparse
 
-Asplund_coolfn = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/CoolFunc_Asplund2009/CIE_n1024_Asplund2009_CoolFunc.txt'
-Eatson_coolfn = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/CoolFunc_Eatson2022/CIE_n128_Eatson2022_CoolFunc.txt'
+parser = argparse.ArgumentParser()
+parser.add_argument("Asplund_coolfn_data", type=str, help="Asplund 2009 cooling function data file")
+parser.add_argument("Eatson_coolfn_data", type=str, help="Eatson 2022 cooling function data file")
+parser.add_argument("OriginalEatson_coolfn_data", type=str, help="Original Eatson 2022 cooling function data file")
+parser.add_argument("output_dir", type=str, help="give the output image dir path")
 
+args = parser.parse_args()
+
+
+Asplund_coolfn = args.Asplund_coolfn_data
+Eatson_coolfn = args.Eatson_coolfn_data
 # Both the simulations use the following relevant parameters
 rho = 2.26739E-24 # gas density in the units of g/cm^3
 m_H = 1.67356E-24 # mass of Hydrogen atom in g
 # Hence, the normalisation factor is
 norm_factor = np.power(m_H/rho, 2.0)
 
+# Original Eatson cooling function
+Eatson_coolfn_original = args.OriginalEatson_coolfn_data
 
-Eatson_coolfn_original = '/home/mathew/Desktop/Simula/CIE_Cooling_Func/Eatson2022_original/Eatson_cooling_curve_WC_logT.txt'
+# Output directory
+output_dir = args.output_dir
+output_dir = make_directory(output_dir)
 
 plot_data = []
 
@@ -105,7 +117,7 @@ Asplund_Fe = [[np.log10(dataset_1[73]), 'Fe'], [np.log10(dataset_1[74]), 'Fe1+']
 asplund_element_list = [Asplund_H, Asplund_He, Asplund_C, Asplund_N, Asplund_O,
                         Asplund_Ne, Asplund_Si, Asplund_S, Asplund_Fe]
 asplund_element_list_name = ['H', 'He', 'C', 'N', 'O', 'Ne', 'Si', 'S', 'Fe']
-label_position = [[4.24, -22.6], [4.9, -22.8], [4.92, -22.3], [5.2, -22.4], [5.3, -21.9],
+label_position = [[4.22, -22.8], [4.9, -22.8], [4.92, -22.3], [5.2, -22.4], [5.3, -21.9],
                   [5.63, -22.35], [6.1, -22.85], [6.37, -23.32], [7, -23.2]]
 line_color = ['black', 'black', 'darkblue', 'darkblue', 'crimson', 'crimson', 'darkblue', 'darkgreen', 'darkgreen']
 line_style = ['-.', '--', '--', '-', '-', '--', 'dotted', '--', '-']
@@ -337,33 +349,9 @@ plot_style['hspace'] = 0.1  # the amount of height reserved for white space betw
 #    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
 #]
 
-###################################################################
-'''
-# Making INAM 2023 presentation plots
-plot_dir = make_directory('INAM_2023')
-plot_style['figsize'] = (14, 6)
-plot_style['matrix'] = [1, 2]
-plot_style['sharex'] = True  # options: True/False, 'col', 'all'
-plot_style['sharey'] = True  # options: True/False, 'col', 'all'
-plot_style['force-plotting_1d'] = [[3,1], [4, 2]]
-plot_style['axis-label'] = [[r"${\rm log(T) \, K}$", r"${\Large \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
-                            [r"${\rm log(T) \, K}$", None],
-                            [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
-
-plot_style['insert-txt'] = [[r'{With Solar Abundance}', -0.2, -20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
-
-# plot margin adjustments
-plot_style['left'] = 0.05  # the left side of the subplots of the figure
-plot_style['right'] = 0.98  # the right side of the subplots of the figure
-plot_style['bottom'] = 0.1  # the bottom of the subplots of the figure
-plot_style['top'] = 0.95  # the top of the subplots of the figure
-plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
-plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
-###################################################################
-'''
 
 # Plotting and saving the image to the file
 onedim_master_plotter(plot_data, plot_style)
-plt.savefig(plot_dir + 'cooling_function.png', dpi=300)
+plt.savefig(output_dir + 'cooling_function.png', dpi=300)
 
