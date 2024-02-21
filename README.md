@@ -1,2 +1,10 @@
-# MIM_Plotter
-This repo contain plotting fucntion for Multi Ion Module V10 (MPV10) publications-1
+# Multi-ion Module Plotting Script
+
+Plotting Script for multi-ion Module Method paper
+
+
+1. cie_asplund.py
+2. cie_eatson.py
+3. cooling_function.py
+4. adibatic_flow_struc.py
+5. adiabatic_ion_profile.py
