@@ -1,6 +1,6 @@
 # Multi-ion Module Plotting Scripts
 
-Plotting Script for multi-ion Module Method paper
+Plotting Scripts for the multi-ion Module Method paper
 
 
 1. cie_asplund.py
