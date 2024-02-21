@@ -1,4 +1,4 @@
-# Multi-ion Module Plotting Script
+# Multi-ion Module Plotting Scripts
 
 Plotting Script for multi-ion Module Method paper
 
