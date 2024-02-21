@@ -45,7 +45,7 @@ ax.plot(x_high, get_density(high_resolution_file), color=color1, label=r'$\rho$'
 # Set labels and ticks for primary y-axis
 ax.set_xlabel(r'$\rm x \, (cm)$', fontsize=20)  # Adjust fontsize as needed
 ax.set_ylabel(r'$\rm \rho \, (g/cm^3)$', fontsize=20)  # Adjust fontsize as needed
-ax.tick_params(axis='both', labelsize=15)  # Adjust tick label size as needed
+ax.tick_params(axis='both', labelsize=16)  # Adjust tick label size as needed
 ax.set_xlim(2e+16, 3e+16)
 ax.set_ylim(7e-24, 10e-23)
 ax.legend(loc=(0.7, 0.82), frameon=False, fontsize='xx-large')
@@ -58,7 +58,7 @@ ax_2.plot(x_high, np.log10(get_temperature(high_resolution_file)), color=color2,
 
 # Set label and ticks for secondary y-axis
 ax_2.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=20)  # Adjust fontsize as needed
-ax_2.tick_params(axis='y', labelsize=15, direction="in")
+ax_2.tick_params(axis='y', labelsize=16, direction="in")
 ax_2.set_xlim(2.4e+16, 2.7e+16)
 ax_2.set_ylim(3, 7)
 ax_2.legend(loc=(0.7, 0.74), frameon=False, fontsize='xx-large')
