@@ -10,115 +10,126 @@ from master_plotter import *
 import numpy as np
 import matplotlib.pyplot as plt
 from species import *
+import argparse
 
-# MAIN **********************************************************************
-output_dir = make_directory('INAM_2023')
+parser = argparse.ArgumentParser()
+parser.add_argument("low_density_subtime", type=str, help="Silo file for sub-cooling-time and low-density case.")
+parser.add_argument("low_density_overtime", type=str, help="Silo file for high-time over cooling timescale and low-density case")
+parser.add_argument("high_density_overtime", type=str, help="Silo file for high-density cases exceeding cooling timescales.")
+parser.add_argument("output_dir", type=str, help="give the output image dir path")
+args = parser.parse_args()
+output_dir = args.output_dir
+output_dir = make_directory(output_dir)
 
-'''
-Compare flow quanties of for radiavive flow at two different time
- - 2024 grid
-'''
-time1_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/Planar_RadShock_v100/RadShock_n2048_v100_Ray78ModelE/RSH1D_n2048_v100_Ray79E_0000.00020480.silo'
-time2_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/Planar_RadShock_v100/RadShock_n2048_v100_Ray78ModelE/RSH1D_n2048_v100_Ray79E_0000.01071104.silo'
-
-OPTION = 1
-
-# OPTION: 1 ****************************************************************************
-if OPTION == 1:
-    '''
-
-    # check for match
-    if not abs(get_basic_data(high_resolution_file)['time'].value - get_basic_data(low_resolution_file)[
-        'time'].value) <= 1.0E-04:
-        warnings.warn(message='Time in two silo file do not match, exiting ...', stacklevel=2)
-        exit(0)
-
-    '''
-
-    # make plotting data and append to plot_data array
-    plot_data = []
-
-    # x data
-    x_time1 = get_basic_data(time1_file)['x']
-    x_time2 = get_basic_data(time2_file)['x']
-
-    # modify x_low data by shifting to left
-    #x_low = x_low - 2.7e13 * np.ones_like(x_low)
-
-    '''
-    # density ###########################################################
-    # y data - density - low resolution
-    data_1 = []
-    flow_data = {}
-
-    flow_data['labels'] = 'density'
-    flow_data['x'] = x_low
-    flow_data['y'] = get_density(low_resolution_file)
-    flow_data['label-position'] = []
-    flow_data['line-color'] = 'magenta'
-    flow_data['line-style'] = '-'
-    data_1.append(flow_data.copy())
-    plot_data.append(data_1)
-    del data_1
+low_den_subtime_file = args.low_density_subtime
+low_den_overtime_file = args.low_density_overtime
+high_den_overtime_file = args.high_density_overtime
 
 
-    # temperature ###########################################################
-    # y data - temperature - low resolution
-    data_2 = []
-    flow_data = {}
-
-    flow_data['labels'] = 'temperature'
-    flow_data['x'] = x_low
-    flow_data['y'] = get_temperature(high_resolution_file)
-    flow_data['label-position'] = []
-    flow_data['line-color'] = 'magenta'
-    flow_data['line-style'] = '-'
-    data_2.append(flow_data.copy())
-    plot_data.append(data_2)
-    del data_2
-
-    '''
-
-    plt.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
-    plt.rc('text', usetex=True)
-    plt.rc('font', **{'size': 12})
-    plt.rc('lines', linewidth=1.5)
-
-    fig, ax = plt.subplots(figsize=(8, 6))
-
-    color = 'tab:orange'
-    ax.set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
-    ax.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=18)
-    ax.plot(x_time1, np.log10(get_temperature(time1_file)), color=color)
-    ax.tick_params(axis='y')
-    ax.set_xlim(1e+14, 1.8e+15)
-    ax.set_ylim(2.0, 6.0)
-    #ax.legend(loc=(0.75, 0.85), frameon=False, fontsize=24)
-
-    text = "time = 5.62 yr"
-    plt.text(3.5e+14, 5.7, text, fontsize=12, color='red', ha='center')
+#plt.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+#plt.rc('text', usetex=True)
+#plt.rc('font', **{'size': 12})
+#plt.rc('lines', linewidth=1.5)
 
 
+# x data
+x_ldst = get_basic_data(low_den_subtime_file)['x']
+x_ldot = get_basic_data(low_den_overtime_file)['x']
+x_hdot = get_basic_data(high_den_overtime_file)['x']
 
-    color = 'darkgreen'
-    #ax.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=18)  # we already handled the x-label with ax1
-    ax.plot(x_time2, np.log10(get_temperature(time2_file)), color=color, linestyle='-')
-    ax.tick_params(axis='y')
-    ax.set_xlim(1.0e+14, 1.8e+15)   # ax_2.set_ylim(3, 7)
-    #ax.legend(loc=(0.75, 0.75), frameon=False, fontsize=24)
+# generate 5 panel figure
+fig, ax = plt.subplots(5, 1, figsize=(5, 8), gridspec_kw = {'wspace':0, 'hspace':0}, sharex=True)
 
-    ax.xaxis.set_minor_locator(AutoMinorLocator())
-    ax.yaxis.set_minor_locator(AutoMinorLocator())
-    ax.tick_params(axis="both", direction="in", which="both",
-                   bottom=True, top=True, left=True, right=True, length=2)
+### Panel - 1 Temperature profile
+#ax[0].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
+ax[0].set_ylabel(r'$\rm log \, T \, (K)$', fontsize=14, labelpad=10)
+ax[0].plot(x_ldst, np.log10(get_temperature(low_den_subtime_file)), label=r'\rm t = ??? sub s',
+           color='black', linewidth=1)
+ax[0].plot(x_ldot, np.log10(get_temperature(low_den_overtime_file)), label=r'\rm t = ??? over s',
+           color='black', linestyle='--', linewidth=1)
+ax[0].legend(frameon=False, fontsize=12)
+#ax[0].xaxis.set_minor_locator(AutoMinorLocator())
+#ax[0].yaxis.set_minor_locator(AutoMinorLocator())
+ax[0].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
 
-    text = "time = 294.97 yr"
-    plt.text(1.5e+15, 5.6, text, fontsize=12, color='red', ha='center')
+### Panel - 2 density profile
+#ax[1].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
+ax[1].set_ylabel(r'$\rm log \, \rho \, (g/cm^3)$', fontsize=14, labelpad=20)
+ax[1].plot(x_ldst, get_density(low_den_subtime_file),
+           label=r'\rm t = ??? sub s', color='black', linewidth=1)
+ax[1].plot(x_ldot, get_density(low_den_overtime_file),
+           label=r'\rm t = ??? over s', color='black', linestyle='--', linewidth=1)
+ax[1].set_yscale('log')
+ax[1].legend(frameon=False, fontsize=12)
+ax[1].xaxis.set_minor_locator(AutoMinorLocator())
+ax[1].yaxis.set_minor_locator(AutoMinorLocator())
+ax[1].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
 
-    #time = get_basic_data(high_resolution_file)['time']
+### Panel - 3 H, He, ionisation profile
+X_H = get_tracer(low_den_overtime_file, 'Tr000_X_H')
+H0 = get_tracer(low_den_overtime_file, 'Tr009_H')
+H1p = X_H - H0
+X_He = get_tracer(low_den_overtime_file, "Tr001_X_He")
+He0 = get_tracer(low_den_overtime_file, "Tr010_He")
+He1p = get_tracer(low_den_overtime_file, "Tr011_He1p")
+He2p = X_He - He0 - He1p
 
-    #print(time)
+#ax[2].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
+ax[2].set_ylabel(r'\rm Ionisation fraction', fontsize=12)
+ax[2].plot(x_ldot, H0 / X_H, label="$\mathrm{H}^{0}$")
+ax[2].plot(x_ldot, H1p / X_H, label="$\mathrm{H}^{+}$")
+ax[2].plot(x_ldot, He0 / X_He, label="$\mathrm{He}^{0}$")
+ax[2].plot(x_ldot, He1p / X_He, label="$\mathrm{He}^{+}$")
+ax[2].plot(x_ldot, He2p / X_He, label="$\mathrm{He}^{2+}$")
+ax[2].set_xlim()
+ax[2].set_ylim()
+ax[2].legend(frameon=False, fontsize=12, ncol=2)
+ax[2].xaxis.set_minor_locator(AutoMinorLocator())
+ax[2].yaxis.set_minor_locator(AutoMinorLocator())
+ax[2].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
 
-    plt.savefig(output_dir + 'RS_logT.png', dpi=300)
+### Panel - 4, Carbon ionisation profile
+
+X_C = get_tracer(low_den_overtime_file, "Tr002_X_C")
+C0 = get_tracer(low_den_overtime_file, "Tr012_C")
+C1p = get_tracer(low_den_overtime_file, "Tr013_C1p")
+C2p = get_tracer(low_den_overtime_file, "Tr014_C2p")
+C3p = get_tracer(low_den_overtime_file, "Tr015_C3p")
+C4p = get_tracer(low_den_overtime_file, "Tr016_C4p")
+C5p = get_tracer(low_den_overtime_file, "Tr017_C5p")
+C6p = X_C - C0 - C1p - C2p - C3p - C4p - C5p
+
+#ax[3].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
+ax[3].set_ylabel(r'\rm Ionisation fraction', fontsize=12)
+ax[3].plot(x_ldot, C0 / X_C, label="$\mathrm{C}$")
+ax[3].plot(x_ldot, C1p / X_C, label="$\mathrm{C}^{+}$")
+ax[3].plot(x_ldot, C2p / X_C, label="$\mathrm{C}^{2+}$")
+ax[3].plot(x_ldot, C3p / X_C, label="$\mathrm{C}^{3+}$")
+ax[3].plot(x_ldot, C4p / X_C, label="$\mathrm{C}^{4+}$")
+ax[3].plot(x_ldot, C5p / X_C, label="$\mathrm{C}^{5+}$")
+ax[3].plot(x_ldot, C6p / X_C, label="$\mathrm{C}^{6+}$")
+ax[3].set_xlim()
+ax[3].set_ylim()
+ax[3].legend(frameon=False, fontsize=12, ncol=2)
+ax[3].xaxis.set_minor_locator(AutoMinorLocator())
+ax[3].yaxis.set_minor_locator(AutoMinorLocator())
+ax[3].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
+
+### Panel - 5
+ax[4].set_xlabel(r'$\rm x \, (cm)$', fontsize=14)
+ax[4].set_ylabel(r'$\rm log \, T \, (K)$', fontsize=14, labelpad=10)
+ax[4].plot(x_ldst, np.log10(get_temperature(low_den_overtime_file)), color='black',
+           linestyle='--', linewidth=1, label=r'$\rm \rho \sim 10^{-23} (g/cm^3)$')
+ax[4].plot(x_hdot, np.log10(get_temperature(high_den_overtime_file)), color='black',
+           linewidth=1, label=r'$\rm \rho \sim 10^{-22} (g/cm^3)$')
+ax[4].set_xlim()
+ax[4].set_ylim()
+ax[4].legend(frameon=False, fontsize=12)
+ax[4].xaxis.set_minor_locator(AutoMinorLocator())
+ax[4].yaxis.set_minor_locator(AutoMinorLocator())
+ax[4].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
 
 
+fig.subplots_adjust(wspace=0.0)
+plt.tight_layout()
+plt.savefig(output_dir + 'non-adiabatic_analysis.png')

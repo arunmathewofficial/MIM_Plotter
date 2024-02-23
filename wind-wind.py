@@ -19,6 +19,13 @@ input_silo = args.input_silo_file
 output_dir = args.output_dir
 output_dir = make_directory(output_dir)
 what2plot = args.whatplot
+if what2plot != 'flow_quantities' and what2plot != 'chemical_tracers':
+    print('\033[93mPlease specify what to plot!\033[0m')
+    print('\033[93mOptions: flow_quantities, chemical_tracers\033[0m')
+
+
+
+
 basic_info = get_basic_data(input_silo)
 # time
 time = basic_info['time']
