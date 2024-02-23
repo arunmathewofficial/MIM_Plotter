@@ -1,7 +1,9 @@
 # Author: Arun Mathew
 # Created: 16-03-2023
-# Multi-ion-module-publication plots: flow quantities
-
+# Multi-ion-module-publication: This script plots flow quantities and
+# ionization profiles for the non-adiabatic shock test case. The plots
+# are generated to compare the effects of the cooling function on
+# density and the cooling timescale.
 
 # Import required libraries: ##########################################
 import warnings

@@ -16,3 +16,7 @@ the vicinity of the shock.
 ### 5. adiabatic_ion_profile.py
 
 ### 6. non-adiabatic_flow_analysis.py
+This script plots flow quantities and
+ionization profiles for the non-adiabatic shock test case. The plots
+are generated to compare the effects of the cooling function on 
+density and the cooling timescale.
