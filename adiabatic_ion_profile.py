@@ -1,6 +1,7 @@
 # Author: Arun Mathew
 # Created: 11-03-2023
-# Multi-ion-module-publication plots: shock test plots
+# Multi-ion-module-publication: Generate a comparison plot for low
+# and high-resolution chemical profiles in the vicinity of the shock.
 
 
 # Import required libraries: ##########################################
