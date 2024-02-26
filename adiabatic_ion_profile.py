@@ -11,28 +11,39 @@ from master_plotter import *
 import numpy as np
 import matplotlib.pyplot as plt
 from species import *
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("low_resolution", type=str, help="Low-resolution silo file")
+parser.add_argument("high_resolution", type=str, help="High-resolution silo file")
+parser.add_argument("output_dir", type=str, help="Output image dir path")
+parser.add_argument("plot_option", type=int, help="Options: 1 for H, He, C, N, O, and Ne plot and 2 of Si, S, and Fe plot")
+
+args = parser.parse_args()
+output_dir = args.output_dir
+output_dir = make_directory(output_dir)
+low_resolution_file = args.low_resolution
+high_resolution_file = args.high_resolution
+option = args.plot_option
+if option != 1 and option != 2:
+    print('\033[93mSpecify the correct plot option\033[0m')
+    print('\033[93mOptions: 1 for H, He, C, N, O, and Ne plot and 2 of Si, S, and Fe plot\033[0m')
 
 
-# MAIN **********************************************************************
-make_directory('MIM_Publi_Plots')
 
 
-'''
-1. Comparing low and high resolution shock test.
-low resolution - 1024 grid
-high resolution - 10240 grid
-'''
-low_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/HighLow_Resol_NRShock/SH1D_n1024_v100_Ray79E_0000.00017408.silo'
-high_resolution_file = '/home/tony/Desktop/MIM_Pub_Datafiles/HighLow_Resol_NRShock/SH1D_n10240_v100_Ray79E_0000.00174080.silo'
+##########################################################################
+# OPTION: 1 ##############################################################
+##########################################################################
 
-OPTION = 1
-
-# OPTION: 1 ****************************************************************************
-if OPTION == 1:
+if option == 1:
 
     '''
-    1. Comparing low and high resolution shock test and plot the tracers as function of position.
+    Plot ionisation profile of H, He, C, N, O, and Ne behind the shock for
+    the adiabatic flow.
     '''
+
+    print('Plotting H, He, C, N, O, and Ne ionisation profile ...')
 
     # check for match
     if not abs(get_basic_data(high_resolution_file)['time'].value - get_basic_data(low_resolution_file)[
@@ -55,12 +66,12 @@ if OPTION == 1:
     tracer_list = HYDROGEN_SHOCK_RAY79E
     tracer_labels = HYDROGEN_SHOCK_LABELS
     label_position = [[2.567e16,0.9], [2.545e16,0.9]]
-    line_color = ['black', 'crimson']
-    line_style = ['dashed', '--']
-    line_marker = ['D', 'D']
+    line_color = ['crimson', 'darkblue']
+    line_style = ['-.', '-.']
+    line_marker = ['s', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over hydrogen ions
     species_data = []
     single_species_data = {}
@@ -81,11 +92,11 @@ if OPTION == 1:
     tracer_list = HYDROGEN_SHOCK_RAY79E
     tracer_labels = HYDROGEN_LABELS
     label_position = [[], []]
-    line_color = ['black', 'crimson']
+    line_color = ['crimson', 'darkblue']
     line_style = ['-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over hydrogen ions
     species_data = []
     single_species_data = {}
@@ -105,13 +116,13 @@ if OPTION == 1:
     # y data - Helium species - low resolution
     tracer_list = HELIUM_SHOCK_RAY79E
     tracer_labels = HELIUM_SHOCK_LABELS
-    label_position = [[2.57e16,0.9], [2.55e16,0.75], [2.545e16,0.35]]
-    line_color = ['black', 'crimson', 'darkgreen']
-    line_style = ['--', '--', '--']
-    line_marker = ['D', 'D', 'D']
+    label_position = [[2.566e16,0.9], [2.55e16,0.75], [2.545e16,0.35]]
+    line_color = ['crimson', 'darkblue', 'darkgreen']
+    line_style = ['-.', '-.', '-.']
+    line_marker = ['s', 's', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over helium ions
     species_data = []
     single_species_data = {}
@@ -132,11 +143,11 @@ if OPTION == 1:
     tracer_list = HELIUM_SHOCK_RAY79E
     tracer_labels = HELIUM_LABELS
     label_position = [[], [], []]
-    line_color = ['black', 'crimson', 'darkgreen']
+    line_color = ['crimson', 'darkblue', 'darkgreen']
     line_style = ['-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over helium ions
     species_data = []
     single_species_data = {}
@@ -154,15 +165,15 @@ if OPTION == 1:
 
     # Carbon ####################################################
     # y data - Carbon species -     line_color = ['black', 'crimson', 'darkgreen', 'gold', 'royalblue', 'darkorange', 'magenta']low resolution
-    tracer_list = CARBON_SHOCK_RAY79E
+    tracer_list = OLD_CARBON_SHOCK_RAY79E
     tracer_labels = CARBON_SHOCK_LABELS
     label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.8], [2.546e16,0.7], [2.546e16,0.1], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
-    line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
+    line_marker = ['s', 's', 's', 's', 's', 's', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over Carbon ions
     species_data = []
     single_species_data = {}
@@ -184,11 +195,11 @@ if OPTION == 1:
     tracer_list = CARBON_SHOCK_RAY79E
     tracer_labels = CARBON_LABELS
     label_position = [[], [], [], [], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
     line_style = ['-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over carbon ions
     species_data = []
     single_species_data = {}
@@ -210,12 +221,12 @@ if OPTION == 1:
     tracer_list = NITROGEN_SHOCK_RAY79E
     tracer_labels = NITROGEN_SHOCK_LABELS
     label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
-    line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
+    line_marker = ['s', 's', 's', 's', 's', 's', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over Carbon ions
     species_data = []
     single_species_data = {}
@@ -238,11 +249,11 @@ if OPTION == 1:
     tracer_list = NITROGEN_SHOCK_RAY79E
     tracer_labels = NITROGEN_LABELS
     label_position = [[], [], [], [], [], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
     line_style = ['-', '-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over nitrogen ions
     species_data = []
     single_species_data = {}
@@ -263,12 +274,12 @@ if OPTION == 1:
     tracer_list = OXYGEN_SHOCK_RAY79E
     tracer_labels = OXYGEN_SHOCK_LABELS
     label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
-    line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
+    line_marker = ['s', 's', 's', 's', 's', 's', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over oxygen ions
     species_data = []
     single_species_data = {}
@@ -290,11 +301,11 @@ if OPTION == 1:
     tracer_list = OXYGEN_SHOCK_RAY79E
     tracer_labels = OXYGEN_LABELS
     label_position = [[], [], [], [], [], [], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
     line_style = ['-', '-', '-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over oxygen ions
     species_data = []
     single_species_data = {}
@@ -316,12 +327,12 @@ if OPTION == 1:
     tracer_list = NEON_SHOCK_RAY79E
     tracer_labels = NEON_SHOCK_LABELS
     label_position = [[2.5625e16,0.92], [2.558e16,0.7], [2.550e16,0.62], [2.546e16,0.4], [2.547e16,0.04], [], [], [], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
-    line_style = ['--', '--', '--', '--', '--', '--', '--']
-    line_marker = ['D', 'D', 'D', 'D', 'D', 'D', 'D']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
+    line_marker = ['s', 's', 's', 's', 's', 's', 's']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over neon ions
     species_data = []
     single_species_data = {}
@@ -343,11 +354,11 @@ if OPTION == 1:
     tracer_list = NEON_SHOCK_RAY79E
     tracer_labels = NEON_LABELS
     label_position = [[], [], [], [], [], [], [], [], [], [], []]
-    line_color = ['black', 'crimson', 'darkgreen', 'royalblue', 'darkorange', 'gold', 'magenta']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
     line_style = ['-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
-    pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
+    pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
     # loop over neon ions
     species_data = []
     single_species_data = {}
@@ -363,11 +374,9 @@ if OPTION == 1:
     plot_data.append(species_data)
     del species_data
 
-
-
     # plot style ================================================================
     plot_style = {}
-    plot_style['figsize'] = (14, 18)
+    plot_style['figsize'] = (16, 12)
     plot_style['label-font-size'] = 12
     plot_style['matrix'] = [3, 2]
     plot_style['legend'] = False       # options: True/False
@@ -375,34 +384,34 @@ if OPTION == 1:
     plot_style['sharey'] = True       # options: True/False, 'col', 'all'
 
     # insert text in the figure (add several number of text)
-    plot_style['insert-txt'] = [[r'\textbf{Hydrogen}', 2.514E+16, 3.4, 0],
-                                [r'\textbf{Helium}', 2.541E+16, 3.5, 0],
-                                [r'\textbf{Carbon}', 2.514E+16, 2.2, 0],
-                                [r'\textbf{Nitrogen}', 2.541E+16, 2.2,0],
-                                [r'\textbf{Oxygen}', 2.514E+16, 0.9, 0],
-                                [r'\textbf{Neon}', 2.541E+16, 0.9, 0]]
+    plot_style['insert-txt'] = [[r'\huge \rm Hydrogen', 2.514E+16, 3.4, 0],
+                                [r'\huge \rm Helium', 2.541E+16, 3.5, 0],
+                                [r'\huge \rm Carbon', 2.514E+16, 2.2, 0],
+                                [r'\huge \rm Nitrogen', 2.541E+16, 2.2,0],
+                                [r'\huge \rm Oxygen', 2.514E+16, 0.9, 0],
+                                [r'\huge \rm Neon', 2.541E+16, 0.9, 0]]
     #plot_style['insert-txt'] = []
-    plot_style['axis-label'] = [[None, r'\huge{Ioniastion fraction}'], [None, None],
-                                [None, r'\huge{Ioniastion fraction}'], [None, None],
-                                [r'\huge{x (cm)}', r'\huge{Ioniastion fraction}'], [r'\huge{x (cm)}', None]]
+    plot_style['axis-label'] = [[None, r'\huge \rm Ioniastion fraction'], [None, None],
+                                [None, r'\huge \rm Ioniastion fraction'], [None, None],
+                                [r'\huge \rm x (cm)', r'\huge \rm Ioniastion fraction'], [r'\huge \rm x (cm)', None]]
     #plot_style['axis-label'] = []
 
     plot_style['xlimit'] = [[2.54E+16, 2.57E+16],
                             [2.54E+16, 2.57E+16],
-                            [2.54E+16, 2.565E+16],
-                            [2.54E+16, 2.565E+16],
+                            [2.54E+16, 2.57E+16],
+                            [2.54E+16, 2.57E+16],
                             [2.54E+16, 2.565E+16],
                             [2.54E+16, 2.565E+16]]
 
     #plot_style['ylimit'] = []
 
     # plot margin adjustments
-    plot_style['left'] = 0.1  # the left side of the subplots of the figure
-    plot_style['right'] = 0.9   # the right side of the subplots of the figure
+    plot_style['left'] = 0.05  # the left side of the subplots of the figure
+    plot_style['right'] = 0.97   # the right side of the subplots of the figure
     plot_style['bottom'] = 0.1  # the bottom of the subplots of the figure
     plot_style['top'] = 0.95    # the top of the subplots of the figure
     plot_style['wspace'] = 0.1  # the amount of width reserved for blank space between subplots
-    plot_style['hspace'] = 0.2  # the amount of height reserved for white space between subplots
+    plot_style['hspace'] = 0.25  # the amount of height reserved for white space between subplots
 
     # this option will force the plot into any subplots
     # syntax: [plot-index, plot-location] first enter plot-index and then row and col location of
@@ -413,17 +422,22 @@ if OPTION == 1:
     plot_style['force-plotting'] = [[2, 1, 1], [4, 1, 2], [6, 2, 1], [8, 2, 2], [10, 3, 1], [12, 3, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('Shock_LH_HHeCN0.png')
+    plt.savefig(output_dir + 'adiabatic_shock_HHeCN0Ne.png')
 
 
 
+##########################################################################
+# OPTION: 2 ##############################################################
+##########################################################################
 
-# OPTION: 2 ****************************************************************************
-if OPTION == 2:
+if option == 2:
 
     '''
-    2. Comparing low and high resolution shock test for Si, S, Fe
+    Plot ionisation profile of Si, S, and Fe behind the shock for
+    the adiabatic flow.
     '''
+
+    print('Plotting Si, S, and Fe ionisation profile ...')
 
     # check for match
     if not abs(get_basic_data(high_resolution_file)['time'].value - get_basic_data(low_resolution_file)[
@@ -660,5 +674,5 @@ if OPTION == 2:
     plot_style['force-plotting_1d'] = [[2, 1], [4, 2]]
 
     figure = onedim_master_plotter(plot_data, plot_style)
-    plt.savefig('Shock_LH_SiSFe.png')
+    plt.savefig(output_dir + 'adiabatic_shock_SiSFe.png')
 

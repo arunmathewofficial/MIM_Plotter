@@ -287,9 +287,9 @@ def onedim_master_plotter(plot_data, plot_style):
 
                  ax[r, c].plot(plot_data[plot_index][n]['x'], plot_data[plot_index][n]['y'],
                                label=plot_data[plot_index][n]['labels'],
-                               linestyle=linestyle, linewidth=2,
+                               linestyle=linestyle, linewidth=2.0,
                                color=color,
-                               marker=marker, markersize=10
+                               marker=marker, markersize=8
                                )
 
                  if len(plot_data[plot_index][n]['label-position']) == 2:
@@ -298,8 +298,8 @@ def onedim_master_plotter(plot_data, plot_style):
                      ax[r, c].text(x_position, y_position, plot_data[plot_index][n]['labels'],
                                    fontsize=label_font_size)
 
-             ax[r, c].xaxis.set_minor_locator(AutoMinorLocator())
-             ax[r, c].yaxis.set_minor_locator(AutoMinorLocator())
+             #ax[r, c].xaxis.set_minor_locator(AutoMinorLocator())
+             #ax[r, c].yaxis.set_minor_locator(AutoMinorLocator())
              ax[r, c].tick_params(axis="both", direction="in", which="both",
                                   bottom=True, top=True, left=True, right=True,
                                   length=5, width=1, labelsize=16)

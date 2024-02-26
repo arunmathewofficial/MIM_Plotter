@@ -74,6 +74,13 @@ ax[1].legend(frameon=False, fontsize=12, loc=(0.5, 0.3))
 #ax[1].yaxis.set_minor_locator(AutoMinorLocator())
 ax[1].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
 
+# save data to file the temperature profile with low density gas.
+import pandas as pd
+T_profile_data = {'x(pc)': x_ldot, 'T (K)':get_temperature(low_den_overtime_file)}
+df = pd.DataFrame(T_profile_data)
+print('Printing temperature profile data to file ...')
+df.to_csv(output_dir + 'non-adiabatic_temp_profile.txt', sep='\t', index=False, float_format='%e')
+
 
 
 ### Panel - 3 H, He, ionisation profile

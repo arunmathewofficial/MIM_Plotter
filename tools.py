@@ -150,6 +150,39 @@ def get_tracers(silo_file, tracer_list):
 # ***************************************************************************
 
 
+# old process tracer data before pplotting ######################################
+def old_process_tracer_data(tracer_data_list, norm):
+
+    '''
+    process the tracer data list for plotting
+    :param tracer_data_list:
+    :param norm: this can be array or constant
+    :return:
+    '''
+
+    processed_tracer_data = []
+
+    # neutral calculation
+    neutral_tracer = np.ones_like(tracer_data_list[0])
+    zero_vector = np.zeros_like(neutral_tracer)
+    for j in range(1, len(tracer_data_list)):
+        neutral_tracer -= tracer_data_list[j] / norm
+
+    # correct negative numbers in neutral fraction
+    for i in range(np.size(neutral_tracer)):
+        neutral_tracer[i] = max(neutral_tracer[i], zero_vector[i])
+
+    tracer_data = neutral_tracer
+    processed_tracer_data.append(tracer_data)
+
+    # all other species
+    for m in range(1, len(tracer_data_list)):
+        tracer_data = tracer_data_list[m] / norm
+        processed_tracer_data.append(tracer_data)
+
+    return processed_tracer_data
+# ***************************************************************************
+
 # process tracer data before pplotting ######################################
 def process_tracer_data(tracer_data_list, norm):
 

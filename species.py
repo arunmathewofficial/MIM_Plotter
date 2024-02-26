@@ -185,3 +185,23 @@ IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe1p", "Tr074_Fe2p", "Tr075_Fe3p", "Tr
 
 
 
+# OLD RAYMOND SHOCK TEST  ==========================================================================================
+OLD_HYDROGEN_SHOCK_RAY79E = ["Tr000_X_H", "Tr009_H1p"]
+OLD_HELIUM_SHOCK_RAY79E = ["Tr001_X_He", "Tr010_He1p", "Tr011_He2p"]
+OLD_CARBON_SHOCK_RAY79E = ["Tr002_X_C", "Tr012_C1p", "Tr013_C2p", "Tr014_C3p", "Tr015_C4p", "Tr016_C5p", "Tr017_C6p"]
+OLD_NITROGEN_SHOCK_RAY79E = ["Tr003_X_N", "Tr018_N1p", "Tr019_N2p", "Tr020_N3p", "Tr021_N4p", "Tr022_N5p", "Tr023_N6p",
+                 "Tr024_N7p"]
+OLD_OXYGEN_SHOCK_RAY79E = ["Tr004_X_O", "Tr025_O1p", "Tr026_O2p", "Tr027_O3p", "Tr028_O4p", "Tr029_O5p", "Tr030_O6p",
+                 "Tr031_O7p", "Tr032_O8p"]
+OLD_NEON_SHOCK_RAY79E = ["Tr005_X_Ne", "Tr033_Ne1p", "Tr034_Ne2p", "Tr035_Ne3p", "Tr036_Ne4p", "Tr037_Ne5p", "Tr038_Ne6p",
+           "Tr039_Ne7p", "Tr040_Ne8p", "Tr041_Ne9p", "Tr042_Ne10p"]
+SILICON_SHOCK_RAY79E = ["Tr006_X_Si", "Tr043_Si1p", "Tr044_Si2p", "Tr045_Si3p", "Tr046_Si4p", "Tr047_Si5p", "Tr048_Si6p",
+           "Tr049_Si7p", "Tr050_Si8p", "Tr051_Si9p", "Tr052_Si10p", "Tr053_Si11p", "Tr054_Si12p", "Tr055_Si13p",
+           "Tr056_Si14p"]
+SULFUR_SHOCK_RAY79E = ["Tr007_X_S", "Tr057_S1p", "Tr058_S2p", "Tr059_S3p", "Tr060_S4p", "Tr061_S5p", "Tr062_S6p", "Tr063_S7p",
+           "Tr064_S8p", "Tr065_S9p", "Tr066_S10p", "Tr067_S11p", "Tr068_S12p", "Tr069_S13p", "Tr070_S14p",
+           "Tr071_S15p", "Tr072_S16p"]
+IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe1p", "Tr074_Fe2p", "Tr075_Fe3p", "Tr076_Fe4p", "Tr077_Fe5p", "Tr078_Fe6p",
+           "Tr079_Fe7p", "Tr080_Fe8p", "Tr081_Fe9p", "Tr082_Fe10p", "Tr083_Fe11p", "Tr084_Fe12p", "Tr085_Fe13p",
+           "Tr086_Fe14p", "Tr087_Fe15p", "Tr088_Fe16p", "Tr089_Fe17p", "Tr090_Fe18p", "Tr091_Fe19p", "Tr092_Fe20p",
+           "Tr093_Fe21p", "Tr094_Fe22p", "Tr095_Fe23p", "Tr096_Fe24p", "Tr097_Fe25p", "Tr098_Fe26p"]
