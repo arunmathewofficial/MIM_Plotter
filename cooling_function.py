@@ -16,9 +16,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("Asplund_coolfn_data", type=str, help="Asplund 2009 cooling function data file")
 parser.add_argument("Eatson_coolfn_data", type=str, help="Eatson 2022 cooling function data file")
-parser.add_argument("OriginalEatson_coolfn_data", type=str, help="Original Eatson 2022 cooling function data file")
 parser.add_argument("output_dir", type=str, help="give the output image dir path")
-
 args = parser.parse_args()
 
 
@@ -30,8 +28,9 @@ m_H = 1.67356E-24 # mass of Hydrogen atom in g
 # Hence, the normalisation factor is
 norm_factor = np.power(m_H/rho, 2.0)
 
-# Original Eatson cooling function
-Eatson_coolfn_original = args.OriginalEatson_coolfn_data
+# get original Eatson cooling function
+Original_Eatson_coolfn_data_file = "data/Eatson_cooling_curve_WC_logT.txt"
+Eatson_coolfn_original = Original_Eatson_coolfn_data_file
 
 # Output directory
 output_dir = args.output_dir

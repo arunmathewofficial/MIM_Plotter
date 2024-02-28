@@ -69,8 +69,6 @@ for species in pion_xsection_data["species"]:
     y_min = min(species_xsection_array)
     y_max = max(species_xsection_array)
 
-    print(species_xsection_bin_Mb)
-
     # Create a figure with subplots
     fig, ax1 = plt.subplots()
 
