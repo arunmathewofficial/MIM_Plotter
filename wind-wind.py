@@ -47,10 +47,10 @@ if what2plot == 'flow_quantities':
     X_H = get_tracer(input_silo, 'Tr000_X_H')
     nH = X_H * density / mH
     # Create a plot
-    plt.plot(radius, temperature/(1.5*10**7), label=r'$T\, (1.5\times 10^{7} K)$', linestyle='-')
-    plt.plot(radius, density/(5*10**-23), label=r'$\rho \, (5.0\times 10^{22})$', linestyle='--')
-    plt.plot(radius, vx/10**8, label=r'$v_r \, (1.0\times 10^{8})$', linestyle='-.')
-    plt.plot(radius, nH/30, label=r'$n_H (3.0\times 10^1)$', linestyle=':')
+    plt.plot(radius, temperature/(1.5*10**4), label=r'$T\, (1.5\times 10^{7} K)$', linestyle='-')
+    #plt.plot(radius, density/(5*10**-23), label=r'$\rho \, (5.0\times 10^{22})$', linestyle='--')
+    #plt.plot(radius, vx/10**8, label=r'$v_r \, (1.0\times 10^{8})$', linestyle='-.')
+    #plt.plot(radius, nH/30, label=r'$n_H (3.0\times 10^1)$', linestyle=':')
     # Add labels and title
     plt.xlabel('radius (pc)')
     plt.ylabel('various quantities')

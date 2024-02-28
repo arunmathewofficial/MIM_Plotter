@@ -2,10 +2,6 @@
 # Created: 07-03-2023
 # To plot CIE ASPLUND 2009
 
-# New comments:
-# 2022-11-09 AM: scripted H and He OneDGrid_Plotter
-# 2022-11-10 AM: scripted C, O, N OneDGrid_Plotter
-
 # Import required libraries: ##########################################
 from tools import *
 from master_plotter import *

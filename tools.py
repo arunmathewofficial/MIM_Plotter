@@ -1,6 +1,6 @@
 # Author: Arun Mathew
 # Created: 08-03-2023
-# Multi-ion-module-publication plots:
+# Multi-ion-module-test scripts 
 
 # New comments:
 # 2022-11-09 AM: scripted H and He OneDGrid_Plotter
@@ -87,7 +87,6 @@ def get_density(silo_file):
 # **************************************************************************
 
 
-    return {'xmax': xmax, 'xmin': xmin, 'x': xdata, 'ngrid': n_grid, 'time': sim_time}
 # **************************************************************************
 
 
@@ -105,6 +104,7 @@ def get_temperature(silo_file):
     return temperature
 # ***************************************************************************
 
+# get radial velocity #######################################################
 def get_velocityX(silo_file):
     '''
     read the silo file for temperature array
@@ -150,7 +150,7 @@ def get_tracers(silo_file, tracer_list):
 # ***************************************************************************
 
 
-# old process tracer data before pplotting ######################################
+# process tracer data (old) ################################################
 def old_process_tracer_data(tracer_data_list, norm):
 
     '''
@@ -217,7 +217,7 @@ def process_tracer_data(tracer_data_list, norm):
 # ***************************************************************************
 
 
-
+# read table ################################################################
 def ReadTable_Advance(Table):
     # Read a line of numbers out of a text file:
     print('Reading tabulated data: ' + Table)
@@ -245,9 +245,10 @@ def ReadTable_Advance(Table):
             columns[col].append(data[row][col])
 
     return {'N_row': N_row, 'N_col': N_col, 'columns': columns}
+# ***************************************************************************
 
 
-
+# Add data to dict ##########################################################
 def add_data_to_dict(dict, column_data, column_name):
 
     '''
@@ -275,3 +276,36 @@ def add_data_to_dict(dict, column_data, column_name):
                 dict[column_name[i]] = column_data[i]
 
     return dict
+# ***************************************************************************
+
+# Read photo cross-section data  ###########################################
+def read_xsection_data(filename):
+    # Read the content of the text file
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+
+    # Initialize an empty dictionary to store data columns
+    data_dict = {}
+
+    # Extract labels from the comments
+    for line in lines:
+        if line.startswith('#ATTRIBUTE LABEL:'):
+            line = line.replace('#ATTRIBUTE LABEL:', '', 1)
+            labels = line.split()[1:]  # Splitting by whitespace and removing the '#NAME:' prefix
+            labels = ["Bin_Min"] + labels  # Include "Bin_Min" as the first label
+            break
+
+    species = labels[2:]  # get all the species
+
+    # Extract data from the lines after the '#DATA:' comment
+    data_lines = [line for line in lines if not line.startswith('#')]
+    for line in data_lines:
+        values = line.split()
+        for label, value in zip(labels, values):
+            value = float(value)
+            if label not in data_dict:
+                data_dict[label] = []
+            data_dict[label].append(value)
+
+    return {"species": species, "names": labels, "dict" :data_dict}
+# ***************************************************************************    
