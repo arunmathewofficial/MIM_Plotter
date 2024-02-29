@@ -1,6 +1,8 @@
 # Author: Arun Mathew
 # Created: 11-03-2023
-# Multi-ion-module-publication:
+# Multi-ion-module-publication: This script generates plots comparing
+# the non-adiabatic ionization fraction of silicon (Si), sulfur (S),
+# and iron (Fe) behind the plane shock for inflow velocities of 1000 km/s and 3000 km/s.
 
 
 # Import required libraries: ##########################################
