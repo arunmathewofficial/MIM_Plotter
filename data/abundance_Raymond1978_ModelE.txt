@@ -1,0 +1,10 @@
+# Mass fraction for Raymond 1978 Model E
+X_H     7.35821E-01
+X_He    2.48727E-01
+X_C     2.90375E-03
+X_N     9.32645E-04
+X_O     7.71744E-03
+X_Ne    1.22545E-03
+X_Si    6.78989E-04
+X_S     3.71032E-04
+X_Fe    1.62317E-03
