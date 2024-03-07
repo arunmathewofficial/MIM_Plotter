@@ -15,14 +15,18 @@ from species import *
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("nonadia_v1000", type=str, help="Silo file for non-adiabatic shock with inflow velocity of 1000 km/s")
-parser.add_argument("nonadia_v3000", type=str, help="Silo file for non-adiabatic shock with inflow velocity of 3000 km/s")
+parser.add_argument("nonadia_v1000_silofile", type=str, help="Silo file for non-adiabatic shock with inflow velocity of 1000 km/s")
+parser.add_argument("nonadia_v3000_silofile", type=str, help="Silo file for non-adiabatic shock with inflow velocity of 3000 km/s")
 parser.add_argument("output_dir", type=str, help="Output image dir path")
 args = parser.parse_args()
+print("*** Multi-ion-module-publication: non-adiabatic ionisation fraction v1000 vs v3000 ***")
+
 output_dir = args.output_dir
 output_dir = make_directory(output_dir)
-v1000_file = args.nonadia_v1000
-v3000_file = args.nonadia_v3000
+v1000_file = args.nonadia_v1000_silofile
+v3000_file = args.nonadia_v3000_silofile
+
+np.set_printoptions(threshold=np.inf)  # Print the entire array
 
 
 # x data for v=1000 km/s
@@ -30,8 +34,12 @@ x_v1000 = get_basic_data(v1000_file)['x']
 # x data for v=3000 km/s
 x_v3000 = get_basic_data(v3000_file)['x']
 
+
+
+
+
 # SILICON ###################################################################
-# y data - Silicon species - 1000 km/s velocity
+# y data - Silicon species - 1000 km/s velocity ============================
 plot_data = []
 tracer_list = SILICON_SHOCK_RAY79E
 tracer_labels = SILICON_SHOCK_LABELS
@@ -59,16 +67,18 @@ for i in range(len(pro_tracer_data_list)):
 plot_data.append(species_data)
 del species_data
 
-# y data - Silicon species - 3000 km/s velocity
+# y data - Silicon species - 3000 km/s velocity ============================
 tracer_list = SILICON_SHOCK_RAY79E
 tracer_labels = SILICON_SHOCK_LABELS
-label_position = [[2.5625e16, 0.92], [2.558e16, 0.7], [2.550e16, 0.62], [2.546e16, 0.4], [2.547e16, 0.04],
+label_position = [[2.5625e13, 0.92], [2.558e13, 0.7], [2.550e13, 0.62], [2.546e13, 0.4], [2.547e13, 0.04],
                   [], [], [], [], [], [], [], [], [], []]
 line_color = ['magenta', 'magenta', 'magenta', 'magenta', 'magenta', 'magenta',
               'magenta', 'magenta', 'magenta', 'magenta', 'magenta',
               'magenta', 'magenta', 'magenta', 'magenta']
 line_style = ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--', '--']
 tracer_data_list = get_tracers(v3000_file, tracer_list)
+
+
 normalisation_factor = tracer_data_list[0]
 pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
 # loop over silicon ions
@@ -102,7 +112,7 @@ plot_style['axis-label'] = [[None, r'\Large{Ioniastion fraction}'],
                             [r'\Large{x (cm)}', r'\Large{Ioniastion fraction}']]
 # plot_style['axis-label'] = []
 
-plot_style['xlimit'] = [[2e+15, 8e+15], [6e+15, 8.7e+15], [6e+15, 8.7e+15], [6e+15, 8.7e+15]]
+plot_style['xlimit'] = [[0.0e+14, 1e+14], [0.0e+14, 1e+14],[0.0e+14, 1e+14], [0.0e+14, 1e+14]]
 
 plot_style['insert-txt'] = [[r"${\rm \huge v_0 = 1000 \, km/s}$", 6.2E+15, 2.2, 0],
                             [r"${\rm v_0 = 3000 \, km/s}$", 6.2E+15, 0.9, 0]]
@@ -130,8 +140,7 @@ plt.savefig(output_dir + 'nonadia_v3000_vs_v1000_Si.png')
 #############################################################################
 
 
-
-
+'''
 # SULFUR ####################################################################
 # y data - Sulfur species 1000 km/s
 plot_data = []
@@ -234,6 +243,10 @@ plt.savefig(output_dir + 'nonadia_v3000_vs_v1000_S.png')
 #############################################################################
 
 
+
+
+
+
 # IFON ######################################################################
  # y data - Iron species - 1000 km/s velocity
 plot_data = []
@@ -315,7 +328,7 @@ plot_style['axis-label'] = [[None, r'\Large{\rm Ioniastion fraction}'],
                                 [r'\Large{\rm x (cm)}', r'\Large{\rm Ioniastion fraction}']]
 # plot_style['axis-label'] = []
 
-plot_style['xlimit'] = [[6e+15, 8.0e+15], [7e+15, 8.7e+15]]
+#plot_style['xlimit'] = [[6e+15, 8.0e+15], [7e+15, 8.7e+15]]
 
 plot_style['insert-txt'] = [[r"${\rm \huge v_0 = 1000 \, km/s}$", 7.1E+15, 2.2, 0],
                                 [r"${\rm v_0 = 3000 \, km/s}$", 7.1E+15, 0.9, 0]]
@@ -344,7 +357,7 @@ plt.savefig(output_dir + 'nonadia_v3000_vs_v1000_Si.png')
 
 
 
-
+'''
 
 
 

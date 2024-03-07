@@ -1,5 +1,7 @@
 """
-Species_info.py
+This python file contain labels and variable names of species that is
+used in different plotter.
+
 """
 # Author: Arun Mathew
 # Created: 08-03-2023
@@ -172,16 +174,17 @@ OXYGEN_SHOCK_RAY79E = ["Tr004_X_O", "Tr025_O1p", "Tr026_O2p", "Tr027_O3p", "Tr02
                  "Tr031_O7p", "Tr032_O8p"]
 NEON_SHOCK_RAY79E = ["Tr005_X_Ne", "Tr033_Ne1p", "Tr034_Ne2p", "Tr035_Ne3p", "Tr036_Ne4p", "Tr037_Ne5p", "Tr038_Ne6p",
            "Tr039_Ne7p", "Tr040_Ne8p", "Tr041_Ne9p", "Tr042_Ne10p"]
-SILICON_SHOCK_RAY79E = ["Tr006_X_Si", "Tr043_Si1p", "Tr044_Si2p", "Tr045_Si3p", "Tr046_Si4p", "Tr047_Si5p", "Tr048_Si6p",
-           "Tr049_Si7p", "Tr050_Si8p", "Tr051_Si9p", "Tr052_Si10p", "Tr053_Si11p", "Tr054_Si12p", "Tr055_Si13p",
-           "Tr056_Si14p"]
-SULFUR_SHOCK_RAY79E = ["Tr007_X_S", "Tr057_S1p", "Tr058_S2p", "Tr059_S3p", "Tr060_S4p", "Tr061_S5p", "Tr062_S6p", "Tr063_S7p",
-           "Tr064_S8p", "Tr065_S9p", "Tr066_S10p", "Tr067_S11p", "Tr068_S12p", "Tr069_S13p", "Tr070_S14p",
-           "Tr071_S15p", "Tr072_S16p"]
-IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe1p", "Tr074_Fe2p", "Tr075_Fe3p", "Tr076_Fe4p", "Tr077_Fe5p", "Tr078_Fe6p",
-           "Tr079_Fe7p", "Tr080_Fe8p", "Tr081_Fe9p", "Tr082_Fe10p", "Tr083_Fe11p", "Tr084_Fe12p", "Tr085_Fe13p",
-           "Tr086_Fe14p", "Tr087_Fe15p", "Tr088_Fe16p", "Tr089_Fe17p", "Tr090_Fe18p", "Tr091_Fe19p", "Tr092_Fe20p",
-           "Tr093_Fe21p", "Tr094_Fe22p", "Tr095_Fe23p", "Tr096_Fe24p", "Tr097_Fe25p", "Tr098_Fe26p"]
+
+SILICON_SHOCK_RAY79E = ["Tr006_X_Si", "Tr043_Si", "Tr044_Si1p", "Tr045_Si2p", "Tr046_Si3p", "Tr047_Si4p", "Tr048_Si5p",
+           "Tr049_Si6p", "Tr050_Si7p", "Tr051_Si8p", "Tr052_Si9p", "Tr053_Si10p", "Tr054_Si11p", "Tr055_Si12p",
+           "Tr056_Si13p"]
+SULFUR_SHOCK_RAY79E = ["Tr007_X_S", "Tr057_S", "Tr058_S1p", "Tr059_S2p", "Tr060_S3p", "Tr061_S4p", "Tr062_S5p", "Tr063_S6p",
+           "Tr064_S7p", "Tr065_S8p", "Tr066_S9p", "Tr067_S10p", "Tr068_S11p", "Tr069_S12p", "Tr070_S13p",
+           "Tr071_S14p", "Tr072_S15p"]
+IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe", "Tr074_Fe1p", "Tr075_Fe2p", "Tr076_Fe3p", "Tr077_Fe4p", "Tr078_Fe5p",
+           "Tr079_Fe6p", "Tr080_Fe7p", "Tr081_Fe8p", "Tr082_Fe9p", "Tr083_Fe10p", "Tr084_Fe11p", "Tr085_Fe12p",
+           "Tr086_Fe13p", "Tr087_Fe14p", "Tr088_Fe15p", "Tr089_Fe16p", "Tr090_Fe17p", "Tr091_Fe18p", "Tr092_Fe19p",
+           "Tr093_Fe20p", "Tr094_Fe21p", "Tr095_Fe22p", "Tr096_Fe23p", "Tr097_Fe24p", "Tr098_Fe25p"]
 
 
 
@@ -195,13 +198,13 @@ OLD_OXYGEN_SHOCK_RAY79E = ["Tr004_X_O", "Tr025_O1p", "Tr026_O2p", "Tr027_O3p", "
                  "Tr031_O7p", "Tr032_O8p"]
 OLD_NEON_SHOCK_RAY79E = ["Tr005_X_Ne", "Tr033_Ne1p", "Tr034_Ne2p", "Tr035_Ne3p", "Tr036_Ne4p", "Tr037_Ne5p", "Tr038_Ne6p",
            "Tr039_Ne7p", "Tr040_Ne8p", "Tr041_Ne9p", "Tr042_Ne10p"]
-SILICON_SHOCK_RAY79E = ["Tr006_X_Si", "Tr043_Si1p", "Tr044_Si2p", "Tr045_Si3p", "Tr046_Si4p", "Tr047_Si5p", "Tr048_Si6p",
+OLD_SILICON_SHOCK_RAY79E = ["Tr006_X_Si", "Tr043_Si1p", "Tr044_Si2p", "Tr045_Si3p", "Tr046_Si4p", "Tr047_Si5p", "Tr048_Si6p",
            "Tr049_Si7p", "Tr050_Si8p", "Tr051_Si9p", "Tr052_Si10p", "Tr053_Si11p", "Tr054_Si12p", "Tr055_Si13p",
            "Tr056_Si14p"]
-SULFUR_SHOCK_RAY79E = ["Tr007_X_S", "Tr057_S1p", "Tr058_S2p", "Tr059_S3p", "Tr060_S4p", "Tr061_S5p", "Tr062_S6p", "Tr063_S7p",
+OLD_SULFUR_SHOCK_RAY79E = ["Tr007_X_S", "Tr057_S1p", "Tr058_S2p", "Tr059_S3p", "Tr060_S4p", "Tr061_S5p", "Tr062_S6p", "Tr063_S7p",
            "Tr064_S8p", "Tr065_S9p", "Tr066_S10p", "Tr067_S11p", "Tr068_S12p", "Tr069_S13p", "Tr070_S14p",
            "Tr071_S15p", "Tr072_S16p"]
-IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe1p", "Tr074_Fe2p", "Tr075_Fe3p", "Tr076_Fe4p", "Tr077_Fe5p", "Tr078_Fe6p",
+OLD_IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe1p", "Tr074_Fe2p", "Tr075_Fe3p", "Tr076_Fe4p", "Tr077_Fe5p", "Tr078_Fe6p",
            "Tr079_Fe7p", "Tr080_Fe8p", "Tr081_Fe9p", "Tr082_Fe10p", "Tr083_Fe11p", "Tr084_Fe12p", "Tr085_Fe13p",
            "Tr086_Fe14p", "Tr087_Fe15p", "Tr088_Fe16p", "Tr089_Fe17p", "Tr090_Fe18p", "Tr091_Fe19p", "Tr092_Fe20p",
            "Tr093_Fe21p", "Tr094_Fe22p", "Tr095_Fe23p", "Tr096_Fe24p", "Tr097_Fe25p", "Tr098_Fe26p"]
