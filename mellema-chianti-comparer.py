@@ -12,12 +12,12 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("Chianti_Dir", type=str, help="Folder containing Chinati cooling tables")
 parser.add_argument("Mellema_Dir", type=str, help="Folder containing Mellema cooling tables")
-parser.add_argument("output_dir", type=str, help="Output image dir path")
+parser.add_argument("Output_dir", type=str, help="Output image dir path")
 args = parser.parse_args()
 
 chianti_dir = args.nonadia_v1000_silofile
 mellema_dir = args.nonadia_v3000_silofile
-output_dir = args.output_dir
+output_dir = args.Output_dir
 output_dir = make_directory(output_dir)
 chianti_list = os.listdir(chianti_dir)
 
