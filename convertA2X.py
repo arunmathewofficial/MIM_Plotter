@@ -38,12 +38,11 @@ parser.add_argument('abundance', type=str,
 
 args = parser.parse_args()
 abundance_name = args.abundance
-database_abundances = ['Raymond1978']
+database_abundances = ['Raymond1978', 'Asplund2009']
 
 if abundance_name not in database_abundances:
-    print(abundance_string)
-else:
-    pass
+    print("\033[33mInvalid Abundances Name!\033[0m")
+
 
 
 ##################################################
@@ -62,7 +61,7 @@ def read_abundance_txt_file(file_path):
 
 ##################################################
 def calculate_massfraction(abundance_dict):
-    dataframe = pd.DataFrame.from_dict(abundance_dict, orient='index', columns=['Abundaces', 'Depletion'])
+    dataframe = pd.DataFrame.from_dict(abundance_dict, orient='index', columns=['Abundaces', 'Error'])
     epsilon_X = []
     mass_value = []
     for key, value in abundance_dict.items():
@@ -87,7 +86,7 @@ def calculate_massfraction(abundance_dict):
 
 ##########################################################
 if abundance_name == 'Raymond1978':
-    print('Abundance: Raymond (1978)')
+    print('Name: Raymond (1978) abundances')
     raymond_dict = read_abundance_txt_file('data/abundance_Raymond1978_ModelE.txt')
     raymond_dataframe = calculate_massfraction(raymond_dict)
     print(raymond_dataframe)
@@ -95,8 +94,8 @@ if abundance_name == 'Raymond1978':
 
 ##########################################################
 if abundance_name == 'Asplund2009':
-    print('Abundance: Raymond (1978)')
-    raymond_dict = read_abundance_txt_file('data/abundance_Raymond1978_ModelE.txt')
+    print('Name: Asplund (2009) proto-solar abundances')
+    raymond_dict = read_abundance_txt_file('data/abundance_Asplund2009.txt')
     raymond_dataframe = calculate_massfraction(raymond_dict)
     print(raymond_dataframe)
 
