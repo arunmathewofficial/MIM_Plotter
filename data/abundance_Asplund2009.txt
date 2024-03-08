@@ -1,0 +1,10 @@
+# Solar Abundances, Asplund et al. 2009, Table 5 col 2
+H   12.00   0
+He  10.98   0
+C   8.56    0
+N   7.96    0
+O   8.87    0
+Ne  8.12    0
+Si  7.59    0
+S   7.37    0
+Fe  7.55    0
