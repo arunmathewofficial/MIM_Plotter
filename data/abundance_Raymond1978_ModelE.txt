@@ -1,10 +1,10 @@
-# Mass fraction for Raymond 1978 Model E
-X_H     7.35821E-01
-X_He    2.48727E-01
-X_C     2.90375E-03
-X_N     9.32645E-04
-X_O     7.71744E-03
-X_Ne    1.22545E-03
-X_Si    6.78989E-04
-X_S     3.71032E-04
-X_Fe    1.62317E-03
+# Elemental Abundances for Raymond (1978) Model-E
+H   12.00   0
+He  10.93   0
+C   8.52    0
+N   7.96    0
+O   8.82    0
+Ne  7.92    0
+Si  7.52    0
+S   7.20    0
+Fe  7.60    0
