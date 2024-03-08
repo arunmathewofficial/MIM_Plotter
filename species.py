@@ -208,3 +208,16 @@ OLD_IRON_SHOCK_RAY79E = ["Tr008_X_Fe", "Tr073_Fe1p", "Tr074_Fe2p", "Tr075_Fe3p",
            "Tr079_Fe7p", "Tr080_Fe8p", "Tr081_Fe9p", "Tr082_Fe10p", "Tr083_Fe11p", "Tr084_Fe12p", "Tr085_Fe13p",
            "Tr086_Fe14p", "Tr087_Fe15p", "Tr088_Fe16p", "Tr089_Fe17p", "Tr090_Fe18p", "Tr091_Fe19p", "Tr092_Fe20p",
            "Tr093_Fe21p", "Tr094_Fe22p", "Tr095_Fe23p", "Tr096_Fe24p", "Tr097_Fe25p", "Tr098_Fe26p"]
+
+
+# Non-adiabatic shock test  ==========================================================================================
+SILICON_NON_ADIABATIC = ["Tr040_X_Si", "Tr041_Si", "Tr042_Si1p", "Tr043_Si2p", "Tr044_Si3p", "Tr045_Si4p", "Tr046_Si5p",
+           "Tr047_Si6p", "Tr048_Si7p", "Tr049_Si8p", "Tr050_Si9p", "Tr051_Si10p", "Tr052_Si11p", "Tr053_Si12p",
+           "Tr054_Si13p"]
+SULFUR_NON_ADIABATIC = ["Tr055_X_S", "Tr056_S", "Tr057_S1p", "Tr058_S2p", "Tr059_S3p", "Tr060_S4p", "Tr061_S5p", "Tr062_S6p",
+           "Tr063_S7p", "Tr064_S8p", "Tr065_S9p", "Tr066_S10p", "Tr067_S11p", "Tr068_S12p", "Tr069_S13p",
+           "Tr070_S14p", "Tr071_S15p"]
+IRON_NON_ADIABATIC = ["Tr072_X_Fe", "Tr073_Fe", "Tr074_Fe1p", "Tr075_Fe2p", "Tr076_Fe3p", "Tr077_Fe4p", "Tr078_Fe5p",
+           "Tr079_Fe6p", "Tr080_Fe7p", "Tr081_Fe8p", "Tr082_Fe9p", "Tr083_Fe10p", "Tr084_Fe11p", "Tr085_Fe12p",
+           "Tr086_Fe13p", "Tr087_Fe14p", "Tr088_Fe15p", "Tr089_Fe16p", "Tr090_Fe17p", "Tr091_Fe18p", "Tr092_Fe19p",
+           "Tr093_Fe20p", "Tr094_Fe21p", "Tr095_Fe22p", "Tr096_Fe23p", "Tr097_Fe24p", "Tr098_Fe25p"]
