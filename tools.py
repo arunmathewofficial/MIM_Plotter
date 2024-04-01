@@ -309,3 +309,11 @@ def read_xsection_data(filename):
 
     return {"species": species, "names": labels, "dict" :data_dict}
 # ***************************************************************************    
+
+
+
+def detect_shock (temperature):
+
+    for i in range(len(temperature)):
+        if (temperature[i] - temperature[i+1]>1e+1):
+            return i

@@ -221,3 +221,9 @@ IRON_NON_ADIABATIC = ["Tr072_X_Fe", "Tr073_Fe", "Tr074_Fe1p", "Tr075_Fe2p", "Tr0
            "Tr079_Fe6p", "Tr080_Fe7p", "Tr081_Fe8p", "Tr082_Fe9p", "Tr083_Fe10p", "Tr084_Fe11p", "Tr085_Fe12p",
            "Tr086_Fe13p", "Tr087_Fe14p", "Tr088_Fe15p", "Tr089_Fe16p", "Tr090_Fe17p", "Tr091_Fe18p", "Tr092_Fe19p",
            "Tr093_Fe20p", "Tr094_Fe21p", "Tr095_Fe22p", "Tr096_Fe23p", "Tr097_Fe24p", "Tr098_Fe25p"]
+
+
+# charge-exchange shock test
+
+CX_OXYGEN_SHOCK_RAY79E = ["Tr020_X_O", "Tr021_O", "Tr022_O1p", "Tr023_O2p", "Tr024_O3p", "Tr025_O4p", "Tr026_O5p",
+                 "Tr027_O6p", "Tr028_O7p"]
