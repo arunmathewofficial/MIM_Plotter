@@ -10,19 +10,62 @@ import matplotlib.pyplot as plt
 from species import *
 from matplotlib.lines import Line2D
 from matplotlib.ticker import AutoMinorLocator
+import argparse
 
-plt.rcParams["font.family"] = "Times New Roman"
+parser = argparse.ArgumentParser()
+parser.add_argument("performance_datafile", type=str, help="The text file contains data for performance testing")
+parser.add_argument("output_dir", type=str, help="give the output image dir path")
+args = parser.parse_args()
+output_dir = args.output_dir
 
-# MAIN ##################################################################################
-plot_dir = make_directory('INAM_2023')
+################################################################
+output_dir = make_directory(output_dir)
+datafile = args.performance_datafile
+# Load the text file, ignoring lines starting with #
+data = np.loadtxt(datafile, comments='#')
+# Extract data from each column into separate arrays
+ntracers = data[:, 0]
+walltime = data[:, 1]
+nsteps = data[:, 2]
+Ngrids = data[:, 3]
+Nthreads = data[:, 4]
 
-performance_test_file = '/home/mathew/Desktop/MIM_Pub_Datafiles/Performance_Test/performance_test.txt'
+# Calculating Cell-Update Speed
 
+
+
+fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(8, 12), sharex=False, sharey=False)
+
+print('Plotting performance ...')
+ax[0].plot(ntracers, walltime, label='', color='black', linestyle='-',
+        marker='o', linewidth=0.7, markersize=10, markerfacecolor='red', markeredgecolor='none')
+ax[0].set_xlabel('N-Tracers')
+ax[0].set_ylabel('Walltime')
+ax[0].xaxis.set_minor_locator(AutoMinorLocator())
+ax[0].yaxis.set_minor_locator(AutoMinorLocator())
+
+
+ax[1].plot(ntracers, walltime, label='', color='black', linestyle='-',
+        marker='o', linewidth=0.7, markersize=10, markerfacecolor='red', markeredgecolor='none')
+ax[1].set_xlabel('N-Tracers')
+ax[1].set_ylabel('cell-update speed')
+ax[1].xaxis.set_minor_locator(AutoMinorLocator())
+ax[1].yaxis.set_minor_locator(AutoMinorLocator())
+
+
+imagefile = output_dir + 'performance.png'
+print("Saving image "+ imagefile)
+plt.savefig(imagefile, dpi=200)
+
+
+'''
 plot_data = []
 
-table_1 = ReadTable_Advance(performance_test_file)
 # This original data already is normalised  with norm_factor
 print("Table Size: ( row =", table_1['N_row'], ", columns = ", table_1['N_col'], ")")
+
+
+print(table_1)
 
 tabledata_1 = table_1['columns']
 # x-data, numner of tracers
@@ -31,7 +74,7 @@ Walltime = tabledata_1[1]
 
 normalized_walltime = Walltime/Walltime[0]
 
-fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4, 3), sharex=False, sharey=False)
+fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(4, 3), sharex=False, sharey=False)
 ax.plot(NTracers, normalized_walltime, label='', color='red', linestyle='-',
         marker='o', linewidth=0.7, markersize=4, markerfacecolor='black', markeredgecolor='none')
 
@@ -58,5 +101,5 @@ plt.subplots_adjust(left=left, bottom=bottom, right=right, top=top, wspace=wspac
 # Save the plot
 plt.savefig(plot_dir + 'performance_test_1.png', dpi=200)
 
-
+'''
 

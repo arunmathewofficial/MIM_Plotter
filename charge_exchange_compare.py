@@ -54,7 +54,7 @@ if option == 1:
     x_cx_off = get_basic_data(charge_exchange_off_file)['x']
 
 
-    fig, ax = plt.subplots(3, 1, figsize=(8, 6), gridspec_kw={'height_ratios': [1, 1, 2]})
+    fig, ax = plt.subplots(2, 1, figsize=(6, 8), gridspec_kw={'height_ratios': [1, 2]})
 
     # plot 1 ===================================================
     temperature_cx_on = get_temperature(charge_exchange_on_file)
@@ -70,14 +70,18 @@ if option == 1:
 
     # ploting temperature profile
     print('Plotting temperature profile ...')
-    ax[0].plot(x_cx_on, temperature_cx_on, color='green', label = 'CT on')
-    ax[0].plot(x_cx_off, temperature_cx_off, color='green', linestyle='--', label = 'CT off')
-    ax[0].set_xlim(0.0, 0.25e+16)
+    ax[0].plot(x_cx_on, temperature_cx_on, color='green', label = r'\rm Charge exchange enabled')
+    ax[0].plot(x_cx_off, temperature_cx_off, color='green', linestyle='--', label = r'\rm Charge exchange disabled')
+    ax[0].set_xlim(0.0, 0.22e+16)
     ax[0].set_yscale('log')
     ax[0].legend(fontsize=12, loc="lower right")
-    ax[0].set_ylabel(r"T(K)", fontsize=16)
-    ax[0].set_xlabel(r"x (pc)", fontsize=16)
+    ax[0].set_ylabel(r"\rm T(K)", fontsize=16)
+    ax[0].set_xlabel(r"\rm x (cm)", fontsize=16)
+    ax[0].tick_params(axis="both", direction="in", which="both",
+                        bottom=True, top=True, left=True, right=True,
+                        length=3, width=1, labelsize=16)
 
+    '''
     # plot 2 ================================================================
     X_H = get_tracer(charge_exchange_on_file, 'Tr000_X_H')[:cutoff_index_cx_on]
     H0 = get_tracer(charge_exchange_on_file, 'Tr001_H')[:cutoff_index_cx_on]
@@ -101,13 +105,16 @@ if option == 1:
     ax[1].set_yscale('log')
     ax[1].set_ylabel(r"Ion fraction", fontsize=16)
     ax[1].set_xlabel(r"T (K)", fontsize=16)
-
+    '''
 
     # Plot 3 OXYGEN ####################################################
     # y data - oxygen species - charge exchange on
     tracer_list = CX_OXYGEN_SHOCK_RAY79E
-    tracer_labels = OXYGEN_SHOCK_LABELS
-    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], [], []]
+    tracer_labels = [r"\Large$0$", r"\Large$1+$", r"\Large$2+$", r"\Large$3+$", r"\Large$4+$", r"\Large$5+$", r"\Large$6+$"]
+
+    label_position = [(7e3, 0.4), (1.3e4, 0.8), (5e4, 0.65),
+                      (9e4, 0.35), (2.546e16, 0.1), (0.1, 0.1), (0.3, 0.4),
+                      (0.1, 0.4), (0.1, 0.3)]
     line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown', 'blue', 'red', 'black', 'green']
     line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
     line_marker = ['s', 's', 's', 's', 's', 's', 's']
@@ -117,12 +124,14 @@ if option == 1:
     print('Plotting Oxygen ionisation profile ...')
     for i in range(len(pro_tracer_data_list)-5):
         pro_tracer_data_list[i] = pro_tracer_data_list[i][:cutoff_index_cx_on]
-        ax[2].plot(temperature_cx_on, pro_tracer_data_list[i], label=tracer_labels[i], color=line_color[i])
+        ax[1].plot(temperature_cx_on, pro_tracer_data_list[i], label=tracer_labels[i], color=line_color[i])
+        ax[1].text(label_position[i][0], label_position[i][1], tracer_labels[i], fontsize=8)
 
     # y data - oxygen species - charge exchange off
     tracer_list = CX_OXYGEN_SHOCK_RAY79E
     tracer_labels = OXYGEN_SHOCK_LABELS
-    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], [], []]
+    label_position = [[2.5625e16, 0.92], [2.559e16, 0.68], [2.555e16, 0.7], [2.546e16, 0.72],
+                      [2.546e16, 0.1], [], [], [], []]
     line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown', 'blue', 'red', 'black', 'green']
     line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
     line_marker = ['s', 's', 's', 's', 's', 's', 's']
@@ -132,16 +141,18 @@ if option == 1:
 
     for i in range(len(pro_tracer_data_list)-5):
         pro_tracer_data_list[i] = pro_tracer_data_list[i][:cutoff_index_cx_off]
-        ax[2].plot(temperature_cx_off, pro_tracer_data_list[i], label=tracer_labels[i], linestyle='--', color=line_color[i])
+        ax[1].plot(temperature_cx_off, pro_tracer_data_list[i], label=tracer_labels[i], linestyle='--', color=line_color[i])
 
-    ax[2].tick_params(labelsize=16)
-    #ax.grid()
-    ax[2].legend(fontsize=12, loc="lower right")
-    ax[2].set_ylabel(r"Ion fraction", fontsize=16)
-    ax[2].set_xlabel(r"T (K)", fontsize=16)
-    ax[2].set_xlim(5.0e+3, 1.5e+5)
-    ax[2].set_xscale('log')
-    plt.gca().invert_xaxis()
+    ax[1].tick_params(labelsize=16)
+    ax[1].tick_params(axis="both", direction="in", which="both",
+                      bottom=True, top=True, left=True, right=True,
+                      length=3, width=1, labelsize=16)
+    ax[1].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
+    ax[1].set_xlabel(r"\rm T (K)", fontsize=16)
+    ax[1].set_xlim(5.0e+3, 1.5e+5)
+    ax[1].set_xscale('log')
+    ax[1].invert_xaxis()
+    plt.subplots_adjust(left=0.12, bottom=0.1, right=0.95, top=0.95, wspace=0.1, hspace=0.2)
     plt.savefig(output_dir + 'cx_oxygen.png')
     plt.close()
 
