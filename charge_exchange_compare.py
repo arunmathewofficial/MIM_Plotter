@@ -141,7 +141,7 @@ if option == 1:
 
     for i in range(len(pro_tracer_data_list)-5):
         pro_tracer_data_list[i] = pro_tracer_data_list[i][:cutoff_index_cx_off]
-        ax[1].plot(temperature_cx_off, pro_tracer_data_list[i], label=tracer_labels[i], linestyle='--', color=line_color[i])
+        ax[1].plot(temperature_cx_off, pro_tracer_data_list[i], label=tracer_labels[i], linestyle=line_style[i], color=line_color[i])
 
     ax[1].tick_params(labelsize=16)
     ax[1].tick_params(axis="both", direction="in", which="both",
@@ -149,7 +149,7 @@ if option == 1:
                       length=3, width=1, labelsize=16)
     ax[1].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
     ax[1].set_xlabel(r"\rm T (K)", fontsize=16)
-    ax[1].set_xlim(5.0e+3, 1.5e+5)
+    ax[1].set_xlim(3.5e+3, 1.5e+5)
     ax[1].set_xscale('log')
     ax[1].invert_xaxis()
     plt.subplots_adjust(left=0.12, bottom=0.1, right=0.95, top=0.95, wspace=0.1, hspace=0.2)
