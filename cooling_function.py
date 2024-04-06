@@ -16,12 +16,14 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("Asplund_coolfn_data", type=str, help="Asplund 2009 cooling function data file")
 parser.add_argument("Eatson_coolfn_data", type=str, help="Eatson 2022 cooling function data file")
+parser.add_argument("Purpose", type=str, help="opt the purpose: journal or conference")
 parser.add_argument("output_dir", type=str, help="give the output image dir path")
 args = parser.parse_args()
 
 
 Asplund_coolfn = args.Asplund_coolfn_data
 Eatson_coolfn = args.Eatson_coolfn_data
+purpose = args.Purpose
 # Both the simulations use the following relevant parameters
 rho = 2.26739E-24 # gas density in the units of g/cm^3
 m_H = 1.67356E-24 # mass of Hydrogen atom in g
@@ -280,8 +282,11 @@ plot_data.append(eatson_net_data)
 
 
 # 5, 6 appending asplund_net_dataset_1 qnd eatson_net_dataset_1 once again ###################
-plot_data.append(asplund_net_data)
-plot_data.append(eatson_net_data)
+
+if(purpose == "journal"):
+    plot_data.append(asplund_net_data)
+    plot_data.append(eatson_net_data)
+
 del asplund_net_data
 del eatson_net_data
 
@@ -308,46 +313,73 @@ net_cooling_data['label-position'] = label_position[0]
 net_cooling_data['line-color'] = line_color[0]
 net_cooling_data['line-style'] = line_style[0]
 eatson_orig_net_data.append(net_cooling_data.copy())
-plot_data.append(eatson_orig_net_data)
+if(purpose == "journal"):
+    plot_data.append(eatson_orig_net_data)
 
 
 
 
 # plot style #################################################################
 plot_style = {}
-plot_style['figsize'] = (6, 12)
-plot_style['label-font-size'] = 12
-plot_style['matrix'] = [3, 1]
-plot_style['legend'] = True  # options: True/False
-plot_style['sharex'] = False  # options: True/False, 'col', 'all'
-plot_style['sharey'] = False # options: True/False, 'col', 'all'
 
-plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
-plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
+if(purpose == "journal"):
+    plot_style['figsize'] = (6, 12)
+    plot_style['label-font-size'] = 12
+    plot_style['matrix'] = [3, 1]
+    plot_style['legend'] = True  # options: True/False
+    plot_style['sharex'] = False  # options: True/False, 'col', 'all'
+    plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
-plot_style['force-plotting_1d'] = [[3,1], [4, 2], [6, 3], [7, 3]]
+    plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
+    plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
 
-plot_style['axis-label'] = [[None, r"${\Large \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
-                            [None, r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
-                            [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
+    plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3]]
 
-#plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
+    plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [None, r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
+    # plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
 
+    # plot margin adjustments
+    plot_style['left'] = 0.14  # the left side of the subplots of the figure
+    plot_style['right'] = 0.95  # the right side of the subplots of the figure
+    plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
+    plot_style['top'] = 0.95  # the top of the subplots of the figure
+    plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
+    plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+    # plot_style['custom-legend'] = [
+    #    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
+    # ]
 
-# plot margin adjustments
-plot_style['left'] = 0.125  # the left side of the subplots of the figure
-plot_style['right'] = 0.95  # the right side of the subplots of the figure
-plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
-plot_style['top'] = 0.95  # the top of the subplots of the figure
-plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
-plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
+if(purpose == "conference"):
+    plot_style['figsize'] = (5, 7)
+    plot_style['label-font-size'] = 8
+    plot_style['matrix'] = [2, 1]
+    plot_style['legend'] = True  # options: True/False
+    plot_style['sharex'] = True  # options: True/False, 'col', 'all'
+    plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
+    plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
+    plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
 
-#plot_style['custom-legend'] = [
-#    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
-#]
+    plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3]]
 
+    plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
+
+    # plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
+
+    # plot margin adjustments
+    plot_style['left'] = 0.18  # the left side of the subplots of the figure
+    plot_style['right'] = 0.98  # the right side of the subplots of the figure
+    plot_style['bottom'] = 0.08  # the bottom of the subplots of the figure
+    plot_style['top'] = 0.98  # the top of the subplots of the figure
+    plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
+    plot_style['hspace'] = 0.0  # the amount of height reserved for white space between subplots
+    # plot_style['custom-legend'] = [
+    #    [2, ['o', 'r', 'Line 1', '-', 6], ['s', 'b', 'Line 2', '--', 6]]
+    # ]
 
 
 # Plotting and saving the image to the file
