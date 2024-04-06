@@ -40,6 +40,11 @@ This script generates plots comparing the non-adiabatic ionization fraction
 of silicon (Si), sulfur (S), and iron (Fe) behind the plane shock for inflow 
 velocities of 1000 km/s and 3000 km/s.
 
+### 8.charge_exchange_compare.py
+This script compares the ionization profile of oxygen behind the planar shock
+with and without charge-exchange reactions enabled. Additionally, it generates
+temperature profiles for both cases.
+
 
 
 # Multi-ion Module MPv10 Testing Scripts #
