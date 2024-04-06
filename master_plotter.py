@@ -247,18 +247,20 @@ def onedim_master_plotter(plot_data, plot_style):
                         x_position = plot_data[plot_index][n]['label-position'][0]
                         y_position = plot_data[plot_index][n]['label-position'][1]
                         ax[fig_index].text(x_position, y_position, plot_data[plot_index][n]['labels'],
-                                   fontsize=label_font_size)
+                                   fontsize= 8
+                                   #label_font_size, #default
+                                           )
 
-                ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator())
-                ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator())
+                #ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator()) # default on
+                #ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator()) # default
                 ax[fig_index].tick_params(axis="both", direction="in", which="both",
                                   bottom=True, top=True, left=True, right=True, length=4)
 
                 ax[fig_index].set_xlim(plot_style['xlimit'][fig_index])
                 ax[fig_index].set_ylim(plot_style['ylimit'][fig_index])
 
-                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=18)
-                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=18)
+                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14) # default 18
+                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14) # default 18
 
                 if plot_style['legend'] == True: ax[fig_index].legend(frameon=False, loc='upper right')
 

@@ -68,6 +68,9 @@ def get_basic_data(silo_file):
     xn = xmax[0] - 0.5 * dx[0]
     xdata = np.linspace(x0, xn, ngrid_x)
 
+    read_data.close()
+    open_data.close()
+
     return {'xmax': xmax, 'xmin': xmin, 'x': xdata, 'ngrid': n_grid, 'time': sim_time}
 # **************************************************************************
 
@@ -83,6 +86,7 @@ def get_density(silo_file):
 
     read_data = ReadData([silo_file])
     density = read_data.get_1Darray("Density")['data'][0]
+    read_data.close()
     return density
 # **************************************************************************
 
@@ -101,6 +105,7 @@ def get_temperature(silo_file):
     '''
     read_data = ReadData([silo_file])
     temperature = read_data.get_1Darray("Temperature")['data'][0]
+    read_data.close()
     return temperature
 # ***************************************************************************
 
@@ -114,6 +119,7 @@ def get_velocityX(silo_file):
     '''
     read_data = ReadData([silo_file])
     vx = read_data.get_1Darray("VelocityX")['data'][0]
+    read_data.close()
     return vx
 
 # get tracer data from the given silo file ##################################
@@ -126,6 +132,7 @@ def get_tracer(silo_file, tracer):
     '''
     read_data = ReadData([silo_file])
     tracer_data = read_data.get_1Darray(tracer)['data'][0]
+    read_data.close()
     return tracer_data
 # ***************************************************************************
 
@@ -146,6 +153,7 @@ def get_tracers(silo_file, tracer_list):
         tracer_data = read_data.get_1Darray(tracer_name)['data'][0]
         tracer_data_list.append(tracer_data)
 
+    read_data.close()
     return tracer_data_list
 # ***************************************************************************
 

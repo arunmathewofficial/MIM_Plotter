@@ -1,9 +1,6 @@
 from pypion.ReadData import ReadData
 import numpy as np
 
-
-
-
 class GetSiloData(ReadData):
 
     def get_basic_data(self):

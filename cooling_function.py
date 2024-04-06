@@ -353,8 +353,8 @@ if(purpose == "journal"):
     # ]
 
 if(purpose == "conference"):
-    plot_style['figsize'] = (5, 7)
-    plot_style['label-font-size'] = 8
+    plot_style['figsize'] = (4, 6)
+    plot_style['label-font-size'] = 4
     plot_style['matrix'] = [2, 1]
     plot_style['legend'] = True  # options: True/False
     plot_style['sharex'] = True  # options: True/False, 'col', 'all'
@@ -365,8 +365,8 @@ if(purpose == "conference"):
 
     plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3]]
 
-    plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
-                                [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
+    plot_style['axis-label'] = [[None, r"${\rm  log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [r"${\rm \small log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
     # plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
 
@@ -384,5 +384,5 @@ if(purpose == "conference"):
 
 # Plotting and saving the image to the file
 onedim_master_plotter(plot_data, plot_style)
-plt.savefig(output_dir + 'cooling_function.png', dpi=300)
+plt.savefig(output_dir + 'cooling_function.png')
 
