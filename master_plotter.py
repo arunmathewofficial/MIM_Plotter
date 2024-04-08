@@ -241,7 +241,9 @@ def onedim_master_plotter(plot_data, plot_style):
                     ax[fig_index].plot(plot_data[plot_index][n]['x'], plot_data[plot_index][n]['y'],
                                label=plot_data[plot_index][n]['labels'],
                                linestyle=linestyle, color=color,
-                               marker=marker, markersize=10)
+                               marker=marker, markersize=10,
+                                       linewidth=1 # in default detting this line is not there
+                                       )
 
                     if len(plot_data[plot_index][n]['label-position']) == 2:
                         x_position = plot_data[plot_index][n]['label-position'][0]

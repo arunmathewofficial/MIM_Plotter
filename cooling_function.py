@@ -353,7 +353,7 @@ if(purpose == "journal"):
     # ]
 
 if(purpose == "conference"):
-    plot_style['figsize'] = (4, 6)
+    plot_style['figsize'] = (4, 5.4)
     plot_style['label-font-size'] = 4
     plot_style['matrix'] = [2, 1]
     plot_style['legend'] = True  # options: True/False

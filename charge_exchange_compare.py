@@ -104,8 +104,6 @@ label_position = [(7e3, 0.4), (1.3e4, 0.8), (5e4, 0.65),
                   (9e4, 0.35), (2.546e16, 0.1), (0.1, 0.1), (0.3, 0.4),
                   (0.1, 0.4), (0.1, 0.3)]
 line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown', 'blue', 'red', 'black', 'green']
-line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
-line_marker = ['s', 's', 's', 's', 's', 's', 's']
 tracer_data_list = get_tracers(charge_exchange_on_file, tracer_list)
 normalisation_factor = tracer_data_list[0]
 pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
@@ -121,8 +119,7 @@ tracer_labels = OXYGEN_SHOCK_LABELS
 label_position = [[2.5625e16, 0.92], [2.559e16, 0.68], [2.555e16, 0.7], [2.546e16, 0.72],
                       [2.546e16, 0.1], [], [], [], []]
 line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown', 'blue', 'red', 'black', 'green']
-line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
-line_marker = ['s', 's', 's', 's', 's', 's', 's']
+line_style = ['--', '--', '--', '--', '--', '--', '--']
 tracer_data_list = get_tracers(charge_exchange_off_file, tracer_list)
 normalisation_factor = tracer_data_list[0]
 pro_tracer_data_list = process_tracer_data(tracer_data_list, normalisation_factor)
