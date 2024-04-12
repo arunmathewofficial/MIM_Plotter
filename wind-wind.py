@@ -23,16 +23,17 @@ if what2plot != 'flow_quantities' and what2plot != 'chemical_tracers':
     print('\033[93mPlease specify what to plot!\033[0m')
     print('\033[93mOptions: flow_quantities, chemical_tracers\033[0m')
 
-
-
+# switch to plot in pc
+cm2pc = True
 
 basic_info = get_basic_data(input_silo)
 # time
 time = basic_info['time']
 # radial grid points
 radial_grid_points = basic_info['x']
-# radius in parsec
-radius = radial_grid_points*(unit.cm).to(unit.pc)
+
+
+
 
 # plot flow quantities ############################################
 if what2plot == 'flow_quantities':
