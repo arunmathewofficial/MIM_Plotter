@@ -17,6 +17,7 @@ dimension = Inputs.dimen
 OutputDir = Inputs.img_path
 imgbase = Inputs.img_file
 
+OneParsec = 3.086e+18
 cm2pc = True
 
 for i, frame in enumerate(timeline):
@@ -29,8 +30,11 @@ for i, frame in enumerate(timeline):
     x_label = "cm"
 
     if cm2pc == True:
-        xaxis = xaxis * (unit.cm).to(unit.pc)
-        x_label = "pc"
+        if xaxis[-1].value < OneParsec:
+            pass
+        else:
+            xaxis = xaxis * (unit.cm).to(unit.pc)
+            x_label = "pc"
 
     norm = get_tracer(silo_file, 'Tr000_X_H')
     H0 = get_tracer(silo_file, 'Tr001_H')
