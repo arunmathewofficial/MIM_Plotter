@@ -255,6 +255,45 @@ def ReadTable_Advance(Table):
     return {'N_row': N_row, 'N_col': N_col, 'columns': columns}
 # ***************************************************************************
 
+# read charge exchange Mpv10 PIONv3.0 table #################################
+def Read_CX_Table(file):
+    # Read a line of numbers out of a text file:
+    print('Reading data from: ' + file)
+    title = []
+    info = []
+    data = []
+    with open(file) as table:
+        for line in table:
+            row = line.split()
+            if row[0] == "------":
+                continue
+            if row[0] == "--":
+                title.append(row)
+            elif row[0] == "#":
+                info.append(row)
+            else:
+                data.append(row)
+
+
+    heading = ' '.join(title[0][index] for index in range(2, 8))
+    print("Title: " + heading)
+    # get number of reaction
+    N_reactions = info[4][4]
+    print("No of charge exchange reactions: " + N_reactions);
+    # get
+    Reaction_IDs = info[0][3:3+35]
+    Energy_Defect = info[1][3:3+35]
+
+    # Extracting data
+    N_reactions = int(N_reactions)
+    temperature = [row[0] for row in data]
+    reaction_rate_table = [[row[i] for row in data] for i in range(1, N_reactions+1)]
+
+    return {'N_Reactions': N_reactions, 'Reaction_IDs': Reaction_IDs,
+            'Energy_Defect': Energy_Defect, 'Temperature': temperature,
+            'Rate_Table': reaction_rate_table}
+# ***************************************************************************
+
 
 # Add data to dict ##########################################################
 def add_data_to_dict(dict, column_data, column_name):
