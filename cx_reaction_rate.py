@@ -26,6 +26,13 @@ if not pion_lookuptab_dir.endswith('/'):
 cx_ionise_reaction_rate_file = pion_lookuptab_dir + 'charge-exchange-tables/cx-ionise-reactions.txt'
 cx_recomb_reaction_rate_file = pion_lookuptab_dir + 'charge-exchange-tables/cx-recomb-reactions.txt'
 
+# set xmin and xmax limits
+xmin_limit = 1.0E+2
+xmax_limit = 1.0E+5
+
+
+# plotting ionisation reaction rates ************************
+print("----- plotting ionisation reaction rates -----")
 ReadData = Read_CX_Table(cx_ionise_reaction_rate_file)
 
 N_Reactions = ReadData['N_Reactions']
@@ -36,19 +43,79 @@ Rate_Table = ReadData['Rate_Table']
 
 
 for i, data in enumerate(Rate_Table):
-    fig, ax = plt.subplots(figsize=(6, 5))
-    ax.plot(Temperature, data)
+    fig, ax = plt.subplots(figsize=(8, 6))
+    # Convert data to a numpy array if it's not already
+    data = np.array(data, dtype=float)
+    temperature = np.array(Temperature, dtype=float)
+    # Plot the data
+    ax.plot(temperature, data)
     ax.text(0.1, 0.9, 'Reaction: ' + Reaction_IDs[i], transform=ax.transAxes, fontsize=10, color='black')
     ax.text(0.1, 0.8, r'$\Delta E = $' + Energy_Defect[i] + ' eV', transform=ax.transAxes, fontsize=10, color='black')
     ax.set_xlabel('T (K)')
     ax.set_ylabel(r'Reaction rate (cm$^3$/s)')
     ax.set_xscale('log')
-    ax.set_yscale('log')
+    # calculate ymin and ymax from xmin and xmax
+    if data[0] != data[1]:
+        xmin_index = np.argmin(np.abs(temperature - xmin_limit))
+        xmax_index = np.argmin(np.abs(temperature - xmax_limit))
+        ymin_limit = data[xmin_index]
+        ymax_limit = data[xmax_index]
+        # setting x-limits in the plot
+        ax.set_xlim([xmin_limit, xmax_limit])
+        # setting y-limits in the plot
+        ax.set_ylim([ymin_limit, ymax_limit])
+
+    # saving images
+    plt.tight_layout()
     image_name = output_dir + Reaction_IDs[i] + '.png'
     print("Saving " + image_name)
     fig.savefig(image_name)
     plt.close(fig)
 
+# Clear the dictionary
+ReadData.clear()
 
+
+
+# plotting recombination reaction rates *******************
+print("----- plotting recombination reaction rates -----")
+ReadData = Read_CX_Table(cx_recomb_reaction_rate_file)
+
+N_Reactions = ReadData['N_Reactions']
+Reaction_IDs = ReadData['Reaction_IDs']
+Energy_Defect = ReadData['Energy_Defect']
+Temperature = ReadData['Temperature']
+Rate_Table = ReadData['Rate_Table']
+
+for i, data in enumerate(Rate_Table):
+    fig, ax = plt.subplots(figsize=(8, 6))
+    temperature = np.array(Temperature, dtype=float)
+    data = np.array(data, dtype=float)
+    ax.plot(temperature, data)
+    ax.text(0.1, 0.9, 'Reaction: ' + Reaction_IDs[i], transform=ax.transAxes, fontsize=10, color='black')
+    ax.text(0.1, 0.8, r'$\Delta E = $' + Energy_Defect[i] + ' eV', transform=ax.transAxes, fontsize=10, color='black')
+    ax.set_xlabel('T (K)')
+    ax.set_ylabel(r'Reaction rate (cm$^3$/s)')
+    ax.set_xscale('log')
+    # calculate ymin and ymax from xmin and xmax
+    if data[0] != data[1]:
+        xmin_index = np.argmin(np.abs(temperature - xmin_limit))
+        xmax_index = np.argmin(np.abs(temperature - xmax_limit))
+        ymin_limit = data[xmin_index]
+        ymax_limit = data[xmax_index]
+        # setting x-limits in the plot
+        ax.set_xlim([xmin_limit, xmax_limit])
+        # setting y-limits in the plot
+        ax.set_ylim([ymin_limit, ymax_limit])
+
+    #saving images
+    plt.tight_layout()
+    image_name = output_dir + Reaction_IDs[i] + '.png'
+    print("Saving " + image_name)
+    fig.savefig(image_name)
+    plt.close(fig)
+
+# Clear the dictionary
+ReadData.clear()
 
 
