@@ -278,14 +278,14 @@ def Read_CX_Table(file):
     heading = ' '.join(title[0][index] for index in range(2, 8))
     print("Title: " + heading)
     # get number of reaction
-    N_reactions = info[4][4]
-    print("No of charge exchange reactions: " + N_reactions);
+    N_reactions = int(info[4][4].strip())
+    print("No of charge exchange reactions:",  N_reactions)
+
     # get
-    Reaction_IDs = info[0][3:3+35]
-    Energy_Defect = info[1][3:3+35]
+    Reaction_IDs = info[0][3:3+N_reactions]
+    Energy_Defect = info[1][3:3+N_reactions]
 
     # Extracting data
-    N_reactions = int(N_reactions)
     temperature = [row[0] for row in data]
     reaction_rate_table = [[row[i] for row in data] for i in range(1, N_reactions+1)]
 
