@@ -45,7 +45,9 @@ This script compares the ionization profile of oxygen behind the planar shock
 with and without charge-exchange reactions enabled. Additionally, it generates
 temperature profiles for both cases.
 
-
+### 9. HII_region
+Multi-ion-module-publication: The script plot the HII-region temperature and
+ionisation profile for the HII40 Lexington Benchmark
 
 # Multi-ion Module MPv10 Testing Scripts #
 

@@ -294,6 +294,36 @@ def Read_CX_Table(file):
             'Rate_Table': reaction_rate_table}
 # ***************************************************************************
 
+# read cloudy file ##########################################################
+def read_cloudy(file):
+    print('Reading couldy data from:', file)
+    data = []
+
+    with open(file) as table:
+        for line in table:
+            row = line.split()
+            if row[0].startswith("#"):
+                continue
+            else:
+                data.append(row)
+
+    columns = {}
+    num_columns = len(data[0])
+
+    for i in range(num_columns):
+        columns[i] = []
+
+    for row in data:
+        for i in range(num_columns):
+            try:
+                columns[i].append(float(row[i]))
+            except ValueError:
+                print(f"Warning: Could not convert {row[i]} to float. Storing as string.")
+                columns[i].append(row[i])
+
+    return columns
+
+# ***************************************************************************
 
 # Add data to dict ##########################################################
 def add_data_to_dict(dict, column_data, column_name):
