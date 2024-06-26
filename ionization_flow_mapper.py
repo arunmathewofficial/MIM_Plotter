@@ -18,23 +18,30 @@ OutputDir = Inputs.img_path
 imgbase = Inputs.img_file
 
 OneParsec = 3.086e+18
-cm2pc = True
+# convert the x-axis into parsec scale
+cm2pc = False
+
+# minimum and maximum value of x-axis in cm
+
 
 for i, frame in enumerate(timeline):
     silo_file = timeline[frame][0]
 
     time = get_basic_data(silo_file)['time']
+    print(time)
     Temperature = get_temperature(silo_file)
     Density = get_density(silo_file)
     xaxis = get_basic_data(silo_file)['x']
     x_label = "cm"
 
+    '''
     if cm2pc == True:
         if xaxis[-1].value < OneParsec:
             pass
         else:
             xaxis = xaxis * (unit.cm).to(unit.pc)
             x_label = "pc"
+    '''
 
     norm = get_tracer(silo_file, 'Tr000_X_H')
     H0 = get_tracer(silo_file, 'Tr001_H')
@@ -47,7 +54,7 @@ for i, frame in enumerate(timeline):
     #axs[0].tick_params(labelsize=16)
     #axs[0].grid()
     #axs[0].legend(fontsize=12, loc="lower right")
-    #axs[0].set_xlim(0.0, 1.0E+14)
+    #axs[0].set_xlim(x_min, x_max)
 
     axs[1].plot(xaxis, np.log10(Density))  # Corrected label
     axs[1].set_xlabel(x_label)
@@ -55,16 +62,16 @@ for i, frame in enumerate(timeline):
     #axs[1].tick_params(labelsize=16)
     #axs[1].grid()
     #axs[1].legend(fontsize=12, loc="lower right")
-    #axs[1].set_xlim(0.0, 1.0E+14)
-
+    #axs[1].set_xlim(x_min, x_max)
 
     axs[2].plot(xaxis, H0/norm , label='H0')
     axs[2].plot(xaxis, H1p/norm, label='H1+')
     axs[2].set_xlabel(x_label)
     axs[2].set_ylabel("Ionisation fraction")
+    #axs[2].set_xlim(x_min, x_max)
     #axs[2].tick_params(labelsize=16)
     #axs[2].grid()
-    axs[2].legend(fontsize=12, loc="lower right")
+    #axs[2].legend(fontsize=12, loc="lower right")
 
     # Margin adjustments
     left = 0.06  # the left side of the subplots of the figure
@@ -75,7 +82,7 @@ for i, frame in enumerate(timeline):
     hspace = 0.23  # the amount of height reserved for white space between subplots
     plt.subplots_adjust(left=left, bottom=bottom, right=right, top=top, wspace=wspace, hspace=hspace)
 
-    s = "$t=$" + f"{time:0.04f}"
+    s = "$t=$" + f"{time:0.04e}"
     plt.text(0.2, 0.5, s, color="black", fontsize=14)
     iy = str(i).zfill(5)
     outfile = OutputDir + imgbase + "_" + iy + ".png"
