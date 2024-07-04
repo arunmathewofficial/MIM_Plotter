@@ -94,7 +94,7 @@ axs[0].legend(fontsize=12, loc="lower right")
 axs[0].set_ylabel("Ionisation Fraction", fontsize=16)
 axs[0].set_xlabel(r"T (K)", fontsize=16)
 axs[0].set_yscale('log')
-axs[0].set_xlim(1, 10**-2)
+axs[0].set_ylim(1, 10**-2)
 axs[0].set_xlim(4.0, 5.2)  # Set the x-axis limits from 4.0 to 9.0
 
 outfile = output_dir + "cx_cie_aspulnd09.png"
