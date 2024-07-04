@@ -34,7 +34,7 @@ temperature_cx_off = np.log10(temperature_cx_off)
 temperature_cx_on = get_temperature(cx_on_cie_silo)
 temperature_cx_on = np.log10(temperature_cx_on)
 
-fig, axs = plt.subplots(2, 1, figsize=(5, 6))
+fig, axs = plt.subplots(2, 1, figsize=(5, 8))
 # NEON ###################################################################
 # y data - neon species cx off ###########
 X_Ne = get_tracer(cx_off_cie_silo, "Tr005_X_Ne")
