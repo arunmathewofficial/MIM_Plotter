@@ -14,13 +14,12 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("input_silo_file", type=str, help="give the input silo input_silo path")
 parser.add_argument("output_dir", type=str, help="give the output image dir path")
-parser.add_argument("abundance", type=str, help="give the name of the abundance")
 
 args = parser.parse_args()
 input_silo = args.input_silo_file
 output_dir = args.output_dir
 output_dir = make_directory(output_dir)
-abundance  = args.abundance
+abundance  = "asplund09"
 
 # make plotting data and append to plot_data array
 plot_data = []

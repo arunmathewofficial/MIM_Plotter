@@ -144,9 +144,9 @@ for i, data in enumerate(Rate_Table):
     ax.set_ylabel(r'CX Reaction rate (cm$^3$/s)')
     ax.set_xscale('log')
     # setting x limits
-    ax.set_xlim([fit_temp_range[i][0] - 0.1 * fit_temp_range[i][0], fit_temp_range[i][1] + 0.1 * fit_temp_range[i][1]])
+    #ax.set_xlim([fit_temp_range[i][0] - 0.1 * fit_temp_range[i][0], fit_temp_range[i][1] + 0.1 * fit_temp_range[i][1]])
     # setting y-limits in the plot
-    ax.set_ylim([Rate_range_fit[i][0] - 0.1 * Rate_range_fit[i][0], Rate_range_fit[i][1] + 0.1 * Rate_range_fit[i][1]])
+    #ax.set_ylim([Rate_range_fit[i][0] - 0.1 * Rate_range_fit[i][0], Rate_range_fit[i][1] + 0.1 * Rate_range_fit[i][1]])
     ax.legend(loc='upper right')
 
     # saving images
@@ -207,9 +207,9 @@ for i, data in enumerate(Rate_Table):
     ax.set_xlabel('T (K)')
     ax.set_ylabel(r'Reaction rate (cm$^3$/s)')
     ax.set_xscale('log')
-    ax.set_xlim([fit_temp_range[i][0] - 0.1 * fit_temp_range[i][0], fit_temp_range[i][1] + 0.1 * fit_temp_range[i][1]])
+    #ax.set_xlim([fit_temp_range[i][0] - 0.1 * fit_temp_range[i][0], fit_temp_range[i][1] + 0.1 * fit_temp_range[i][1]])
     # setting y-limits in the plot
-    ax.set_ylim([Rate_range_fit[i][0] - 0.1 * Rate_range_fit[i][0], Rate_range_fit[i][1] + 0.1 * Rate_range_fit[i][1]])
+    #ax.set_ylim([Rate_range_fit[i][0] - 0.1 * Rate_range_fit[i][0], Rate_range_fit[i][1] + 0.1 * Rate_range_fit[i][1]])
     ax.legend(loc='upper right')
 
     #saving images
