@@ -40,12 +40,16 @@ This script generates plots comparing the non-adiabatic ionization fraction
 of silicon (Si), sulfur (S), and iron (Fe) behind the plane shock for inflow 
 velocities of 1000 km/s and 3000 km/s.
 
-### 8.cx_shock_compare
+### 8.cx_cie_compare
+Script to compare cie ionisation profile of Ne, Si, and Fe with and 
+without charge-exchange reactions.
+
+### 9.cx_shock_compare
 This script compares the ionization profile of oxygen behind the planar shock
 with and without charge-exchange reactions enabled. Additionally, it generates
 temperature profiles for both cases.
 
-### 9. HII_region
+### 10. HII_region
 Multi-ion-module-publication: The script plot the HII-region temperature and
 ionisation profile for the HII40 Lexington Benchmark
 
