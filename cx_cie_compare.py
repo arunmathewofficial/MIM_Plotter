@@ -61,12 +61,41 @@ axs[0].plot(temperature_cx_off, Ne7p / X_Ne, label="$\mathrm{Ne}^{7+}$")
 axs[0].plot(temperature_cx_off, Ne8p / X_Ne, label="$\mathrm{Ne}^{8+}$")
 axs[0].plot(temperature_cx_off, Ne9p / X_Ne, label="$\mathrm{Ne}^{9+}$")
 axs[0].plot(temperature_cx_off, Ne10p / X_Ne, label="$\mathrm{Ne}^{10+}$")
+
+# y data - neon species cx on ###########
+X_Ne = get_tracer(cx_on_cie_silo, "Tr005_X_Ne")
+Ne0 = get_tracer(cx_on_cie_silo, "Tr033_Ne")
+Ne1p = get_tracer(cx_on_cie_silo, "Tr034_Ne1p")
+Ne2p = get_tracer(cx_on_cie_silo, "Tr035_Ne2p")
+Ne3p = get_tracer(cx_on_cie_silo, "Tr036_Ne3p")
+Ne4p = get_tracer(cx_on_cie_silo, "Tr037_Ne4p")
+Ne5p = get_tracer(cx_on_cie_silo, "Tr038_Ne5p")
+Ne6p = get_tracer(cx_on_cie_silo, "Tr039_Ne6p")
+Ne7p = get_tracer(cx_on_cie_silo, "Tr040_Ne7p")
+Ne8p = get_tracer(cx_on_cie_silo, "Tr041_Ne8p")
+Ne9p = get_tracer(cx_on_cie_silo, "Tr042_Ne9p")
+Ne10p = X_Ne - (Ne0 + Ne1p + Ne2p + Ne3p + Ne4p + Ne5p + Ne6p + Ne7p + Ne8p + Ne9p)
+
+axs[0].plot(temperature_cx_off, Ne0 / X_Ne, label="$\mathrm{Ne}^{0}$")
+axs[0].plot(temperature_cx_off, Ne1p / X_Ne, label="$\mathrm{Ne}^{+}$")
+axs[0].plot(temperature_cx_off, Ne2p / X_Ne, label="$\mathrm{Ne}^{2+}$")
+axs[0].plot(temperature_cx_off, Ne3p / X_Ne, label="$\mathrm{Ne}^{3+}$")
+axs[0].plot(temperature_cx_off, Ne4p / X_Ne, label="$\mathrm{Ne}^{4+}$")
+axs[0].plot(temperature_cx_off, Ne5p / X_Ne, label="$\mathrm{Ne}^{5+}$")
+axs[0].plot(temperature_cx_off, Ne6p / X_Ne, label="$\mathrm{Ne}^{6+}$")
+axs[0].plot(temperature_cx_off, Ne7p / X_Ne, label="$\mathrm{Ne}^{7+}$")
+axs[0].plot(temperature_cx_off, Ne8p / X_Ne, label="$\mathrm{Ne}^{8+}$")
+axs[0].plot(temperature_cx_off, Ne9p / X_Ne, label="$\mathrm{Ne}^{9+}$")
+axs[0].plot(temperature_cx_off, Ne10p / X_Ne, label="$\mathrm{Ne}^{10+}$")
+
+
 axs[0].tick_params(labelsize=16)
-axs[0].grid()
 axs[0].legend(fontsize=12, loc="lower right")
 axs[0].set_ylabel("Ion Fraction", fontsize=16)
-axs[0].set_xlabel("radius (pc)", fontsize=16)
-axs[0].set_xlim(0, 10.0)  # Set the x-axis limits from 4.0 to 9.0
+axs[0].set_xlabel("T (K)", fontsize=16)
+axs[0].set_yscale('log')
+axs[0].set_xlim(0.001, 1.1)
+axs[0].set_xlim(4.0, 5.2)  # Set the x-axis limits from 4.0 to 9.0
 
 outfile = output_dir + "cx_cie_aspulnd09.png"
 print("saving " + outfile)
