@@ -35,7 +35,7 @@ def get_cx_rate(reaction_key: Tuple[str, str], T: float) -> Tuple[float, bool]:
     if reaction_key[1] == "H1+" and reaction.type:
         rate = reaction.a * pow(T * 1.00E-04, reaction.b) \
                * (1.00 + reaction.c * exp(reaction.d * T * 1.00E-04)) \
-               * math.exp(- reaction.dE_fit * 1.00E-04 / T)
+               * math.exp(- reaction.dE_fit * const.eV2erg / (const.kB * T))
 
         constant = reaction.b == 0.0 and reaction.c == 0.0 and reaction.dE_fit
         return rate, constant
@@ -44,7 +44,7 @@ def get_cx_rate(reaction_key: Tuple[str, str], T: float) -> Tuple[float, bool]:
     if reaction_key[1] == "He1+" and reaction.type:
         rate = reaction.a * pow(T * 1.00E-04, reaction.b) \
                * math.exp(- reaction.c * T * 1.00E-04) \
-               * math.exp(- reaction.dE * const.eV2erg / (const.kB * T))
+               * math.exp(- reaction.dE_fit * const.eV2erg / (const.kB * T))
 
         constant = reaction.b == 0.0 and reaction.c == 0.0 and reaction.dE
         return rate, constant
