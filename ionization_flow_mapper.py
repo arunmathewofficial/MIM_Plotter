@@ -28,7 +28,9 @@ for i, frame in enumerate(timeline):
     silo_file = timeline[frame][0]
 
     time = get_basic_data(silo_file)['time']
-    print(time)
+    filename = os.path.basename(silo_file)
+    print(f"silo-file: {filename}, time: {time:.5e}")
+
     Temperature = get_temperature(silo_file)
     Density = get_density(silo_file)
     xaxis = get_basic_data(silo_file)['x']
@@ -44,8 +46,8 @@ for i, frame in enumerate(timeline):
     '''
 
     norm = get_tracer(silo_file, 'Tr000_X_H')
-    H0 = get_tracer(silo_file, 'Tr009_H')
-    H1p = get_tracer(silo_file, 'Tr000_X_H') - get_tracer(silo_file, 'Tr009_H')
+    H0 = get_tracer(silo_file, 'Tr001_H')
+    H1p = get_tracer(silo_file, 'Tr000_X_H') - get_tracer(silo_file, 'Tr001_H')
 
     fig, axs = plt.subplots(3, 1, figsize=(8, 8))
     axs[0].plot(xaxis, np.log10(Temperature))
@@ -82,7 +84,7 @@ for i, frame in enumerate(timeline):
     hspace = 0.23  # the amount of height reserved for white space between subplots
     plt.subplots_adjust(left=left, bottom=bottom, right=right, top=top, wspace=wspace, hspace=hspace)
 
-    s = "$t=$" + f"{time:0.04e}"
+    s = "$t=$" + f"{time:.5e}"
     plt.text(0.2, 0.5, s, color="black", fontsize=14)
     iy = str(i).zfill(5)
     outfile = OutputDir + imgbase + "_" + iy + ".png"
