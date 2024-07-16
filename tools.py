@@ -109,6 +109,19 @@ def get_temperature(silo_file):
     return temperature
 # ***************************************************************************
 
+def get_pressure(silo_file):
+    '''
+    read the silo file for temperature array
+
+    :param silo_file:
+    :return: temperature array
+    '''
+    read_data = ReadData([silo_file])
+    pressure = read_data.get_1Darray("Pressure")['data'][0]
+    read_data.close()
+    return pressure
+# ***************************************************************************
+
 # get radial velocity #######################################################
 def get_velocityX(silo_file):
     '''
@@ -121,6 +134,18 @@ def get_velocityX(silo_file):
     vx = read_data.get_1Darray("VelocityX")['data'][0]
     read_data.close()
     return vx
+
+def get_MagneticFieldY(silo_file):
+    '''
+    read the silo file for temperature array
+
+    :param silo_file:
+    :return: temperature array
+    '''
+    read_data = ReadData([silo_file])
+    By = read_data.get_1Darray('MagneticFieldY')['data'][0]
+    read_data.close()
+    return By
 
 # get tracer data from the given silo file ##################################
 def get_tracer(silo_file, tracer):

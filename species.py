@@ -241,3 +241,6 @@ IRON_NON_ADIABATIC_LABELS = [r"$0$", r"$1+$", r"$2+$", r"$3+$", r"$4+$", r"$5+$"
 
 CX_OXYGEN_SHOCK_RAY79E = ["Tr020_X_O", "Tr021_O", "Tr022_O1p", "Tr023_O2p", "Tr024_O3p", "Tr025_O4p", "Tr026_O5p",
                  "Tr027_O6p", "Tr028_O7p"]
+
+CX_SILICON_SHOCK_RAY79E = ["Tr040_X_Si", "Tr041_Si", "Tr042_Si1p", "Tr043_Si2p", "Tr044_Si3p", "Tr045_Si4p", "Tr046_Si5p",
+                 "Tr047_Si6p", "Tr048_Si7p", "Tr049_Si8p", "Tr050_Si9p", "Tr051_Si10p", "Tr052_Si11p", "Tr053_Si12p", "Tr054_Si13p"]
