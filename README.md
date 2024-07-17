@@ -35,7 +35,7 @@ This script plots flow quantities and ionization profiles for the
 non-adiabatic shock test case. The plots re generated to compare the effects 
 of the cooling function on density and the cooling timescale.
 
-### 7. non-adiabatic_ion_SiSFe
+### 7. non-adiabatic_ion_Si
 This script generates plots comparing the non-adiabatic ionization fraction
 of silicon (Si), sulfur (S), and iron (Fe) behind the plane shock for inflow 
 velocities of 1000 km/s and 3000 km/s.
