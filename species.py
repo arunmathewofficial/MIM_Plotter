@@ -106,8 +106,20 @@ IRON_SHOCK_LABELS = [r"$Fe$", r"$Fe^{1+}$", r"$Fe^{2+}$", r"$Fe^{3+}$", r"$Fe^{4
                 r"$Fe^{25+}$", r"$Fe^{26+}$"]
 
 
+# adiabatic shock test high-low resolution
+HYDROGEN_ADIA_SHOCK_LABELS = [r"\rm \LARGE H", r"\rm \LARGE H$^+$"]
 
-
+HELIUM_ADIA_SHOCK_LABELS = [r"\rm \LARGE He", r"\rm \LARGE He$^{+}$", r"\rm \LARGE He$^{2+}$"]
+CARBON_ADIA_SHOCK_LABELS = [r"\rm \LARGE C", r"\rm \LARGE C$^+$", r"\rm \LARGE C$^{2+}$",
+                            r"\rm \LARGE C$^{3+}$", r"\rm \LARGE C$^{4+}$", r"\Large$5+$", r"\Large$6+$"]
+NITROGEN_ADIA_SHOCK_LABELS = [r"\rm \LARGE N", r"\rm \LARGE N$^{+}$", r"\rm \LARGE N$^{2+}$", r"\rm \LARGE N$^{3+}$",
+                              r"\rm \LARGE N$^{4+}$", r"\Large$5+$", r"\Large$6+$", r"\Large$7+$"]
+OXYGEN_ADIA_SHOCK_LABELS = [r"\rm \LARGE O", r" \rm \LARGE O$^+$", r" \rm \LARGE O$^{2+}$",
+                            r"\rm \LARGE O$^{3+}$", r"\rm \LARGE O$^{4+}$", r"\Large$5+$",
+                       r"\Large$6+$", r"\Large$7+$", r"\Large$8+$"]
+NEON_ADIA_SHOCK_LABELS = [r"\rm \LARGE Ne", r"\rm \LARGE Ne$^+$", r"\rm \LARGE Ne$^{2+}$",
+                          r"\rm \LARGE Ne$^{3+}$", r"\rm \LARGE Ne$^{4+}$", r"\Large$5+$",
+                       r"\Large$6+$", r"\Large$7+$", r"\Large$8+$", r"$\textrm{X}$", r"$\textrm{XI}$"]
 
 
 

@@ -23,8 +23,8 @@ to solar abundance, Wolf-Rayet-Carbon abundance, and the original cooling
 data from Asplund et al. (2009).
 
 ### 4. adibatic_flow_struc
-Generate a comparison plot for low and high-resolution chemical profiles in 
-the vicinity of the shock for the adiabatic flow.
+Generate flow structure plots for high-resolution flow in the vicinity of 
+the shock for the adiabatic flow.
 
 ### 5. adiabatic_ion_profile
 Generate a comparison plot for low (1024) and high-resolution (10240) chemical profiles in 

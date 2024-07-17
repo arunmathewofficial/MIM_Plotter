@@ -55,20 +55,20 @@ if option == 1:
     plot_data = []
 
     # x data
-    x_low = get_basic_data(low_resolution_file)['x']
-    x_high = get_basic_data(high_resolution_file)['x']
+    x_low = get_basic_data(low_resolution_file)['x']/1.0E+16
+    x_high = get_basic_data(high_resolution_file)['x']/1.0E+16
 
     #modify x_low data by shifting to left
-    x_low = x_low - 2.7e13*np.ones_like(x_low)
+    x_low = x_low - 0.0025*np.ones_like(x_low)
 
     # Hydrogen ###########################################################
     # y data - Hydrogen species - low resolution
     tracer_list = HYDROGEN_SHOCK_RAY79E
-    tracer_labels = HYDROGEN_SHOCK_LABELS
-    label_position = [[2.567e16,0.9], [2.545e16,0.9]]
+    tracer_labels = HYDROGEN_ADIA_SHOCK_LABELS
+    label_position = [[2.563,0.75], [2.545,0.9]]
     line_color = ['crimson', 'darkblue']
-    line_style = ['-.', '-.']
-    line_marker = ['s', 's']
+    line_style = ['--', '--']
+    line_marker = ['o', 'o']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
@@ -115,11 +115,11 @@ if option == 1:
     # Helium ##############################################################
     # y data - Helium species - low resolution
     tracer_list = HELIUM_SHOCK_RAY79E
-    tracer_labels = HELIUM_SHOCK_LABELS
-    label_position = [[2.566e16,0.9], [2.55e16,0.75], [2.545e16,0.35]]
+    tracer_labels = HELIUM_ADIA_SHOCK_LABELS
+    label_position = [[2.563,0.8], [2.55,0.7], [2.545,0.3]]
     line_color = ['crimson', 'darkblue', 'darkgreen']
-    line_style = ['-.', '-.', '-.']
-    line_marker = ['s', 's', 's']
+    line_style = ['--', '--', '--']
+    line_marker = ['o', 'o', 'o']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
@@ -166,11 +166,11 @@ if option == 1:
     # Carbon ####################################################
     # y data - Carbon species -     line_color = ['black', 'crimson', 'darkgreen', 'gold', 'royalblue', 'darkorange', 'magenta']low resolution
     tracer_list = OLD_CARBON_SHOCK_RAY79E
-    tracer_labels = CARBON_SHOCK_LABELS
-    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.8], [2.546e16,0.7], [2.546e16,0.1], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
-    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    tracer_labels = CARBON_ADIA_SHOCK_LABELS
+    label_position = [[2.563,0.8], [2.559,0.68], [2.5565,0.83], [2.546,0.68], [2.543,0.1], [], []]
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
+    line_style = ['--', '--', '--', '--', '--', '--', '--']
+    line_marker = ['o', 'o', 'o', 'o', 'o', 'o', 'o']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
@@ -195,7 +195,7 @@ if option == 1:
     tracer_list = CARBON_SHOCK_RAY79E
     tracer_labels = CARBON_LABELS
     label_position = [[], [], [], [], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
     line_style = ['-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -219,11 +219,11 @@ if option == 1:
     # NITROGEN ####################################################
     # y data - nitrogen species - low resolution
     tracer_list = NITROGEN_SHOCK_RAY79E
-    tracer_labels = NITROGEN_SHOCK_LABELS
-    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
-    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    tracer_labels = NITROGEN_ADIA_SHOCK_LABELS
+    label_position = [[2.5635,0.85], [2.5585,0.68], [2.556,0.7], [2.542,0.8], [2.546,0.1], [], [], []]
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
+    line_style = ['--', '--', '--', '--', '--', '--', '--']
+    line_marker = ['o', 'o', 'o', 'o', 'o', 'o', 'o']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
@@ -249,7 +249,7 @@ if option == 1:
     tracer_list = NITROGEN_SHOCK_RAY79E
     tracer_labels = NITROGEN_LABELS
     label_position = [[], [], [], [], [], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
     line_style = ['-', '-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -272,11 +272,11 @@ if option == 1:
     # OXYGEN ####################################################
     # y data - oxygen species - low resolution
     tracer_list = OXYGEN_SHOCK_RAY79E
-    tracer_labels = OXYGEN_SHOCK_LABELS
-    label_position = [[2.5625e16,0.92], [2.559e16,0.68], [2.555e16,0.7], [2.546e16,0.72], [2.546e16,0.1], [], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
-    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    tracer_labels = OXYGEN_ADIA_SHOCK_LABELS
+    label_position = [[2.5635,0.85], [2.5585,0.68], [2.555,0.66], [2.542,0.72], [2.546,0.1], [], [], [], []]
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
+    line_style = ['--', '--', '--', '--', '--', '--', '--']
+    line_marker = ['o', 'o', 'o', 'o', 'o', 'o', 'o']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
@@ -301,7 +301,7 @@ if option == 1:
     tracer_list = OXYGEN_SHOCK_RAY79E
     tracer_labels = OXYGEN_LABELS
     label_position = [[], [], [], [], [], [], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
     line_style = ['-', '-', '-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -325,11 +325,11 @@ if option == 1:
     # Neon ####################################################
     # y data - Neon species - low resolution
     tracer_list = NEON_SHOCK_RAY79E
-    tracer_labels = NEON_SHOCK_LABELS
-    label_position = [[2.5625e16,0.92], [2.558e16,0.7], [2.550e16,0.62], [2.546e16,0.4], [2.547e16,0.04], [], [], [], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
-    line_style = ['-.', '-.', '-.', '-.', '-.', '-.', '-.']
-    line_marker = ['s', 's', 's', 's', 's', 's', 's']
+    tracer_labels = NEON_ADIA_SHOCK_LABELS
+    label_position = [[2.5625,0.75], [2.5575,0.72], [2.551,0.6], [2.5406,0.53], [2.547,0.03], [], [], [], [], [], []]
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
+    line_style = ['--', '--', '--', '--', '--', '--', '--']
+    line_marker = ['o', 'o', 'o', 'o', 'o', 'o', 'o']
     tracer_data_list = get_tracers(low_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
     pro_tracer_data_list = old_process_tracer_data(tracer_data_list, normalisation_factor)
@@ -354,7 +354,7 @@ if option == 1:
     tracer_list = NEON_SHOCK_RAY79E
     tracer_labels = NEON_LABELS
     label_position = [[], [], [], [], [], [], [], [], [], [], []]
-    line_color = ['crimson', 'darkblue', 'darkgreen', 'purple', 'brown']
+    line_color = ['crimson', 'darkblue', 'darkgreen', 'gray', 'darkorange']
     line_style = ['-', '-', '-', '-', '-', '-', '-']
     tracer_data_list = get_tracers(high_resolution_file, tracer_list)
     normalisation_factor = tracer_data_list[0]
@@ -376,32 +376,32 @@ if option == 1:
 
     # plot style ================================================================
     plot_style = {}
-    plot_style['figsize'] = (16, 12)
+    plot_style['figsize'] = (16, 10)
     plot_style['label-font-size'] = 12
     plot_style['matrix'] = [3, 2]
     plot_style['legend'] = False       # options: True/False
-    plot_style['sharex'] = False       # options: True/False, 'col', 'all'
-    plot_style['sharey'] = True       # options: True/False, 'col', 'all'
+    plot_style['sharex'] = True       # options: True/False, 'col', 'all'
+    plot_style['sharey'] = False       # options: True/False, 'col', 'all'
 
     # insert text in the figure (add several number of text)
-    plot_style['insert-txt'] = [[r'\huge \rm Hydrogen', 2.514E+16, 3.4, 0],
-                                [r'\huge \rm Helium', 2.541E+16, 3.5, 0],
-                                [r'\huge \rm Carbon', 2.514E+16, 2.2, 0],
-                                [r'\huge \rm Nitrogen', 2.541E+16, 2.2,0],
-                                [r'\huge \rm Oxygen', 2.514E+16, 0.9, 0],
-                                [r'\huge \rm Neon', 2.541E+16, 0.9, 0]]
+    #plot_style['insert-txt'] = [[r'\huge \rm Hydrogen', 2.514, 3.4, 0],
+    #                            [r'\huge \rm Helium', 2.541, 3.5, 0],
+    #                            [r'\huge \rm Carbon', 2.514, 2.2, 0],
+    #                            [r'\huge \rm Nitrogen', 2.541, 2.2,0],
+    #                            [r'\huge \rm Oxygen', 2.514, 0.9, 0],
+    #                            [r'\huge \rm Neon', 2.541, 0.9, 0]]
     #plot_style['insert-txt'] = []
-    plot_style['axis-label'] = [[None, r'\huge \rm Ioniastion fraction'], [None, None],
-                                [None, r'\huge \rm Ioniastion fraction'], [None, None],
-                                [r'\huge \rm x (cm)', r'\huge \rm Ioniastion fraction'], [r'\huge \rm x (cm)', None]]
+    plot_style['axis-label'] = [[None, r'\huge \rm Ioniastion fraction'], [None, r'\huge \rm Ioniastion fraction'],
+                                [None, r'\huge \rm Ioniastion fraction'], [None, r'\huge \rm Ioniastion fraction'],
+                                [r'\huge \rm x (10$^{16}$ cm)', r'\huge \rm Ioniastion fraction'], [r'\huge \rm x (10$^{16}$ cm)', r'\huge \rm Ioniastion fraction']]
     #plot_style['axis-label'] = []
 
-    plot_style['xlimit'] = [[2.54E+16, 2.57E+16],
-                            [2.54E+16, 2.57E+16],
-                            [2.54E+16, 2.57E+16],
-                            [2.54E+16, 2.57E+16],
-                            [2.54E+16, 2.565E+16],
-                            [2.54E+16, 2.565E+16]]
+    plot_style['xlimit'] = [[2.54, 2.57],
+                            [2.54, 2.57],
+                            [2.54, 2.57],
+                            [2.54, 2.57],
+                            [2.54, 2.565],
+                            [2.54, 2.565]]
 
     #plot_style['ylimit'] = []
 
@@ -410,8 +410,8 @@ if option == 1:
     plot_style['right'] = 0.97   # the right side of the subplots of the figure
     plot_style['bottom'] = 0.1  # the bottom of the subplots of the figure
     plot_style['top'] = 0.95    # the top of the subplots of the figure
-    plot_style['wspace'] = 0.1  # the amount of width reserved for blank space between subplots
-    plot_style['hspace'] = 0.25  # the amount of height reserved for white space between subplots
+    plot_style['wspace'] = 0.15  # the amount of width reserved for blank space between subplots
+    plot_style['hspace'] = 0.0  # the amount of height reserved for white space between subplots
 
     # this option will force the plot into any subplots
     # syntax: [plot-index, plot-location] first enter plot-index and then row and col location of
