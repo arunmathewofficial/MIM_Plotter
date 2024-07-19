@@ -46,8 +46,8 @@ for i, frame in enumerate(timeline):
     '''
 
     norm = get_tracer(silo_file, 'Tr000_X_H')
-    H0 = get_tracer(silo_file, 'Tr001_H')
-    H1p = get_tracer(silo_file, 'Tr000_X_H') - get_tracer(silo_file, 'Tr001_H')
+    H0 = get_tracer(silo_file, 'Tr009_H')
+    H1p = get_tracer(silo_file, 'Tr000_X_H') - get_tracer(silo_file, 'Tr009_H')
 
     fig, axs = plt.subplots(3, 1, figsize=(8, 8))
     axs[0].plot(xaxis, np.log10(Temperature))
