@@ -8,11 +8,12 @@
 # Import required libraries: ##########################################
 import warnings
 from tools import *
-from master_plotter import *
 import numpy as np
 import matplotlib.pyplot as plt
-from species import *
 import argparse
+from scipy.interpolate import UnivariateSpline
+import pandas as pd
+import matplotlib as mpl
 
 parser = argparse.ArgumentParser()
 parser.add_argument("low_density_subtime", type=str, help="Silo file for sub-cooling-time and low-density case.")
@@ -27,13 +28,6 @@ low_den_subtime_file = args.low_density_subtime
 low_den_cooltime_file = args.low_density_cooltime
 high_den_cooltime_file = args.high_density_cooltime
 
-
-#plt.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
-#plt.rc('text', usetex=True)
-#plt.rc('font', **{'size': 12})
-#plt.rc('lines', linewidth=1.5)
-
-
 scale = 1.0e+19 # cm
 # x data in parsec
 x_ldst = get_basic_data(low_den_subtime_file)['x']/scale
@@ -44,47 +38,38 @@ time_ldst = r'\rm t = ' + str(get_basic_data(low_den_subtime_file)['time'].round
 time_ldot = r'\rm t = ' + str(get_basic_data(low_den_cooltime_file)['time'].round(3))
 time_hdot = r'\rm t = ' + str(get_basic_data(high_den_cooltime_file)['time'].round(3))
 
-# generate 5 panel figure
-fig, ax = plt.subplots(4, 1, figsize=(5, 8))
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = ['Computer Modern Roman']
+mpl.rcParams['text.usetex'] = True
 
-### Panel - 1 Temperature profile
-#ax[0].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
-ax[0].set_ylabel(r'$\rm log \, T \, (K)$', fontsize=14, labelpad=16)
-ax[0].plot(x_ldst, np.log10(get_temperature(low_den_subtime_file)), label=r'\rm t$_1$',
-           color='saddlebrown', linewidth=1)
-ax[0].plot(x_ldot, np.log10(get_temperature(low_den_cooltime_file)), label=r'\rm t$_2$',
-           color='darkgoldenrod', linestyle='--', linewidth=1)
-ax[0].legend(frameon=False, fontsize=12, loc=(0.5, 0.3))
-ax[0].set_xlim(0, 9)
-#ax[0].xaxis.set_minor_locator(AutoMinorLocator())
-#ax[0].yaxis.set_minor_locator(AutoMinorLocator())
-ax[0].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
+#######################################################################
+# Plot 1 - two distinct time (sub and cooling)
+#######################################################################
 
-### Panel - 2 density profile
-#ax[1].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
-#ax[1].set_ylabel(r'$\rm log \, \rho \, (g/cm^3)$', fontsize=14, labelpad=2)
-#ax[1].plot(x_ldst, get_density(low_den_subtime_file),
-#           label=time_ldst, color='saddlebrown', linewidth=1)
-#ax[1].plot(x_ldot, get_density(low_den_overtime_file),
-#           label=time_ldot, color='darkgoldenrod', linestyle='--', linewidth=1)
-#ax[1].set_yscale('log')
-#ax[1].set_xlim(-0.4, 28)
-#ax[1].legend(frameon=False, fontsize=12, loc=(0.5, 0.3))
-#ax[1].xaxis.set_minor_locator(AutoMinorLocator())
-#ax[1].yaxis.set_minor_locator(AutoMinorLocator())
-#ax[1].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
+# Create a figure with 3 subplots
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(5, 6))
 
-# save data to file the temperature profile with low density gas.
-import pandas as pd
-T_profile_data = {'x(pc)': x_ldot, 'T (K)':get_temperature(low_den_cooltime_file)}
+# Panel - 1 Temperature profile
+ax1.set_ylabel(r'$\rm log \, T (K)$', fontsize=14, labelpad=16)
+ax1.plot(x_ldst, np.log10(get_temperature(low_den_subtime_file)), label=r'$\rm Time \, t_1$',
+           color='darkblue', linewidth=1.5)
+ax1.plot(x_ldot, np.log10(get_temperature(low_den_cooltime_file)), label=r'$\rm Time \, t_2$',
+           color='crimson', linestyle='--', linewidth=1.5)
+ax1.legend(frameon=False, fontsize=12, loc=(0.5, 0.3))
+ax1.set_xlim(0.1, 9)
+ax1.set_ylim(3.2, 7.6)
+#ax1.set_xlabel(r'$\rm x \, (10^{19} \, cm)$', fontsize=16)
+ax1.tick_params(axis="both", direction="in", which="both", bottom=True,
+                top=True, left=True, right=True, length=3, labelsize=14)
+ax1.set_yticks([3.2, 4, 5, 6, 7])
+# Save data to file the temperature profile with low density gas
+T_profile_data = {'x(pc)': x_ldot, 'T (K)': get_temperature(low_den_cooltime_file)}
 df = pd.DataFrame(T_profile_data)
 
 print('Printing temperature profile data to file ...')
 df.to_csv(output_dir + 'non-adiabatic_temp_profile.txt', sep='\t', index=False, float_format='%e')
 
-
-
-### Panel - 3 H, He, ionisation profile
+# Panel - 2 H, He, ionisation profile
 X_H = get_tracer(low_den_cooltime_file, 'Tr000_X_H')
 H0 = get_tracer(low_den_cooltime_file, 'Tr009_H')
 H1p = X_H - H0
@@ -93,22 +78,20 @@ He0 = get_tracer(low_den_cooltime_file, "Tr010_He")
 He1p = get_tracer(low_den_cooltime_file, "Tr011_He1p")
 He2p = X_He - He0 - He1p
 
-#ax[2].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
-ax[1].set_ylabel(r'\rm Ionisation fraction', fontsize=12,  labelpad=12)
-ax[1].plot(x_ldot, H0 / X_H, label="$\mathrm{H}$", linewidth=1, color='red')
-ax[1].plot(x_ldot, H1p / X_H, label="$\mathrm{H}^{+}$", linewidth=1, color='black')
-ax[1].plot(x_ldot, He0 / X_He, label="$\mathrm{He}$", linewidth=1, linestyle='--', color='turquoise')
-ax[1].plot(x_ldot, He1p / X_He, label="$\mathrm{He}^{+}$", linewidth=1, linestyle='--', color='darkgoldenrod')
-ax[1].plot(x_ldot, He2p / X_He, label="$\mathrm{He}^{2+}$", linewidth=1, linestyle='--', color='magenta')
-ax[1].set_xlim(0, 1)
-ax[1].set_ylim()
-ax[1].legend(frameon=False, fontsize=10, ncol=2)
-#ax[2].xaxis.set_minor_locator(AutoMinorLocator())
-#ax[2].yaxis.set_minor_locator(AutoMinorLocator())
-ax[1].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
+ax2.set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=14, labelpad=8)
+ax2.plot(x_ldot, H0 / X_H, label=r'$\rm H$', linewidth=1.5, color='crimson', linestyle='--')
+ax2.plot(x_ldot, H1p / X_H, label=r'$\rm H^{+}$', linewidth=1.5, color='darkblue', linestyle='--')
+ax2.plot(x_ldot, He0 / X_He, label=r'$\rm He$', linewidth=1.5, linestyle='-', color='crimson')
+ax2.plot(x_ldot, He1p / X_He, label=r'$\rm He^{+}$', linewidth=1.5, linestyle='-', color='darkgreen')
+ax2.plot(x_ldot, He2p / X_He, label=r'$\rm He^{2+}$', linewidth=1.5, linestyle='-', color='darkblue')
+ax2.set_xlim(0.01, 1.8)
+#ax2.set_xlabel(r'\rm x (10$^{19}$ cm)', fontsize=16)
+ax2.legend(frameon=False, fontsize=12, ncol=2)
+ax2.tick_params(axis="both", direction="in", which="both", bottom=True,
+                top=True, left=True, right=True, length=3, labelsize=14)
+plt.setp(ax2.get_xticklabels(), visible=True)
 
-### Panel - 4, Carbon ionisation profile
-
+# Panel - 3 Carbon ionisation profile
 X_C = get_tracer(low_den_cooltime_file, "Tr002_X_C")
 C0 = get_tracer(low_den_cooltime_file, "Tr012_C")
 C1p = get_tracer(low_den_cooltime_file, "Tr013_C1p")
@@ -118,38 +101,47 @@ C4p = get_tracer(low_den_cooltime_file, "Tr016_C4p")
 C5p = get_tracer(low_den_cooltime_file, "Tr017_C5p")
 C6p = X_C - C0 - C1p - C2p - C3p - C4p - C5p
 
-#ax[3].set_xlabel(r'$\rm x \, (cm)$', fontsize=18)
-ax[2].set_ylabel(r'\rm Ionisation fraction', fontsize=12, labelpad=12)
-ax[2].plot(x_ldot, C0 / X_C, label="$\mathrm{C}$", linewidth=1, color='red')
-ax[2].plot(x_ldot, C1p / X_C, label="$\mathrm{C}^{+}$", linewidth=1, linestyle='--', color='black')
-ax[2].plot(x_ldot, C2p / X_C, label="$\mathrm{C}^{2+}$", linewidth=1, color='magenta')
-ax[2].plot(x_ldot, C3p / X_C, label="$\mathrm{C}^{3+}$", linewidth=1, linestyle='--', color='turquoise')
-ax[2].plot(x_ldot, C4p / X_C, label="$\mathrm{C}^{4+}$", linewidth=1, color='saddlebrown', linestyle='--')
-ax[2].plot(x_ldot, C5p / X_C, label="$\mathrm{C}^{5+}$", linewidth=1, color='orange')
-ax[2].plot(x_ldot, C6p / X_C, label="$\mathrm{C}^{6+}$", linewidth=1, color='olivedrab', linestyle='--')
-ax[2].set_ylim()
-ax[2].set_xlim(0, 1)
-ax[2].legend(frameon=False, fontsize=10, ncol=2)
-#ax[3].xaxis.set_minor_locator(AutoMinorLocator())
-#ax[3].yaxis.set_minor_locator(AutoMinorLocator())
-ax[2].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
+ax3.set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=14, labelpad=8)
+ax3.plot(x_ldot, C0 / X_C, label=r'$\rm C$', linewidth=1.5, color='red')
+ax3.plot(x_ldot, C1p / X_C, label=r'$\rm C^{+}$', linewidth=1.5, linestyle='-', color='black')
+# Use UnivariateSpline to smooth the data
+spline = UnivariateSpline(x_ldot, C4p / X_C, s=0.2)
+norm_C4p_smooth = spline(x_ldot)
+norm_C4p_smooth[norm_C4p_smooth < 0] = 0
+ax3.plot(x_ldot, norm_C4p_smooth, label=r'$\rm C^{4+}$', linewidth=1.5, color='darkgreen', linestyle='-')
+ax3.plot(x_ldot, C5p / X_C, label=r'$\rm C^{5+}$', linewidth=1.5, color='orange')
+ax3.plot(x_ldot, C6p / X_C, label=r'$\rm C^{6+}$', linewidth=1.5, color='darkblue', linestyle='-')
+ax3.set_xlim(0.8, 2.2)
+ax3.legend(frameon=False, fontsize=12, ncol=2, columnspacing=0.5)
+ax3.tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True,
+                right=True, length=3, labelsize=14)
 
-### Panel - 4 for distict densities
-ax[3].set_xlabel(r'$\rm x \, (10^{19} cm)$', fontsize=14)
-ax[3].set_ylabel(r'$\rm log \, T \, (K)$', fontsize=14, labelpad=16)
-ax[3].plot(x_ldst, np.log10(get_temperature(low_den_cooltime_file)), color='turquoise',
-           linestyle='--', linewidth=1, label=r'$\rm \rho_1 $')
-ax[3].plot(x_hdot, np.log10(get_temperature(high_den_cooltime_file)), color='saddlebrown',
-           linewidth=1, label=r'$\rm \rho_2$')
-ax[3].set_xlim(0, 9)
-ax[3].set_ylim()
-ax[3].legend(frameon=False, fontsize=12, loc=(0.6, 0.4))
-#ax[4].xaxis.set_minor_locator(AutoMinorLocator())
-#ax[4].yaxis.set_minor_locator(AutoMinorLocator())
-ax[3].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=2)
+ax3.set_xlabel(r'\rm x (10$^{19}$ cm)', fontsize=14, labelpad=16)
 
 
-#fig.subplots_adjust(wspace=0.0)
-plt.subplots_adjust(hspace=0.05)
+# Adjust the position of each subplot manually
+plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1, wspace=0.4, hspace=0.3)
 plt.tight_layout()
-plt.savefig(output_dir + 'non-adiabatic_analysis.png')
+plt.savefig(output_dir + 'non-adiabatic_analysis_cooltime.png')
+plt.close(fig)
+
+#######################################################################
+# Plot 2 - two distinct density
+#######################################################################
+fig, ax = plt.subplots(1, 1, figsize=(5, 4))
+### Panel - 4 for distict densities
+ax.set_xlabel(r'$\rm x \, (10^{19} cm)$', fontsize=14)
+ax.set_ylabel(r'$\rm log \, T \, (K)$', fontsize=14)
+ax.plot(x_ldst, np.log10(get_temperature(low_den_cooltime_file)), color='darkblue',
+           linestyle='--', linewidth=1.5, label=r'$\rm \rho_1 $')
+ax.plot(x_hdot, np.log10(get_temperature(high_den_cooltime_file)), color='crimson',
+           linewidth=1.5, label=r'$\rm \rho_2$')
+ax.set_xlim(0.05, 9)
+ax.set_ylim(3.2, 7.25)
+ax.legend(frameon=False, fontsize=16, bbox_to_anchor=(0.9, 0.8))
+ax.tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True,
+                right=True, length=3, labelsize=14)
+
+plt.tight_layout()
+plt.savefig(output_dir + 'non-adiabatic_analysis_densities.png')
+plt.close()

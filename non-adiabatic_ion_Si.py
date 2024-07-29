@@ -77,8 +77,8 @@ axs[0].set_ylabel(r'\rm Ionisation fraction', fontsize=22)
 #axs[0].set_xlabel(r'\rm x (10$^{16}$ \, cm)', fontsize=22)
 axs[0].set_xlim(0.2, 0.58)
 axs[0].text(0.25, 0.8, r'\rm $|v_x|$ = 1000 km s$^{-1}$', fontsize=20)
-axs[0].legend(fontsize=16, loc='upper center', ncol=7, bbox_to_anchor=(0.5, 1.28),
-              frameon=False, columnspacing=2.5)
+axs[0].legend(fontsize=16, loc='upper center', ncol=7, bbox_to_anchor=(0.5, 1.3),
+              frameon=True, columnspacing=2.5, edgecolor='black')
 axs[0].tick_params(axis='both', labelsize=16, direction='in')
 
 # flow moving with v=3000 km/s
@@ -115,8 +115,8 @@ axs[1].plot(x_v3000, Si12p / X_Si, linestyle='--', linewidth=2.0)
 axs[1].plot(x_v3000, Si13p / X_Si, linestyle='--', linewidth=2.0)
 axs[1].plot(x_v3000, Si14p / X_Si, linestyle='--', linewidth=2.0)
 
-axs[1].set_ylabel(r'\rm Ionisation fraction', fontsize=20)
-axs[1].set_xlabel(r'\rm x (10$^{16}$ \, cm)', fontsize=20)
+axs[1].set_ylabel(r'\rm Ionisation fraction', fontsize=22)
+axs[1].set_xlabel(r'\rm x (10$^{16}$ cm)', fontsize=22)
 axs[1].set_xlim(0.5, 0.643)
 axs[1].text(0.52, 0.8, r'\rm $|v_x|$ = 3000 km s$^{-1}$', fontsize=20)
 axs[1].tick_params(axis='both', labelsize=16, direction='in')
