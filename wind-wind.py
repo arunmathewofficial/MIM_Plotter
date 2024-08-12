@@ -58,7 +58,7 @@ files = []
 lev = 0
 
 for i in range(0, 20):
-  seek = path + "/" + sim + "_level" + str(i).zfill(2) + "_0000.*.silo"
+  seek = path + "/" + sim + "_level" + str(i).zfill(2) + "_0000.003*.silo"
   # print(seek)
   f = sorted(glob.glob(seek))
   if (len(f) < 1):
@@ -208,14 +208,14 @@ for i in range(len(files[0])):
 
   ax[1].plot(pos, H0 / XH, color='crimson', linestyle='-', linewidth=LINEWIDTH)
   ax[1].plot(pos, H1p / XH, label="$H^{+}$", color='blue', linestyle='-', linewidth=LINEWIDTH)
-  ax[1].text(4, 0.05, r'$\rm H^{0}$', fontsize=14)
-  ax[1].text(4, 0.9, r'$\rm H^{+}$', fontsize=14)
+  ax[1].text(4, 0.05, r'$\rm H^{0}$', fontsize=16)
+  ax[1].text(4, 0.9, r'$\rm H^{+}$', fontsize=16)
 
   #ax[1].plot(pos, He0/XHe, label="$He^{0}$", color='green', linestyle='-', linewidth=LINEWIDTH)
   ax[1].plot(pos, He1p/XHe, label="$He^{+}$", color='magenta', linestyle='--', linewidth=LINEWIDTH)
   ax[1].plot(pos, He2p/XHe, label="$He^{2+}$", color='green', linestyle='--', linewidth=LINEWIDTH)
-  ax[1].text(4, 0.55, r'$\rm He^{+}$', fontsize=14)
-  ax[1].text(4, 0.4, r'$\rm He^{2+}$', fontsize=14)
+  ax[1].text(4, 0.55, r'$\rm He^{+}$', fontsize=16)
+  ax[1].text(4, 0.4, r'$\rm He^{2+}$', fontsize=16)
 
   print2file = {'R(pc)': np.round(pos, 4), 'Den(g cm^-3)': np.array([f"{rho:.4e}" for rho in ro]),
                 'vr(km s^-1)': np.round(np.fabs(vr), 4), 'T(K)': np.round(tt, 4),
@@ -230,10 +230,10 @@ for i in range(len(files[0])):
   ax[2].plot(pos, C5p/XC, label="$C^{5+}$", color='crimson', linestyle='--', linewidth=LINEWIDTH)
   #ax[2].plot(pos, C6p/XC, label="$C^{6+}$")
 
-  ax[2].text(11, 0.23, r'$\rm C^{2+}$', fontsize=14)
-  ax[2].text(4, 0.85, r'$\rm C^{3+}$', fontsize=14)
-  ax[2].text(8.3, 0.7, r'$\rm C^{4+}$', fontsize=14)
-  ax[2].text(8.1, 0.32, r'$\rm C^{5+}$', fontsize=14)
+  ax[2].text(11, 0.23, r'$\rm C^{2+}$', fontsize=16)
+  ax[2].text(4, 0.85, r'$\rm C^{3+}$', fontsize=16)
+  ax[2].text(8.3, 0.7, r'$\rm C^{4+}$', fontsize=16)
+  ax[2].text(8.1, 0.32, r'$\rm C^{5+}$', fontsize=16)
 
   print2file['C'] = np.round(C0/XC, 4)
   print2file['C1+'] = np.round(C1p/XC, 4)
@@ -255,11 +255,11 @@ for i in range(len(files[0])):
   ax[3].plot(pos, N6p/XN, label="$N^{6+}$", color='black', linestyle='--', linewidth=LINEWIDTH)
   #ax[3].plot(pos, N7p/XN, label="$N^{7+}$")
 
-  ax[3].text(10.5, 0.1, r'$\rm N^{2+}$', fontsize=14)
-  ax[3].text(4, 0.85, r'$\rm N^{3+}$', fontsize=14)
-  ax[3].text(6.5, 0.3, r'$\rm N^{4+}$', fontsize=14)
-  ax[3].text(8.6, 0.83, r'$\rm N^{5+}$', fontsize=14)
-  ax[3].text(8.3, 0.32, r'$\rm N^{6+}$', fontsize=14)
+  ax[3].text(10.5, 0.1, r'$\rm N^{2+}$', fontsize=16)
+  ax[3].text(4, 0.85, r'$\rm N^{3+}$', fontsize=16)
+  ax[3].text(6.5, 0.3, r'$\rm N^{4+}$', fontsize=16)
+  ax[3].text(8.6, 0.83, r'$\rm N^{5+}$', fontsize=16)
+  ax[3].text(8.3, 0.32, r'$\rm N^{6+}$', fontsize=16)
 
 
   print2file['N'] = np.round(N0/XN, 4)
@@ -275,8 +275,8 @@ for i in range(len(files[0])):
   #oxygen ################################################################################
   #ax[4].plot(pos, O0/XO, label="$O^{0}$", color='yellow')
   #ax[4].plot(pos, O1p/XO, label="$O^{+}$", color='orange')
-  ax[4].plot(pos, O2p/XO, label="$O^{2+}$", color='magenta', linestyle='-', linewidth=LINEWIDTH)
-  ax[4].plot(pos, O3p/XO, label="$O^{3+}$", color='blue', linestyle='-.', linewidth=LINEWIDTH)
+  ax[4].plot(pos, O2p/XO, label="$O^{2+}$", color='blue', linestyle='--', linewidth=LINEWIDTH)
+  ax[4].plot(pos, O3p/XO, label="$O^{3+}$", color='magenta', linestyle='-.', linewidth=LINEWIDTH)
   ax[4].plot(pos, O4p/XO, label="$O^{4+}$", color='crimson', linestyle='-', linewidth=LINEWIDTH)
   #spline = UnivariateSpline(pos, O5p/XO, s=0.1)
   #norm_O5p_smooth = spline(pos)
@@ -286,11 +286,11 @@ for i in range(len(files[0])):
   #ax[4].plot(pos, O7p/XO, label="$O^{7+}$", color = 'blue')
   #ax[4].plot(pos, O8p/XO, label="$O^{8+}$", color='black')
 
-  ax[4].text(4, 0.85, r'$\rm O^{2+}$', fontsize=14)
-  ax[4].text(6.2, 0.3, r'$\rm O^{3+}$', fontsize=14)
-  ax[4].text(7.5, 0.53, r'$\rm O^{4+}$', fontsize=14)
-  ax[4].text(8.2, 0.55, r'$\rm O^{5+}$', fontsize=14)
-  ax[4].text(8.6, 0.83, r'$\rm O^{6+}$', fontsize=14)
+  ax[4].text(4, 0.85, r'$\rm O^{2+}$', fontsize=16)
+  ax[4].text(6.0, 0.2, r'$\rm O^{3+}$', fontsize=16)
+  ax[4].text(7.4, 0.51, r'$\rm O^{4+}$', fontsize=16)
+  ax[4].text(8.2, 0.55, r'$\rm O^{5+}$', fontsize=16)
+  ax[4].text(8.6, 0.85, r'$\rm O^{6+}$', fontsize=16)
 
 
   print2file['O'] = np.round(O0/XO, 4)
@@ -305,18 +305,19 @@ for i in range(len(files[0])):
 
 
   # legends ###############################################################################
-  ax[0].legend(fontsize=14, loc="upper right", ncol=4, frameon=False, columnspacing=0.5)
+  ax[0].legend(fontsize=14, loc="upper right", ncol=4, frameon=True,
+               columnspacing=0.5, bbox_to_anchor=(1.005, 1.3))
 
 
-  ax[0].set_ylabel(r'\rm Various \ units', fontsize=16)
-  ax[1].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
-  ax[2].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
-  ax[3].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
-  ax[4].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
+  ax[0].set_ylabel(r'\rm log$_{10}$ Quantities', fontsize=18)
+  ax[1].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
+  ax[2].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
+  ax[3].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
+  ax[4].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
   ax[4].set_xlabel(r'$\rm Radius (pc)$', fontsize=18)
 
   ax[0].set_xlim(0.0, 12)
-  ax[0].set_ylim(-5.5, 6)
+  ax[0].set_ylim(-3, 3.5)
 
   ax[0].tick_params(axis="both", direction="in", which="both", bottom=True,
                 top=True, left=True, right=True, length=4, labelsize=14)
