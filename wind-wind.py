@@ -1,5 +1,4 @@
 # -*- coding: iso-8859-15 -*-
-
 import sys
 
 # sys.path.insert(0,"/home/jm/code/pypion/silo/lib")
@@ -14,11 +13,6 @@ from astropy import constants as apc
 import matplotlib as mpl
 import pandas as pd
 from scipy.interpolate import UnivariateSpline
-
-
-mpl.rcParams['font.family'] = 'serif'
-mpl.rcParams['font.serif'] = ['Computer Modern Roman']
-mpl.rcParams['text.usetex'] = True
 
 ############################################################################
 # flatten 1D PION nested-grid data into a single array
@@ -58,7 +52,7 @@ files = []
 lev = 0
 
 for i in range(0, 20):
-  seek = path + "/" + sim + "_level" + str(i).zfill(2) + "_0000.003*.silo"
+  seek = path + "/" + sim + "_level" + str(i).zfill(2) + "_0000.*.silo"
   # print(seek)
   f = sorted(glob.glob(seek))
   if (len(f) < 1):
@@ -70,6 +64,7 @@ for i in range(0, 20):
 
 if (len(files) < 1):
   quit()
+
 
 for i in range(len(files[0])):
   datafile = []
@@ -192,7 +187,7 @@ for i in range(len(files[0])):
   O7p = get_single_array(n, np.array(xO7), np.array(vM))
   O8p = XO - O0 - O1p - O2p - O3p - O4p - O5p - O6p - O7p
 
-  fig, ax = plt.subplots(5, 1, figsize=(8, 15), sharex=True)
+  fig, ax = plt.subplots(5, 1, figsize=(12, 18), sharex=True)
 
   vr = vx * 1.0e-5  # convert to km/s
   nH = ro * XH / (apc.m_p.cgs.value)  # convert density to n(H)
@@ -205,6 +200,9 @@ for i in range(len(files[0])):
   ax[0].plot(pos, np.log10(tt * 1e-5), "r-.",
              label="$T\, (10^5\,\mathrm{K})$", linewidth=LINEWIDTH)
   ax[0].plot(pos, np.log10(nH), "g--", label="$n_H$", linewidth=LINEWIDTH)
+
+  ax[1].text(0.7, 2.32, fr'$\rm time: {time:.4e}$', fontsize=16)
+
 
   ax[1].plot(pos, H0 / XH, color='crimson', linestyle='-', linewidth=LINEWIDTH)
   ax[1].plot(pos, H1p / XH, label="$H^{+}$", color='blue', linestyle='-', linewidth=LINEWIDTH)
@@ -309,12 +307,12 @@ for i in range(len(files[0])):
                columnspacing=0.5, bbox_to_anchor=(1.005, 1.3))
 
 
-  ax[0].set_ylabel(r'\rm log$_{10}$ Quantities', fontsize=18)
-  ax[1].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
-  ax[2].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
-  ax[3].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
-  ax[4].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=18)
-  ax[4].set_xlabel(r'$\rm Radius (pc)$', fontsize=18)
+  ax[0].set_ylabel(r'$\rm log_{10} \ Quantities$', fontsize=16)
+  ax[1].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
+  ax[2].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
+  ax[3].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
+  ax[4].set_ylabel(r'$\rm Ionisation \ fraction$', fontsize=16)
+  ax[4].set_xlabel(r'$\rm Radius (pc)$', fontsize=16)
 
   ax[0].set_xlim(0.0, 12)
   ax[0].set_ylim(-3, 3.5)
@@ -330,20 +328,22 @@ for i in range(len(files[0])):
   ax[4].tick_params(axis="both", direction="in", which="both", bottom=True,
                     top=True, left=True, right=True, length=4, labelsize=14)
 
-  plt.subplots_adjust(hspace=0.0)
+  dataio.close()
+  del dataio
+  plt.subplots_adjust(left=0.08, right=0.98, top=0.95, bottom=0.05, hspace=0.0)
   iy = str(i).zfill(5)
   opf = img_path + "/" + sim + "." + iy + ".png"
-  # plt.show()
 
+
+  plt.savefig(opf)
+  plt.close()
+
+  '''
   df = pd.DataFrame(print2file)
   file_path = img_path + "/" + sim + "." + iy + ".txt"
   df.to_csv(file_path, index=False, sep='\t')
-  plt.savefig(opf, bbox_inches="tight")
   del print2file
   del df
-  plt.close(fig)
-  del fig
-  dataio.close()
-  del dataio
+  '''
 
-quit()
+
