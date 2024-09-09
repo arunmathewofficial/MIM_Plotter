@@ -244,6 +244,7 @@ def onedim_master_plotter(plot_data, plot_style):
                                marker=marker, markersize=10,
                                        linewidth=1 # in default detting this line is not there
                                        )
+                    ##ax[0].set_yticks([-25, -24, -23, -22, -21])
 
                     if len(plot_data[plot_index][n]['label-position']) == 2:
                         x_position = plot_data[plot_index][n]['label-position'][0]

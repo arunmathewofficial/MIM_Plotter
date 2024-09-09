@@ -331,7 +331,7 @@ if(purpose == "journal"):
     plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
     plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
-    plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
+    plot_style['ylimit'] = [[-25.5, -21], [-25.5, -19.6], [-25, -19.5]]
 
     plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3]]
 
@@ -374,7 +374,7 @@ if(purpose == "conference"):
     plot_style['left'] = 0.18  # the left side of the subplots of the figure
     plot_style['right'] = 0.98  # the right side of the subplots of the figure
     plot_style['bottom'] = 0.08  # the bottom of the subplots of the figure
-    plot_style['top'] = 0.98  # the top of the subplots of the figure
+    plot_style['top'] = 1.0  # the top of the subplots of the figure
     plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
     plot_style['hspace'] = 0.0  # the amount of height reserved for white space between subplots
     # plot_style['custom-legend'] = [
@@ -384,5 +384,5 @@ if(purpose == "conference"):
 
 # Plotting and saving the image to the file
 onedim_master_plotter(plot_data, plot_style)
-plt.savefig(output_dir + 'cooling_function.png')
+plt.savefig(output_dir + 'cooling_function.png', dpi=200)
 

@@ -38,18 +38,59 @@ energy_neq = 10**-3 * constant.ev2Ang / wavelength_neq
 lflam_eq = wavelength_eq * spectrum_eq
 energy_eq = 10**-3 * constant.ev2Ang / wavelength_eq
 
-fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8, 6), sharex=False, sharey=False)
-ax.plot(np.log10(energy_neq), np.log10(lflam_neq), label='NEQ', color='crimson', linestyle='-', linewidth=1)
-ax.plot(np.log10(energy_eq), np.log10(lflam_eq), label='IEQ', color='blue', linestyle='-', linewidth=1)
-#ax.set_yscale('log')
-#ax.set_xscale("log")
-#ax.set_xlim(0.5, 4)
-ax.set_ylabel(r'log (E F$_E$) (erg cm$^{-2}$  s$^{-1}$)', fontsize=20)
-ax.set_xlabel('log E (keV)', fontsize=18)
-ax.tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=4,
+plot = 'EFE'
+
+if plot == 'EFE':
+    y_neq = np.log10(lflam_neq)
+    x_neq = np.log10(energy_neq)
+    y_eq = np.log10(lflam_eq)
+    x_eq = np.log10(energy_eq)
+
+if plot == 'Flam':
+    x_neq = wavelength_neq
+    y_neq = spectrum_neq
+    x_eq = wavelength_eq
+    y_eq = spectrum_eq
+
+
+fig, ax = plt.subplots(nrows=3, ncols=1, figsize=(8, 12), sharex=False, sharey=False)
+ax[0].plot(x_neq, y_neq, label='NEQ', color='crimson', linestyle='-', linewidth=1)
+ax[1].plot(x_eq, y_eq, label='IEQ', color='blue', linestyle='-', linewidth=1)
+ax[0].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=4,
                labelsize=20)
-ax.legend(fontsize=17, frameon=False)
-imagefile = output_dir + 'xray_spectrum.png'
+ax[0].legend(fontsize=17, frameon=False)
+
+ax[1].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=4,
+               labelsize=20)
+ax[1].legend(fontsize=17, frameon=False)
+
+
+ax[2].plot(x_neq, y_neq, label='NEQ', color='crimson', linestyle='-', linewidth=1)
+ax[2].plot(x_eq, y_eq, label='IEQ', color='blue', linestyle='-', linewidth=1)
+
+ax[2].tick_params(axis="both", direction="in", which="both", bottom=True, top=True, left=True, right=True, length=4,
+               labelsize=20)
+ax[2].legend(fontsize=17, frameon=False)
+
+
+if plot == 'FEF':
+    ax[0].set_ylabel(r'log (E F$_E$) (erg cm$^{-2}$  s$^{-1}$)', fontsize=20)
+    ax[0].set_xlabel('log E (keV)', fontsize=18)
+    ax[1].set_ylabel(r'log (E F$_E$) (erg cm$^{-2}$  s$^{-1}$)', fontsize=20)
+    ax[1].set_xlabel('log E (keV)', fontsize=18)
+    ax[2].set_ylabel(r'log (E F$_E$) (erg cm$^{-2}$  s$^{-1}$)', fontsize=20)
+    ax[2].set_xlabel('log E (keV)', fontsize=18)
+
+if plot == 'Flam':
+    ax[0].set_ylabel(r'log (F$_\lambda$) (erg cm$^{-2}$  s$^{-1}$ $\AA^{-1}$)', fontsize=20)
+    ax[0].set_xlabel(r'$\lambda$ ($\AA^{-1}$)', fontsize=18)
+    ax[1].set_ylabel(r'log (F$_\lambda$) (erg cm$^{-2}$  s$^{-1}$ $\AA^{-1}$)', fontsize=20)
+    ax[1].set_xlabel(r'$\lambda$ ($\AA^{-1}$)', fontsize=18)
+    ax[2].set_ylabel(r'log (F$_\lambda$) (erg cm$^{-2}$  s$^{-1}$ $\AA^{-1}$)', fontsize=20)
+    ax[2].set_xlabel(r'$\lambda$ ($\AA^{-1}$)', fontsize=18)
+
+
+imagefile = output_dir + 'xray_spectrum_fb.png'
 print("Saving image " + imagefile)
 plt.subplots_adjust(left=0.13, right=0.98, top=0.98, bottom=0.13, hspace=0.0)
 plt.savefig(imagefile)
