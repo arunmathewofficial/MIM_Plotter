@@ -38,7 +38,7 @@ energy_neq = 10**-3 * constant.ev2Ang / wavelength_neq
 lflam_eq = wavelength_eq * spectrum_eq
 energy_eq = 10**-3 * constant.ev2Ang / wavelength_eq
 
-plot = 'EFE'
+plot = 'Flam'
 
 if plot == 'EFE':
     y_neq = np.log10(lflam_neq)

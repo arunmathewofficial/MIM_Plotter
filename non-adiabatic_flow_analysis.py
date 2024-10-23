@@ -45,57 +45,70 @@ mpl.rcParams['text.usetex'] = True
 #######################################################################
 # Plot 1 - two distinct time (sub and cooling)
 #######################################################################
+# Create a figure and two subplots
+fig, (ax1, ax3) = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
 
-# Create a figure with 3 subplots
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(5, 4), sharex=True)
-
-# Panel - 1 Temperature profile
-ax1.set_ylabel(r'$\rm log_{10} \ Quantities$', fontsize=14, labelpad=8)
-ax1.plot(x_ldst, np.log10(get_temperature(low_den_subtime_file)), label=r'$\rm T (K)$',
-           color='crimson', linewidth=1.5)
-ax1.plot(x_ldst, np.log10(get_density(low_den_subtime_file) * 1.e+27),
-         label=r'$\rho\, \left(10^{-27} \, \mathrm{g\,cm}^{-3} \right)$',
-           color='darkblue', linestyle='--', linewidth=1.5)
-ax1.text(1.5, 6.8, r'$\rm t_1 = 1.2945\times10^4 \, yr$', fontsize=14)
-ax1.legend(frameon=False, fontsize=12, loc=(0.55, 0.4))
-ax1.set_xlim(0.1, 9)
-#ax1.set_ylim(3.2, 7.6)
-ax1.tick_params(axis="both", direction="in", which="both", bottom=True,
-                top=True, left=True, right=True, length=3, labelsize=12)
-ax1.set_yticks([3.2, 4, 5, 6, 7])
+# First subplot: Temperature and density with ax1 and ax2
+ax1.set_ylabel(r'$\rm T \ (K)$', fontsize=18, labelpad=8)
+ax1.plot(x_ldst, get_temperature(low_den_subtime_file), color='crimson', linewidth=2.0)
+ax1.set_yscale('log')
+ax1.text(5.0, 1E+6, r'$\rm t_1 = 1.2945\times10^4 \, yr$', fontsize=18)
+ax1.tick_params(axis="both", direction="in", which="both",
+                bottom=True, top=True, left=True, right=False, length=3, labelsize=14)
+ax1.set_yticks([1.E+4, 1.E+5, 1.E+6, 1.E+7])
+ax1.set_xlim(9.0E+3, 3.0E+7)
 
 
-# Panel - 1 Temperature profile
-ax2.set_ylabel(r'$\rm log_{10} \ Quantities$', fontsize=14, labelpad=8)
-ax2.plot(x_ldst, np.log10(get_temperature(low_den_cooltime_file)),
-           color='crimson', linewidth=1.5)
-ax2.plot(x_ldst, np.log10(get_density(low_den_cooltime_file) * 1.e+27),
-           color='darkblue', linestyle='--', linewidth=1.5)
-ax2.text(0.5, 7.0, r'$\rm t_2 = 1.2799\times10^5 \, yr$', fontsize=14)
-ax2.legend(frameon=False, fontsize=12, loc=(0.5, 0.3))
-ax2.set_xlim(0.1, 9)
-ax2.set_ylim(3.2, 7.6)
-ax2.set_xlabel(r'$\rm x \, (10^{19} \, cm)$', fontsize=14)
-ax2.tick_params(axis="both", direction="in", which="both", bottom=True,
-                top=True, left=True, right=True, length=3, labelsize=12)
-ax2.set_yticks([3.2, 4, 5, 6, 7])
+# Create secondary y-axis for density
+ax2 = ax1.twinx()
+ax2.set_ylabel(r'$\rm \rho \ \left(\mathrm{g\,cm}^{-3} \right)$', fontsize=14, labelpad=0)
+ax2.plot(x_ldst, get_density(low_den_subtime_file), color='darkblue', linestyle='--', linewidth=2.0)
+ax2.set_yscale('log')
+ax2.tick_params(axis="both", direction="in", which="both",
+                bottom=True, top=True, left=False, right=True, length=3, labelsize=14)
+#ax2.set_yticks([3.2, 4, 5, 6, 7])
+ax2.set_ylim(3.E-23, 1.E-21)
+#ax2.set_yticks([1.E-22, 3.E-22])
 
-# Save data to file the temperature profile with low density gas
-T_profile_data = {'x(pc)': x_ldot, 'T (K)': get_temperature(low_den_cooltime_file)}
-df = pd.DataFrame(T_profile_data)
 
-print('Printing temperature profile data to file ...')
-df.to_csv(output_dir + 'non-adiabatic_temp_profile.txt', sep='\t', index=False, float_format='%e')
 
+# Second subplot: Temperature and density with ax3 and ax4
+ax3.set_ylabel(r'$\rm T \ (K)$', fontsize=18, labelpad=8)
+ax3.plot(x_ldst, get_temperature(low_den_cooltime_file), color='crimson', linewidth=2.0)
+ax3.set_yscale('log')
+ax3.text(5.0, 1E+4, r'$\rm t_2 = 1.2799\times10^5 \, yr$', fontsize=18)
+ax3.tick_params(axis="both", direction="in", which="both", bottom=True,
+                top=True, left=True, right=False, length=3, labelsize=14)
+ax3.set_yticks([1.E+3, 1.E+4, 1.E+5, 1.E+6, 1.E+7])
+
+# Create secondary y-axis for density on the second subplot
+ax4 = ax3.twinx()
+ax4.set_ylabel(r'$\rm \rho \ \left(\mathrm{g\,cm}^{-3} \right)$', fontsize=18, labelpad=0)
+ax4.plot(x_ldst, get_density(low_den_cooltime_file), color='darkblue', linestyle='--', linewidth=2.0)
+ax4.set_yscale('log')
+ax4.tick_params(axis="both", direction="in", which="both",
+                bottom=True, top=True, left=False, right=True, length=3, labelsize=14)
+#ax4.set_yticks([3.2, 4, 5, 6, 7])
+ax4.set_ylim(3.E-23, 1.E-21)
+
+ax4.set_xlim(-0.05, 9)
+
+
+
+# Set the shared x-axis label for both subplots
+ax3.set_xlabel(r'$\rm x \, (10^{19} \, cm)$', fontsize=18)
+
+plt.tight_layout()
 
 # Adjust the position of each subplot manually
-plt.subplots_adjust(left=0.13, right=0.98, top=0.98, bottom=0.13, wspace=0.0, hspace=0.0)
+plt.subplots_adjust(left=0.1, right=0.90, top=0.98, bottom=0.13, wspace=0.0, hspace=0.0)
 #plt.tight_layout()
-plt.savefig(output_dir + 'non-adiabatic_analysis_flowquan.png')
+plt.savefig(output_dir + 'non-adiabatic_analysis_flowquan.png', dpi=300)
 plt.close(fig)
 
 
 
+#################################################################################
 # Ionisation profile
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(5, 4.5))
 # Panel - 2 H, He, ionisation profile
