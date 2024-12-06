@@ -262,11 +262,11 @@ def ReadTable_Advance(Table):
     with open(Table) as table:
         for line in table:
             row = line.split()
-            if row[0] == "#":
+            if row[0].startswith("#"):
                 continue
             else:
                 N_row += 1
-                N_col  = len(row)
+                N_col = len(row)
                 row = np.asarray(row, dtype=float)
                 data.append(row)
 
