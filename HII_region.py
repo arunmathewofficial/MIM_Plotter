@@ -62,8 +62,6 @@ for d in dens:
   f2 = sorted(glob.glob(seek2))
   pionfile2 = f2[-1]
 
-
-
   torus_haworth = os.path.join('data', 'HII_region_photoionradial_tom.dat')
 
 # common variables #################################################################
@@ -85,12 +83,12 @@ for d in dens:
   torus_data = np.loadtxt(torus_haworth)
   torus_radius = torus_data[:,0] / 3.08e8
 
-  xmax = 5.2
+  xmax = 5.4
   xmin = 0.0
-  lab = xmin + 0.94*(xmax-xmin)
+  lab = xmin + 0.93*(xmax-xmin)
 
 # Plotting Cloudy ##############################################################
-# cloudy1 is regular execution, cloudy2 is CaseB
+  # cloudy1 is regular execution, cloudy2 is CaseB
   cloudy_temp1 = np.array(dataset_T1[1])
   cloudy_temp2 = np.array(dataset_T2[1])
   table1_H = ReadTable_Advance(cloudyfile1_H)
@@ -105,16 +103,16 @@ for d in dens:
   dataset2_He = table2_He['columns']
 
   ax.plot(cloudy_radius1, cloudy_temp1*1e-4, label='$T$ ($10^4$ \\textrm{K})', linestyle='-', color='C1')
-  ax.plot(cloudy_radius2, cloudy_temp2*1e-4, label='$T$ ($10^4$ \\textrm{K) CaseB}', linestyle='-.', color='C1')
+  ax.plot(cloudy_radius2, cloudy_temp2*1e-4, label='$T$ ($10^4$ \\textrm{K) Case-B}', linestyle='-.', color='C1')
   ax.plot(cloudy_radius1, dataset1_H[2], label='$y(\\textrm{H}^+)$', linestyle='-', color='C4')
   ax.plot(cloudy_radius2, dataset2_H[2], label='', linestyle='-.', color='C4')
   ax.plot(cloudy_radius1, dataset1_He[2], label='$y(\\textrm{He}^+)$', linestyle='-', color='C3')
   ax.plot(cloudy_radius2, dataset2_He[2], label='', linestyle='-.', color='C3')
-  ax.set_xlim([xmin,xmax])
+  ax.set_xlim([xmin, xmax])
   ax.set_ylim([0.0, 1.1])
   ax.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=12)
   ax.set_ylabel("$T\,$ ($10^4\,$\\textrm{K) / ion fraction}", fontsize=12)
-  ax.text(lab,1.03,"\\textrm{(a)}", fontsize=12)
+  ax.text(lab, 1.03,"\\textrm{(a)}", fontsize=12)
 
   ax.legend(frameon=False, loc='lower center', fontsize='10')
   image_file = output_dir + d + '_cloudy_comp.png'
@@ -131,24 +129,24 @@ for d in dens:
   cloudy_temp2 = np.array(dataset_T2[1])
   torus_temp = torus_data[:,2]
   fig, (ax0, ax1, ax2) = plt.subplots(3, 1, figsize=(5, 13))
-  ax0.plot(cloudy_radius1, cloudy_temp1*1e-3, label='\\textrm{\\textsc{Cloudy}}', linestyle='-', color='red')
-  ax0.plot(cloudy_radius2, cloudy_temp2*1e-3, label='\\textrm{\\textsc{Cloudy} CaseB}', linestyle='--', color='red')
+  ax0.plot(cloudy_radius1, cloudy_temp1*1e-3, label='\\textrm{\\textsc{Cloudy}}', linestyle=':', color='crimson', linewidth=2)
+  ax0.plot(cloudy_radius2, cloudy_temp2*1e-3, label='\\textrm{\\textsc{Cloudy} Case-B}', linestyle='--', color='crimson')
   if (d == 'n2'):
-    ax0.plot(torus_radius, torus_temp*1e-3, label='\\textrm{\\textsc{Torus}}', linestyle=':', color='black')
-  ax0.plot(pion1_radius, pion1_temp*1e-3, label='\\textrm{\\textsc{Pion} OTS}', linestyle='-.', color='blue')
+    ax0.plot(torus_radius, torus_temp*1e-3, label='\\textrm{\\textsc{Torus}}', linestyle='-.', color='gray')
+  ax0.plot(pion1_radius, pion1_temp*1e-3, label='\\textrm{\\textsc{Pion} OTS}', linestyle='-', color='darkblue')
   #ax.plot(pion2_radius, pion2_temp*1e-3, label='\\textrm{\\textsc{Pion} no OTS}', linestyle=':', color='blue')
   ax0.xaxis.set_minor_locator(AutoMinorLocator())
   ax0.yaxis.set_minor_locator(AutoMinorLocator())
   ax0.tick_params(axis="both", direction="in", which="major", bottom=True, top=True, left=True, right=True, length=4, labelsize=12)
   ax0.tick_params(axis="both", direction="in", which="minor", bottom=True, top=True, left=True, right=True, length=2, labelsize=12)
 
-  ax0.set_xlim([xmin,xmax])
+  ax0.set_xlim([xmin, xmax])
   ax0.set_ylim([5.0, 11.0])
   #ax0.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=12)
-  ax0.set_ylabel("$T\,$ ($10^3\,$K)", fontsize=12)
-  ax0.text(lab,10.3,"\\textrm{(a)}", fontsize=12)
+  ax0.set_ylabel("\\textrm{T} ($10^3$ \\textrm{K})", fontsize=12)
+  ax0.text(lab, 10.2, "\\textrm{(a)}", fontsize=14)
 
-  ax0.legend(frameon=False, loc='upper left', fontsize='11')
+  ax0.legend(frameon=False, loc='upper left', bbox_to_anchor=(0.1, 0.95), fontsize='11')
   #image_file = plot_dir + d + '_HII_temperature.png'
   #print("Saving image to", image_file)
   #plt.savefig(image_file, dpi=300, bbox_inches='tight')
@@ -169,7 +167,7 @@ for d in dens:
   dataset2_He = table2_He['columns']
 
   print("Reading silo file:", pionfile1)
-  H0  = pion_obj1.get_parameter('Tr009_H')  / pion_obj1.get_parameter('Tr000_X_H')
+  H0  = pion_obj1.get_parameter('Tr009_H') / pion_obj1.get_parameter('Tr000_X_H')
   H1p = np.ones_like(H0) - H0
 
   He0  = pion_obj1.get_parameter('Tr010_He') / pion_obj1.get_parameter('Tr001_X_He')
@@ -178,40 +176,40 @@ for d in dens:
 
   #fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(5, 8))
 
-  ax1.plot(cloudy_radius1, dataset1_H[1], label='', linestyle=':', color='C0')
-  ax1.plot(cloudy_radius1, dataset1_H[2], label='', linestyle=':', color='C1')
-  ax1.plot(cloudy_radius1, dataset1_He[1], label='', linestyle=':', color='C2')
-  ax1.plot(cloudy_radius1, dataset1_He[2], label='', linestyle=':', color='C3')
-  ax1.plot(cloudy_radius1, dataset1_He[3], label='', linestyle=':', color='C4')
+  ax1.plot(cloudy_radius1, dataset1_H[1], label='', linestyle=':', color='darkblue', linewidth=2)
+  ax1.plot(cloudy_radius1, dataset1_H[2], label='', linestyle=':', color='crimson', linewidth=2)
+  ax1.plot(cloudy_radius1, dataset1_He[1], label='', linestyle=':', color='darkgreen', linewidth=2)
+  ax1.plot(cloudy_radius1, dataset1_He[2], label='', linestyle=':', color='gray', linewidth=2)
+  ax1.plot(cloudy_radius1, dataset1_He[3], label='', linestyle=':', color='magenta', linewidth=2)
 
-  ax1.plot(cloudy_radius2, dataset2_H[1], label='', linestyle='--', color='C0')
-  ax1.plot(cloudy_radius2, dataset2_H[2], label='', linestyle='--', color='C1')
-  ax1.plot(cloudy_radius2, dataset2_He[1], label='', linestyle='--', color='C2')
-  ax1.plot(cloudy_radius2, dataset2_He[2], label='', linestyle='--', color='C3')
-  ax1.plot(cloudy_radius2, dataset2_He[3], label='', linestyle='--', color='C4')
+  ax1.plot(cloudy_radius2, dataset2_H[1], label='', linestyle='--', color='darkblue', linewidth=2)
+  ax1.plot(cloudy_radius2, dataset2_H[2], label='', linestyle='--', color='crimson', linewidth=2)
+  ax1.plot(cloudy_radius2, dataset2_He[1], label='', linestyle='--', color='darkgreen', linewidth=2)
+  ax1.plot(cloudy_radius2, dataset2_He[2], label='', linestyle='--', color='gray', linewidth=2)
+  ax1.plot(cloudy_radius2, dataset2_He[3], label='', linestyle='--', color='magenta', linewidth=2)
 
-  ax1.plot(pion1_radius, H0, label=r'$\rm H$', linestyle='-', color='C0')
-  ax1.plot(pion1_radius, H1p, label=r'$\rm H^{1+}$', linestyle='-', color='C1')
-  ax1.plot(pion1_radius, He0, label=r'$\rm He$', linestyle='-', color='C2')
-  ax1.plot(pion1_radius, He1p, label=r'$\rm He^{1+}$', linestyle='-', color='C3')
-  ax1.plot(pion1_radius, He2p, label=r'$\rm He^{2+}$', linestyle='-', color='C4')
+  ax1.plot(pion1_radius, H0, label=r'$\rm H$', linestyle='-', color='darkblue')
+  ax1.plot(pion1_radius, H1p, label=r'$\rm H^{1+}$', linestyle='-', color='crimson')
+  ax1.plot(pion1_radius, He0, label=r'$\rm He$', linestyle='-', color='darkgreen')
+  ax1.plot(pion1_radius, He1p, label=r'$\rm He^{1+}$', linestyle='-', color='gray')
+  ax1.plot(pion1_radius, He2p, label=r'$\rm He^{2+}$', linestyle='-', color='magenta')
 
   ax1.xaxis.set_minor_locator(AutoMinorLocator())
   ax1.yaxis.set_minor_locator(AutoMinorLocator())
   ax1.tick_params(axis="both", direction="in", which="major", bottom=True, top=True, left=True, right=True, length=4, labelsize=12)
   ax1.tick_params(axis="both", direction="in", which="minor", bottom=True, top=True, left=True, right=True, length=2, labelsize=12)
-  ax1.text(lab,0.5,"\\textrm{(b)}", fontsize=12)
-  ax1.text(1.1,1.1e-1, "\\textrm{dotted:\n \\textrm{dashed:}\n \\textrm{solid:}", fontsize=12)
-  ax1.text(2.1,1.1e-1, "\\textrm{\\textsc{Cloudy}}\n \\textrm{\\textsc{Cloudy} CaseB}\n \\textrm{\\textsc{Pion}}", fontsize=12)
+  ax1.text(lab, 0.4,"\\textrm{(b)}", fontsize=14)
+  #ax1.text(1.1, 1.1e-1, "\\textrm{dotted:\n \\textrm{dashed:}\n \\textrm{solid:}", fontsize=12)
+  ax1.text(1.0, 1.1e-1, "\\textrm{\\textsc{Cloudy} (\\textit{dotted})} \n \\textrm{\\textsc{Cloudy} Case-B (\\textit{dashed})}\n \\textrm{\\textsc{Pion} (\\textit{solid})}", fontsize=12)
 
-  ax1.set_xlim([xmin,xmax])
+  ax1.set_xlim([xmin, xmax])
   #ax1.grid()
   ax1.set_yscale("log")
-  ax1.set_ylim([1e-4,1.5])
+  ax1.set_ylim([1e-4, 1.5])
 #ax.set_ylim([-25.5, -19.5])
   #ax1.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=12)
-  ax1.set_ylabel(r"$\rm Ionisation \, \, Fraction $", fontsize=12)
-  ax1.legend(loc='upper left', bbox_to_anchor=(-0.12, 1.15), ncol=5, fontsize=11)
+  ax1.set_ylabel(r"$\rm Ionisation \, \, fraction $", fontsize=14)
+  ax1.legend(loc='upper left', bbox_to_anchor=(-0.12, 1.15), ncol=5, fontsize=11, frameon=False)
 
 # Oxygen profile ##############################################################
   print("Plotting Oxygen profile:")
@@ -227,38 +225,38 @@ for d in dens:
   O3p = pion_obj1.get_parameter('Tr028_O3p') / pion_obj1.get_parameter('Tr004_X_O')
   O4p = pion_obj1.get_parameter('Tr029_O4p') / pion_obj1.get_parameter('Tr004_X_O')
 
-  ax2.plot(cloudy_radius1, dataset1_O[1], label='', linestyle=':', color='C0')
-  ax2.plot(cloudy_radius1, dataset1_O[2], label='', linestyle=':', color='C1')
-  ax2.plot(cloudy_radius1, dataset1_O[3], label='', linestyle=':', color='C2')
-  ax2.plot(cloudy_radius1, dataset1_O[4], label='', linestyle=':', color='C3')
+  ax2.plot(cloudy_radius1, dataset1_O[1], label='', linestyle=':', color='darkblue')
+  ax2.plot(cloudy_radius1, dataset1_O[2], label='', linestyle=':', color='crimson')
+  ax2.plot(cloudy_radius1, dataset1_O[3], label='', linestyle=':', color='darkgreen')
+  ax2.plot(cloudy_radius1, dataset1_O[4], label='', linestyle=':', color='gray')
   #ax2.plot(cloudy_radius1, dataset1_O[5], label='', linestyle=':', color='C4')
 
-  ax2.plot(cloudy_radius2, dataset2_O[1], label='', linestyle='--', color='C0')
-  ax2.plot(cloudy_radius2, dataset2_O[2], label='', linestyle='--', color='C1')
-  ax2.plot(cloudy_radius2, dataset2_O[3], label='', linestyle='--', color='C2')
-  ax2.plot(cloudy_radius2, dataset2_O[4], label='', linestyle='--', color='C3')
+  ax2.plot(cloudy_radius2, dataset2_O[1], label='', linestyle='--', color='darkblue')
+  ax2.plot(cloudy_radius2, dataset2_O[2], label='', linestyle='--', color='crimson')
+  ax2.plot(cloudy_radius2, dataset2_O[3], label='', linestyle='--', color='darkgreen')
+  ax2.plot(cloudy_radius2, dataset2_O[4], label='', linestyle='--', color='gray')
   #ax2.plot(cloudy_radius2, dataset2_O[5], label='', linestyle='--', color='C4')
 
-  ax2.plot(pion1_radius, O0, label=r'$\rm O$', linestyle='-', color='C0')
-  ax2.plot(pion1_radius, O1p, label=r'$\rm O^{1+}$', linestyle='-', color='C1')
-  ax2.plot(pion1_radius, O2p, label=r'$\rm O^{2+}$', linestyle='-', color='C2')
-  ax2.plot(pion1_radius, O3p, label=r'$\rm O^{3+}$', linestyle='-', color='C3')
+  ax2.plot(pion1_radius, O0, label=r'$\rm O$', linestyle='-', color='darkblue')
+  ax2.plot(pion1_radius, O1p, label=r'$\rm O^{1+}$', linestyle='-', color='crimson')
+  ax2.plot(pion1_radius, O2p, label=r'$\rm O^{2+}$', linestyle='-', color='darkgreen')
+  ax2.plot(pion1_radius, O3p, label=r'$\rm O^{3+}$', linestyle='-', color='gray')
   #ax2.plot(pion1_radius, O4p, label=r'$\rm O^{4+}$', linestyle='-', color='C4')
 
   ax2.xaxis.set_minor_locator(AutoMinorLocator())
   ax2.yaxis.set_minor_locator(AutoMinorLocator())
   ax2.tick_params(axis="both", direction="in", which="major", bottom=True, top=True, left=True, right=True, length=4, labelsize=12)
   ax2.tick_params(axis="both", direction="in", which="minor", bottom=True, top=True, left=True, right=True, length=2, labelsize=12)
-  ax2.text(lab,0.5,"\\textrm{(c)}", fontsize=12)
+  ax2.text(lab, 0.4, "\\textrm{(c)}", fontsize=14)
 
   ax2.set_xlim([xmin,xmax])
   #ax2.grid()
   ax2.set_yscale("log")
-  ax2.set_ylim([1e-4,1.5])
+  ax2.set_ylim([1e-4, 1.5])
 #ax.set_ylim([-25.5, -19.5])
-  ax2.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=12)
-  ax2.set_ylabel(r"$\rm Ionisation \, \, Fraction $", fontsize=12)
-  ax2.legend(loc='lower left', bbox_to_anchor=(-0.05, 0.98), ncol=5, fontsize=12)
+  ax2.set_xlabel(r"${\rm Radius \, (pc)}$", fontsize=14)
+  ax2.set_ylabel(r"$\rm Ionisation \, \, fraction $", fontsize=14)
+  ax2.legend(loc='lower left', bbox_to_anchor=(0.05, 0.98), ncol=5, fontsize=12, frameon=False)
 
 
   plt.subplots_adjust(left=0.1, right=0.95, top=0.95, bottom=0.2)

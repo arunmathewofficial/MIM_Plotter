@@ -297,10 +297,10 @@ plot_style['axis-label'] = [[None, r'$\rm Ioniastion \, fraction$'],
 plot_style['insert-txt'] = []
 
 # plot margin adjustments
-plot_style['left'] = 0.1  # the left side of the subplots of the figure
-plot_style['right'] = 0.9  # the right side of the subplots of the figure
+plot_style['left'] = 0.06  # the left side of the subplots of the figure
+plot_style['right'] = 0.96  # the right side of the subplots of the figure
 plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
-plot_style['top'] = 0.95  # the top of the subplots of the figure
+plot_style['top'] = 0.97  # the top of the subplots of the figure
 plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
 plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 

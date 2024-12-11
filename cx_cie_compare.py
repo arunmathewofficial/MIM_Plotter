@@ -68,6 +68,8 @@ axs[0, 0].text(4.4, 0.6, "$\mathrm{N}^{+}$", fontsize=12, color='black')
 axs[0, 0].text(4.85, 0.5, '$\mathrm{N}^{2+}$', fontsize=12, color='black')
 axs[0, 0].text(5.1, 0.5, '$\mathrm{N}^{3+}$', fontsize=12, color='black')
 
+#axs[0, 0].text(4.97, 0.09, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
+#axs[0, 0].text(4.97, 0.06, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
 axs[0, 0].tick_params(labelsize=16)
 axs[0, 0].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
@@ -101,7 +103,7 @@ O2p = get_tracer(cx_on_cie_silo, "Tr027_O2p")
 O3p = get_tracer(cx_on_cie_silo, "Tr028_O3p")
 O4p = get_tracer(cx_on_cie_silo, "Tr029_O4p")
 
-axs[0, 1].plot(temperature_cx_on, O0 / X_O, color='crimson', alpha=0.6, linewidth=2.0)
+axs[0, 1].plot(temperature_cx_on, O0 / X_O, color='crimson', alpha=0.6, linewidth=2.0, label='$\mathbf{CX enabled}$')
 axs[0, 1].plot(temperature_cx_on, O1p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
 axs[0, 1].plot(temperature_cx_on, O2p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
 axs[0, 1].plot(temperature_cx_on, O3p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
@@ -110,6 +112,9 @@ axs[0, 1].text(4.05, 0.7, '$\mathrm{O}$', fontsize=12, color='black')
 axs[0, 1].text(4.4, 0.6, "$\mathrm{O}^{+}$", fontsize=12, color='black')
 axs[0, 1].text(4.85, 0.5, '$\mathrm{O}^{2+}$', fontsize=12, color='black')
 axs[0, 1].text(5.11, 0.45, '$\mathrm{O}^{3+}$', fontsize=12, color='black')
+
+#axs[0, 1].text(4.97, 0.09, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
+#axs[0, 1].text(4.97, 0.06, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
 axs[0, 1].tick_params(labelsize=16)
 axs[0, 1].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
@@ -135,7 +140,7 @@ Ne8p = get_tracer(cx_off_cie_silo, "Tr041_Ne8p")
 Ne9p = get_tracer(cx_off_cie_silo, "Tr042_Ne9p")
 Ne10p = X_Ne - (Ne0 + Ne1p + Ne2p + Ne3p + Ne4p + Ne5p + Ne6p + Ne7p + Ne8p + Ne9p)
 
-axs[1, 0].plot(temperature_cx_off, Ne0 / X_Ne, color='darkblue', linestyle='--', linewidth=2.0)
+axs[1, 0].plot(temperature_cx_off, Ne0 / X_Ne, color='darkblue', linestyle='--', linewidth=2.0, label='$\mathrm{CX \ Disabled}$')
 axs[1, 0].plot(temperature_cx_off, Ne1p / X_Ne, color='darkblue', linestyle='--', linewidth=2.0)
 axs[1, 0].plot(temperature_cx_off, Ne2p / X_Ne, color='darkblue', linestyle="--", linewidth=2.0)
 #axs[0].plot(temperature_cx_off, Ne3p / X_Ne, label="$\mathrm{Ne}^{3+}$", color='black')
@@ -161,7 +166,7 @@ Ne8p = get_tracer(cx_on_cie_silo, "Tr041_Ne8p")
 Ne9p = get_tracer(cx_on_cie_silo, "Tr042_Ne9p")
 Ne10p = X_Ne - (Ne0 + Ne1p + Ne2p + Ne3p + Ne4p + Ne5p + Ne6p + Ne7p + Ne8p + Ne9p)
 
-axs[1, 0].plot(temperature_cx_on, Ne0 / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
+axs[1, 0].plot(temperature_cx_on, Ne0 / X_Ne, color='crimson', alpha=0.6, linewidth=2.0, label='$\mathrm{CX \ Enabled}$')
 axs[1, 0].plot(temperature_cx_on, Ne1p / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
 axs[1, 0].plot(temperature_cx_on, Ne2p / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
 #axs[0].plot(temperature_cx_on, Ne3p / X_Ne, linestyle='--', color='black')
@@ -176,6 +181,11 @@ axs[1, 0].plot(temperature_cx_on, Ne2p / X_Ne, color='crimson', alpha=0.6, linew
 axs[1, 0].text(4.1, 0.7, '$\mathrm{Ne}$', fontsize=12, color='black')
 axs[1, 0].text(4.5, 0.6, "$\mathrm{Ne}^{+}$", fontsize=12, color='black')
 axs[1, 0].text(4.9, 0.5, '$\mathrm{Ne}^{2+}$', fontsize=12, color='black')
+
+#axs[1, 0].text(4.75, 0.03, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
+#axs[1, 0].text(4.75, 0.02, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
+
+axs[1, 0].legend(frameon=False, bbox_to_anchor=(0.7, 0.2), loc="center", fontsize=12)
 
 axs[1, 0].tick_params(labelsize=16)
 axs[1, 0].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
@@ -261,6 +271,9 @@ axs[1, 1].plot(temperature_cx_on, Si3p / X_Si, color='crimson', alpha=0.6, linew
 axs[1, 1].text(4.1, 0.7, '$\mathrm{Si}$', fontsize=14, color='black')
 axs[1, 1].text(4.6, 0.5, "$\mathrm{Si}^{+}$", fontsize=14, color='black')
 axs[1, 1].text(4.8, 0.1, '$\mathrm{Si}^{2+}$', fontsize=14, color='black')
+
+#axs[1, 1].text(4.27, 0.03, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
+#axs[1, 1].text(4.27, 0.02, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
 axs[1, 1].tick_params(labelsize=16)
 axs[1, 1].set_ylabel(r"\rm Ionisation fraction", fontsize=16)

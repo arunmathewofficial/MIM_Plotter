@@ -20,7 +20,6 @@ parser.add_argument("Purpose", type=str, help="opt the purpose: journal or confe
 parser.add_argument("output_dir", type=str, help="give the output image dir path")
 args = parser.parse_args()
 
-
 Asplund_coolfn = args.Asplund_coolfn_data
 Eatson_coolfn = args.Eatson_coolfn_data
 purpose = args.Purpose
@@ -43,7 +42,7 @@ plot_data = []
 # 1. Cooling function for Asplund 2002 abuandance ############################################
 
 table_1 = ReadTable_Advance(Asplund_coolfn)
-print("Table Size: ( row =", table_1['N_row'], ", columns = ", table_1['N_col'], ")")
+print("Table-1 Size: ( row =", table_1['N_row'], ", columns = ", table_1['N_col'], ")")
 dataset_1 = table_1['columns']
 
 # x-data
@@ -114,6 +113,8 @@ Asplund_Fe = [[np.log10(dataset_1[73]), 'Fe'], [np.log10(dataset_1[74]), 'Fe1+']
      [np.log10(dataset_1[97]), 'Fe24+'], [np.log10(dataset_1[98]), 'Fe25+'],
      [np.log10(dataset_1[99]), 'Fe26+']]
 
+asplund_ne = dataset_1[100]
+asplund_nH = dataset_1[101]
 
 asplund_element_list = [Asplund_H, Asplund_He, Asplund_C, Asplund_N, Asplund_O,
                         Asplund_Ne, Asplund_Si, Asplund_S, Asplund_Fe]
@@ -152,7 +153,7 @@ plot_data.append(asplund_elements_data)
 # 2. Cooling function for Eatson 2022 abuandance ############################################
 
 table_2 = ReadTable_Advance(Eatson_coolfn)
-print("Table Size: ( row =", table_2['N_row'], ", columns = ", table_2['N_col'], ")")
+print("Table-2 Size: ( row =", table_2['N_row'], ", columns = ", table_2['N_col'], ")")
 dataset_2 = table_2['columns']
 
 # x-dataset_2
@@ -216,6 +217,10 @@ Eatson_Fe = [[np.log10(dataset_2[63]), 'Fe'], [np.log10(dataset_2[64]), 'Fe1+'],
              [np.log10(dataset_2[87]), 'Fe24+'], [np.log10(dataset_2[88]), 'Fe25+'],
              [np.log10(dataset_2[89]), 'Fe26+']]
 
+eatson_ne = dataset_2[90]
+eatson_ne = np.array(eatson_ne)
+eatson_nH = np.full(eatson_ne.shape, asplund_nH[0])
+
 
 eatson_element_list = [Eatson_He, Eatson_C, Eatson_O,
                        Eatson_Ne, Eatson_Si, Eatson_S, Eatson_Fe]
@@ -262,7 +267,7 @@ net_cooling_data['line-color'] = line_color[0]
 net_cooling_data['line-style'] = line_style[0]
 asplund_net_data.append(net_cooling_data.copy())
 plot_data.append(asplund_net_data)
-
+del asplund_net_data
 
 # 4. Net cooling for Eatson 2022 abundance #####################################
 eatson_net_data = []
@@ -279,31 +284,108 @@ net_cooling_data['line-color'] = line_color[0]
 net_cooling_data['line-style'] = line_style[0]
 eatson_net_data.append(net_cooling_data.copy())
 plot_data.append(eatson_net_data)
-
-
-# 5, 6 appending asplund_net_dataset_1 qnd eatson_net_dataset_1 once again ###################
-
-if(purpose == "journal"):
-    plot_data.append(asplund_net_data)
-    plot_data.append(eatson_net_data)
-
-del asplund_net_data
 del eatson_net_data
+
+# 5, 6, 7 appending asplund_net, Sutherland & Dopita, Wiersma 2009 ###################
+# this is to plot the third figure in the cooling plot (comparison of net cooling)
+asplund_net_data_refactor = []
+net_cooling_data = {}
+asplund_element_list_name_refactor = ['Solar']
+label_position = [[]]
+line_color = ['black']
+line_style = ['-']
+net_cooling_data['x'] = asplund_log_temperature
+net_asplund_coolfn = net_asplund_coolfn / (norm_factor * np.array(asplund_ne) * np.array(asplund_nH))
+net_cooling_data['y'] = np.log10(net_asplund_coolfn)
+net_cooling_data['labels'] = asplund_element_list_name_refactor[0]
+net_cooling_data['label-position'] = label_position[0]
+net_cooling_data['line-color'] = line_color[0]
+net_cooling_data['line-style'] = line_style[0]
+asplund_net_data_refactor.append(net_cooling_data.copy())
+if(purpose == "journal"):
+    plot_data.append(asplund_net_data_refactor)
+
+# table 4 Sutherland & Dopita 1993 data ###########################################
+Original_SD1993 = "data/SD93_cooling_curve.txt"
+table_4 = ReadTable_Advance(Original_SD1993)
+# This original data already is normalised  with norm_factor
+print("Table-4 Size: ( row =", table_4['N_row'], ", columns = ", table_4['N_col'], ")")
+dataset_4 = table_4['columns']
+# x-dataset_3, temperature is given in log
+sd1993_orig_T = dataset_4[0]
+sd1993_orig_log_T = np.log10(sd1993_orig_T)
+sd1993_orig_net_data = []
+net_cooling_data = {}
+
+sd1993_orig_element_list_name = ['Sutherland et al. `93']
+label_position = [[]]
+line_color = ['darkgreen']
+line_style = ['--']
+net_cooling_data['x'] = sd1993_orig_log_T
+# y data (rates) are not in log, so we convert them to log
+net_cooling_data['y'] = np.log10(dataset_4[1])
+net_cooling_data['labels'] = sd1993_orig_element_list_name[0]
+net_cooling_data['label-position'] = label_position[0]
+net_cooling_data['line-color'] = line_color[0]
+net_cooling_data['line-style'] = line_style[0]
+sd1993_orig_net_data.append(net_cooling_data.copy())
+if (purpose == "journal"):
+    plot_data.append(sd1993_orig_net_data)
+
+# table 4 Wiersma 2009 original data ###########################################
+Original_Wiersma09 = "data/Wiersma09_cooling_curve.txt"
+table_5 = ReadTable_Advance(Original_Wiersma09)
+# This original data already is normalised  with norm_factor
+print("Table Size: ( row =", table_5['N_row'], ", columns = ", table_5['N_col'], ")")
+dataset_5 = table_5['columns']
+# x-dataset_5, temperature is given in log
+wiersma09_orig_log_T = dataset_5[0]
+wiersma09_orig_net_data = []
+net_cooling_data = {}
+wiersma09_orig_element_list_name = ['Wiersma et al. `09']
+label_position = [[]]
+line_color = ['crimson']
+line_style = ['--']
+net_cooling_data['x'] = wiersma09_orig_log_T
+# y data (rates) are not in log, so we convert them to log
+net_cooling_data['y'] = np.log10(dataset_5[1])
+net_cooling_data['labels'] = wiersma09_orig_element_list_name[0]
+net_cooling_data['label-position'] = label_position[0]
+net_cooling_data['line-color'] = line_color[0]
+net_cooling_data['line-style'] = line_style[0]
+wiersma09_orig_net_data.append(net_cooling_data.copy())
+if (purpose == "journal"):
+    plot_data.append(wiersma09_orig_net_data)
+
+# 8, 9 Eatson net obtained and Eatson original ###################
+eatson_net_data_refactor = []
+net_cooling_data = {}
+eatson_element_list_name_refactor = ['WC']
+label_position = [[]]
+line_color = ['crimson']
+line_style = ['-']
+net_cooling_data['x'] = eatson_log_temperature
+net_cooling_data['y'] = np.log10(net_eatson_coolfn)
+net_cooling_data['labels'] = eatson_element_list_name_refactor[0]
+net_cooling_data['label-position'] = label_position[0]
+net_cooling_data['line-color'] = line_color[0]
+net_cooling_data['line-style'] = line_style[0]
+eatson_net_data_refactor.append(net_cooling_data.copy())
+if(purpose == "journal"):
+    plot_data.append(eatson_net_data_refactor)
 
 # table 3 original eatson 2022 data ###########################################
 table_3 = ReadTable_Advance(Eatson_coolfn_original)
 # This original data already is normalised  with norm_factor
-print("Table Size: ( row =", table_3['N_row'], ", columns = ", table_3['N_col'], ")")
-
+print("Table-3 Size: ( row =", table_3['N_row'], ", columns = ", table_3['N_col'], ")")
 dataset_3 = table_3['columns']
-
 # x-dataset_3, temperature is given in log
 eatson_orig_log_T = dataset_3[0]
 eatson_orig_net_data = []
 net_cooling_data = {}
 eatson_orig_element_list_name = ['Eatson et al. `22']
 label_position = [[]]
-line_color = ['crimson']
+line_color = ['darkblue']
 line_style = ['--']
 net_cooling_data['x'] = eatson_orig_log_T
 # y data (rates) are not in log, so we convert them to log
@@ -325,18 +407,21 @@ plot_style = {}
 if(purpose == "journal"):
     plot_style['figsize'] = (6, 12)
     plot_style['label-font-size'] = 12
-    plot_style['matrix'] = [3, 1]
+    plot_style['matrix'] = [4, 1]
     plot_style['legend'] = True  # options: True/False
     plot_style['sharex'] = False  # options: True/False, 'col', 'all'
     plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
-    plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
-    plot_style['ylimit'] = [[-25.5, -21], [-25.5, -19.6], [-25, -19.5]]
+    plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5], [4, 8.5]]
+    plot_style['ylimit'] = [[-25.5, -21.3], [-25.5, -19.8], [-24.5, -20.5], [-25, -19.5]]
 
-    plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3]]
+    plot_style['force-plotting_1d'] = [[3, 1], [4, 2],
+                                       [6, 3], [7, 3]
+                                       ]
 
     plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
-                                [None, r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [None, r"${ \rm log(L_{cool}/(n_H \, n_e)) \,  erg \, cm^3 \, s^{-1}}$"],
                                 [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
     # plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]
@@ -344,8 +429,8 @@ if(purpose == "journal"):
     # plot margin adjustments
     plot_style['left'] = 0.14  # the left side of the subplots of the figure
     plot_style['right'] = 0.95  # the right side of the subplots of the figure
-    plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
-    plot_style['top'] = 0.95  # the top of the subplots of the figure
+    plot_style['bottom'] = 0.04  # the bottom of the subplots of the figure
+    plot_style['top'] = 0.98  # the top of the subplots of the figure
     plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
     plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
     # plot_style['custom-legend'] = [
@@ -363,7 +448,7 @@ if(purpose == "conference"):
     plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5]]
     plot_style['ylimit'] = [[-25.5, -21.2], [-25.5, -19.6], [-25, -19.5]]
 
-    plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3]]
+    plot_style['force-plotting_1d'] = [[3, 1], [4, 2], [6, 3], [7, 3], [8, 3]]
 
     plot_style['axis-label'] = [[None, r"${\rm  log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
                                 [r"${\rm \small log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
@@ -384,5 +469,5 @@ if(purpose == "conference"):
 
 # Plotting and saving the image to the file
 onedim_master_plotter(plot_data, plot_style)
-plt.savefig(output_dir + 'cooling_function.png', dpi=200)
+plt.savefig(output_dir + 'cooling_function.png', dpi=300)
 

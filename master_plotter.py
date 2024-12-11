@@ -241,10 +241,12 @@ def onedim_master_plotter(plot_data, plot_style):
                     ax[fig_index].plot(plot_data[plot_index][n]['x'], plot_data[plot_index][n]['y'],
                                label=plot_data[plot_index][n]['labels'],
                                linestyle=linestyle, color=color,
-                               marker=marker, markersize=10,
-                                       linewidth=1 # in default detting this line is not there
-                                       )
-                    ##ax[0].set_yticks([-25, -24, -23, -22, -21])
+                               marker=marker, markersize=10, linewidth=1.5)
+                    # enable when ploting CIE ionisation fraction
+                    #ax[0].text(6.3, 0.6, "\\textrm{H (black)} \n \\textrm{He (red)}\n \\textrm{C (blue)}", fontsize=12)
+                    #ax[1].text(4.7, 1.0, "\\textrm{N (black)}, \\textrm{O (red)}, \\textrm{Ne (blue)}", fontsize=12)
+                    #ax[2].text(7.6, 0.5, "\\textrm{Si (black)} \n \\textrm{S (red)}", fontsize=12)
+                    #ax[3].text(8, 0.9, "\\textrm{Fe (black)}", fontsize=12)
 
                     if len(plot_data[plot_index][n]['label-position']) == 2:
                         x_position = plot_data[plot_index][n]['label-position'][0]
@@ -254,8 +256,8 @@ def onedim_master_plotter(plot_data, plot_style):
                                    #label_font_size, #default
                                            )
 
-                #ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator()) # default on
-                #ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator()) # default
+                ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator()) # default on
+                ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator()) # default
                 ax[fig_index].tick_params(axis="both", direction="in", which="both",
                                   bottom=True, top=True, left=True, right=True, length=4)
 
