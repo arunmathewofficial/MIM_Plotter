@@ -133,7 +133,7 @@ for d in dens:
   for i in range(len(pion_radius)):
     ax0.plot(pion_radius[i], pion_temp[i]*1e-3, label='\\textrm{\\textsc{Pion} '+pion_bins[i], linestyle='-.', color='blue', marker=pion_markers[i], markevery=50+3*i)
   #ax0.plot(cloudy_radius1, cloudy_temp1*1e-3, label='\\textrm{\\textsc{Cloudy}}', linestyle='--', color='red')
-  ax0.plot(cloudy_radius2, cloudy_temp2*1e-3, label='\\textrm{\\textsc{Cloudy} CaseB}', linestyle='-', color='red')
+  ax0.plot(cloudy_radius2, cloudy_temp2*1e-3, label='\\textrm{\\textsc{Cloudy} CaseB}', linestyle='-', color='red', linewidth=3)
   ax0.xaxis.set_minor_locator(AutoMinorLocator())
   ax0.yaxis.set_minor_locator(AutoMinorLocator())
   ax0.tick_params(axis="both", direction="in", which="major", bottom=True, top=True, left=True, right=True, length=4, labelsize=12)
