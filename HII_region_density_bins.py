@@ -207,7 +207,7 @@ for d in dens:
 
 
   plt.subplots_adjust(left=0.1, right=0.95, top=0.95, bottom=0.2)
-  image_file = plot_dir + d + '_HHeO.png'
+  image_file = plot_dir + d + '_HHeO_Nbins.png'
   print("Saving image to", image_file)
   plt.savefig(image_file, dpi=300, bbox_inches='tight')
   plt.close()
