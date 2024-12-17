@@ -395,7 +395,10 @@ dataset_6 = table_6['columns']
 Voronov_orig_log_T = np.log10(dataset_6[0]) # temperature in log scale, if from the file at column 0.
 # rate
 Voronov_orig_rate = np.array(dataset_6[1]) # original cooling rate
-# cooling function 
+# cooling function
+#asplund_ne
+#asplund_nH
+#asplund_log_temperature
 Voronov_coolfn = Voronov_orig_rate #Voronov_orig_rate * * ne * nH0 * 13.6eV
 
 Voronov_coolfn_norm = Voronov_coolfn # normalise the with proper 
@@ -475,7 +478,7 @@ if(purpose == "journal"):
     plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5], [4, 8.5]]
     plot_style['ylimit'] = [[-25.5, -21.3], [-25.5, -19.8], [-24.5, -20], [-25, -19.5]]
 
-    plot_style['force-plotting_1d'] = [[2, 1], [4, 2],
+    plot_style['force-plotting_1d'] = [[3, 1], [4, 2],
                                        [6, 3], [7, 3], [8, 3]
                                        ]
 
