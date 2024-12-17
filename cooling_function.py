@@ -336,7 +336,7 @@ sd1993_orig_net_data.append(net_cooling_data.copy())
 if (purpose == "journal"):
     plot_data.append(sd1993_orig_net_data)
 
-# table 4 Wiersma 2009 original data ###########################################
+# table 5 Wiersma 2009 original data ###########################################
 Original_Wiersma09 = "data/Wiersma09-m00-cie.txt"
 table_5 = ReadTable_Advance(Original_Wiersma09)
 # This original data already is normalised  with norm_factor
@@ -381,6 +381,41 @@ net_cooling_data['line-style'] = line_style[0]
 wiersma09_orig_net_data.append(net_cooling_data.copy())
 if (purpose == "journal"):
     plot_data.append(wiersma09_orig_net_data)
+
+# adding a new plot 8 in panel 3 (force this plot on panel 3)
+# Add Voronov-Rate here
+# table 6 Wiersma 2009 original data ###########################################
+Original_Voronov = "data/Wiersma09-m00-cie.txt" # if you are using table then, use the pathe to the table here
+table_6 = ReadTable_Advance(Original_Voronov) # read the table 
+# This original data already is normalised  with norm_factor
+print("Table Size: ( row =", table_5['N_row'], ", columns = ", table_5['N_col'], ")")
+dataset_6 = table_6['columns'] 
+# column 4 in txt file gives Lambda/n_H^2 [erg s-1 cm^3]
+# x-dataset_6, temperature 
+Voronov_orig_log_T = np.log10(dataset_6[0]) # temperature in log scale, if from the file at column 0.
+# rate
+Voronov_orig_rate = np.array(dataset_6[1]) # original cooling rate
+# cooling function 
+Voronov_coolfn = Voronov_orig_rate #Voronov_orig_rate * * ne * nH0 * 13.6eV
+
+Voronov_coolfn_norm = Voronov_coolfn # normalise the with proper 
+Voronov_orig_net_data = []
+net_cooling_data = {}
+Voronov_orig_element_list_name = ['Voronov']
+label_position = [[]]
+line_color = ['purple']
+line_style = ['-']
+net_cooling_data['x'] = Voronov_orig_log_T
+# y data (rates) are not in log, so we convert them to log
+net_cooling_data['y'] = np.log10(Voronov_coolfn_norm)
+net_cooling_data['labels'] = Voronov_orig_element_list_name[0]
+net_cooling_data['label-position'] = label_position[0]
+net_cooling_data['line-color'] = line_color[0]
+net_cooling_data['line-style'] = line_style[0]
+Voronov_orig_net_data.append(net_cooling_data.copy())
+if (purpose == "journal"):
+    plot_data.append(Voronov_orig_net_data)
+
 
 # 8, 9 Eatson net obtained and Eatson original ###################
 eatson_net_data_refactor = []
@@ -440,8 +475,8 @@ if(purpose == "journal"):
     plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5], [4, 8.5]]
     plot_style['ylimit'] = [[-25.5, -21.3], [-25.5, -19.8], [-24.5, -20], [-25, -19.5]]
 
-    plot_style['force-plotting_1d'] = [[3, 1], [4, 2],
-                                       [6, 3], [7, 3]
+    plot_style['force-plotting_1d'] = [[2, 1], [4, 2],
+                                       [6, 3], [7, 3], [8, 3]
                                        ]
 
     plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
@@ -495,4 +530,24 @@ if(purpose == "conference"):
 # Plotting and saving the image to the file
 onedim_master_plotter(plot_data, plot_style)
 plt.savefig(output_dir + 'cooling_function.png', dpi=300)
+
+
+################################################################################
+#compare electron number get_density
+
+# Plot the data
+plt.figure(figsize=(8, 6))
+
+#plt.plot(pion_chianti_logT, pion_chianti_rate, linestyle='-', color='crimson', label='Chianti including BB')
+plt.plot(sd1993_orig_log_T, np.array(sd1993_orig_ne)/np.array(sd1993_orig_nH), linestyle='--', color='darkgreen', label='Sutherland et al. `93')
+plt.plot(wiersma09_orig_log_T, wiersma09_orig_nebynH, linestyle='--', color='crimson', label='Wiersma et al. `09')
+plt.plot(asplund_log_temperature, np.array(asplund_ne)/np.array(asplund_nH), linestyle='-', color='darkblue', label='NEMO v1.0')
+# Add labels, title, and legend
+plt.xlabel(r'$log(T/K)$', fontsize=12)
+plt.ylabel(r'$n_e/n_H \, cm^{-3}$', fontsize=12)
+plt.legend()
+plt.savefig(output_dir + 'compare_ne.png')
+
+
+
 
