@@ -295,7 +295,7 @@ label_position = [[]]
 line_color = ['black']
 line_style = ['-']
 net_cooling_data['x'] = asplund_log_temperature
-net_asplund_coolfn = net_asplund_coolfn / (norm_factor * np.array(asplund_ne) * np.array(asplund_nH))
+net_asplund_coolfn = net_asplund_coolfn / norm_factor / np.array(asplund_nH) / np.array(asplund_ne)
 net_cooling_data['y'] = np.log10(net_asplund_coolfn)
 net_cooling_data['labels'] = asplund_element_list_name_refactor[0]
 net_cooling_data['label-position'] = label_position[0]
@@ -306,24 +306,28 @@ if(purpose == "journal"):
     plot_data.append(asplund_net_data_refactor)
 
 # table 4 Sutherland & Dopita 1993 data ###########################################
-Original_SD1993 = "data/SD93_cooling_curve.txt"
+Original_SD1993 = "data/SD93-m00-cie.txt"
 table_4 = ReadTable_Advance(Original_SD1993)
 # This original data already is normalised  with norm_factor
 print("Table-4 Size: ( row =", table_4['N_row'], ", columns = ", table_4['N_col'], ")")
 dataset_4 = table_4['columns']
 # x-dataset_3, temperature is given in log
-sd1993_orig_T = dataset_4[0]
-sd1993_orig_log_T = np.log10(sd1993_orig_T)
+sd1993_orig_log_T = dataset_4[0]
+sd1993_orig_lambda_norm = 10 ** np.array(dataset_4[5]) # we choose the normalised cooling fucntion
+sd1993_orig_ne = np.array(dataset_4[1])
+sd1993_orig_nH = np.array(dataset_4[2])
+sd1993_orig_nt = np.array(dataset_4[3])
+sd1993_orig_lambda = sd1993_orig_lambda_norm * sd1993_orig_nt
+sd1993_orig_lambda_actual = sd1993_orig_lambda / sd1993_orig_nH
 sd1993_orig_net_data = []
 net_cooling_data = {}
-
 sd1993_orig_element_list_name = ['Sutherland et al. `93']
 label_position = [[]]
-line_color = ['darkgreen']
+line_color = ['crimson']
 line_style = ['--']
 net_cooling_data['x'] = sd1993_orig_log_T
 # y data (rates) are not in log, so we convert them to log
-net_cooling_data['y'] = np.log10(dataset_4[1])
+net_cooling_data['y'] = np.log10(sd1993_orig_lambda_actual)
 net_cooling_data['labels'] = sd1993_orig_element_list_name[0]
 net_cooling_data['label-position'] = label_position[0]
 net_cooling_data['line-color'] = line_color[0]
@@ -333,22 +337,43 @@ if (purpose == "journal"):
     plot_data.append(sd1993_orig_net_data)
 
 # table 4 Wiersma 2009 original data ###########################################
-Original_Wiersma09 = "data/Wiersma09_cooling_curve.txt"
+Original_Wiersma09 = "data/Wiersma09-m00-cie.txt"
 table_5 = ReadTable_Advance(Original_Wiersma09)
 # This original data already is normalised  with norm_factor
 print("Table Size: ( row =", table_5['N_row'], ", columns = ", table_5['N_col'], ")")
 dataset_5 = table_5['columns']
-# x-dataset_5, temperature is given in log
-wiersma09_orig_log_T = dataset_5[0]
+# column 4 in txt file gives Lambda/n_H^2 [erg s-1 cm^3]
+
+# x-dataset_5, temperature is given in K
+wiersma09_orig_log_T = np.log10(dataset_5[0])
+# H and He
+wiersma09_orig_lambda_HHe = np.array(dataset_5[9]) # this is Lambda/n_H^2 [erg s-1 cm^3]
+wiersma09_orig_nebynH = np.array(dataset_5[10]) # this is Lambda/n_H^2 [erg s-1 cm^3]
+# Other elements
+wiersma09_orig_lambda_C = np.array(dataset_5[16])
+wiersma09_orig_lambda_N = np.array(dataset_5[17])
+wiersma09_orig_lambda_O = np.array(dataset_5[18])
+wiersma09_orig_lambda_Ne = np.array(dataset_5[19])
+wiersma09_orig_lambda_Mg = np.array(dataset_5[20])
+wiersma09_orig_lambda_Si = np.array(dataset_5[21])
+wiersma09_orig_lambda_S = np.array(dataset_5[22])
+wiersma09_orig_lambda_Ca = np.array(dataset_5[23])
+wiersma09_orig_lambda_Fe = np.array(dataset_5[24])
+wiersma09_orig_lambda_total = wiersma09_orig_lambda_HHe\
+                              + wiersma09_orig_lambda_C + wiersma09_orig_lambda_N \
+                              + wiersma09_orig_lambda_O + wiersma09_orig_lambda_Ne + wiersma09_orig_lambda_Mg \
+                              + wiersma09_orig_lambda_Si + wiersma09_orig_lambda_Ca + wiersma09_orig_lambda_Fe
+
+wiersma09_orig_lambda_net = wiersma09_orig_lambda_total / wiersma09_orig_nebynH
 wiersma09_orig_net_data = []
 net_cooling_data = {}
 wiersma09_orig_element_list_name = ['Wiersma et al. `09']
 label_position = [[]]
-line_color = ['crimson']
+line_color = ['darkgreen']
 line_style = ['--']
 net_cooling_data['x'] = wiersma09_orig_log_T
 # y data (rates) are not in log, so we convert them to log
-net_cooling_data['y'] = np.log10(dataset_5[1])
+net_cooling_data['y'] = np.log10(wiersma09_orig_lambda_net)
 net_cooling_data['labels'] = wiersma09_orig_element_list_name[0]
 net_cooling_data['label-position'] = label_position[0]
 net_cooling_data['line-color'] = line_color[0]
@@ -413,7 +438,7 @@ if(purpose == "journal"):
     plot_style['sharey'] = False  # options: True/False, 'col', 'all'
 
     plot_style['xlimit'] = [[4, 8.5], [4, 8.3], [4, 8.5], [4, 8.5]]
-    plot_style['ylimit'] = [[-25.5, -21.3], [-25.5, -19.8], [-24.5, -20.5], [-25, -19.5]]
+    plot_style['ylimit'] = [[-25.5, -21.3], [-25.5, -19.8], [-24.5, -20], [-25, -19.5]]
 
     plot_style['force-plotting_1d'] = [[3, 1], [4, 2],
                                        [6, 3], [7, 3]
@@ -421,7 +446,7 @@ if(purpose == "journal"):
 
     plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
                                 [None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
-                                [None, r"${ \rm log(L_{cool}/(n_H \, n_e)) \,  erg \, cm^3 \, s^{-1}}$"],
+                                [None, r"${ \rm log(L_{cool}/(n_e \, n_H)) \,  erg \, cm^3 \, s^{-1}}$"],
                                 [r"${\rm log(T) \, K}$", r"${ \rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"]]
 
     # plot_style['insert-txt'] = [[r'{Solar Abundance}', 2.2, 20, 0], [r'{With WC Abundance}', 4.1, -20, 0],]

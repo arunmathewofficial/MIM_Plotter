@@ -261,14 +261,17 @@ def ReadTable_Advance(Table):
     data = []
     with open(Table) as table:
         for line in table:
-            row = line.split()
-            if row[0].startswith("#"):
+            line = line.strip()  # Remove leading and trailing whitespace
+            if not line or line.startswith("#"):  # Skip empty lines or comments
                 continue
             else:
+                row = line.split()  # Split the line into elements
+                if len(row) == 0:  # Additional check to handle empty rows
+                    continue
                 N_row += 1
-                N_col = len(row)
-                row = np.asarray(row, dtype=float)
-                data.append(row)
+                N_col = len(row)  # Update column count (assumes consistent row length)
+                row = np.asarray(row, dtype=float)  # Convert row to a NumPy array of floats
+                data.append(row)  # Append the row to the data list
 
     #Create N_col arrays
     columns = [[] for _ in range(N_col)]

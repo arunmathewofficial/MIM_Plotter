@@ -267,7 +267,9 @@ def onedim_master_plotter(plot_data, plot_style):
                 ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14) # default 18
                 ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14) # default 18
 
-                if plot_style['legend'] == True: ax[fig_index].legend(frameon=False, loc='upper right')
+                if plot_style['legend'] == True:
+                    ax[fig_index].legend(frameon=True, loc='upper right')
+
 
                 #ax[fig_index].legend(['First List', '', 'Second List'], loc='upper left')
 
