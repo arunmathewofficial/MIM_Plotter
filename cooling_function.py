@@ -382,6 +382,7 @@ wiersma09_orig_net_data.append(net_cooling_data.copy())
 if (purpose == "journal"):
     plot_data.append(wiersma09_orig_net_data)
 
+'''
 # adding a new plot 8 in panel 3 (force this plot on panel 3)
 # Add Voronov-Rate here
 # table 6 Wiersma 2009 original data ###########################################
@@ -418,7 +419,7 @@ net_cooling_data['line-style'] = line_style[0]
 Voronov_orig_net_data.append(net_cooling_data.copy())
 if (purpose == "journal"):
     plot_data.append(Voronov_orig_net_data)
-
+'''
 
 # 8, 9 Eatson net obtained and Eatson original ###################
 eatson_net_data_refactor = []
@@ -479,7 +480,7 @@ if(purpose == "journal"):
     plot_style['ylimit'] = [[-25.5, -21.3], [-25.5, -19.8], [-24.5, -20], [-25, -19.5]]
 
     plot_style['force-plotting_1d'] = [[3, 1], [4, 2],
-                                       [6, 3], [7, 3], [8, 3]
+                                       [6, 3], [7, 3]
                                        ]
 
     plot_style['axis-label'] = [[None, r"${\rm log(\Lambda_N) \,  erg \, cm^3 \, s^{-1}}$"],
