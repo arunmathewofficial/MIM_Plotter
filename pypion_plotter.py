@@ -231,7 +231,7 @@ class Plot_Functions:
                               extent=extents, vmax=max_colorbar_2, vmin=min_colorbar_2)
 
           divider2 = make_axes_locatable(ax_2)
-          cax_2 = divider2.append_axes("right", size="5%", pad=0.05)
+          cax_2 = divider2.append_axes("right", size="5%", pad=0.01)
           plt.colorbar(image_2, cax=cax_2, ticks=MultipleLocator(1), format="%.1f")
           ax_2.text(0.65, 0.05, r'$\log(T / \mathrm{K})$', transform=ax_2.transAxes, color='white', fontsize=14)
           ax_2.set_xlabel('     '+x_axis_label+' (pc)', fontsize=16)
@@ -244,9 +244,9 @@ class Plot_Functions:
           print(f'Time: {time:.2e}.',
                 f'Saving snap-{str(k)} to {self.filename}_{str(k).zfill(3)}_rhoT.png ...')
         
-          '''
 
-          fig2, axs2 = plt.subplots(2, 3, figsize=(16, 5))
+
+          fig2, axs2 = plt.subplots(2, 3, figsize=(18, 5))
 
 
           EL = np.array(data.get_2Darray("Tr004_X_O")['data'])
@@ -302,6 +302,8 @@ class Plot_Functions:
           ax4.set_ylim(-dims_max_1[0][1].value, -dims_min_1[0][1].value)
           ax4.tick_params(axis='both', which='major', labelsize=13)
           ax4.set_xlabel('   '+x_axis_label+' (pc)', fontsize=16)
+          ax4.set_ylabel('                                    '+y_axis_label+' (pc)', fontsize=16)
+
 
           ax5 = axs2[0, 2]
           ax5.text(0.55, 0.9, r'O$^{6+}$ ion fraction', color='white', transform=ax5.transAxes, fontsize=14)
@@ -316,6 +318,8 @@ class Plot_Functions:
           ax6.set_ylim(-dims_max_1[0][1].value, -dims_min_1[0][1].value)
           ax6.tick_params(axis='both', which='major', labelsize=13)
           ax6.set_xlabel('   '+x_axis_label+' (pc)', fontsize=16)
+          ax6.set_ylabel('                                    '+y_axis_label+' (pc)', fontsize=16)
+
 
           for l in range(len(O1p)):
             extents = [dims_min_1[l][0].value, dims_max_1[l][0].value,
@@ -374,7 +378,7 @@ class Plot_Functions:
           cax = fig2.add_axes([0.99, 0.11, 0.015, 0.77])  # Add the colorbar axes to fig2
           plt.colorbar(image_6, cax=cax, ticks=[0, 0.25, 0.5, 0.75, 1], format="%.2f")
 
-
+          plt.subplots_adjust(wspace=0.0, hspace=0.0)  # Horizontal and vertical spacing
 
 
           plt.savefig(f"{self.ImageDir}/{self.filename}_{str(k).zfill(3)}_ionfrac.png",
@@ -383,4 +387,4 @@ class Plot_Functions:
           print(f'Time: {time:.2e}.',
                 f'Saving snap-{str(k)} to {self.filename}_{str(k).zfill(3)}_ionfrac.png ...')
 
-          '''
+

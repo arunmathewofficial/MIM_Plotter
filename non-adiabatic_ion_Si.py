@@ -34,7 +34,7 @@ x_v1000 = get_basic_data(v1000_file)['x']/1.0E+16
 # x data for v=3000 km/s
 x_v3000 = get_basic_data(v3000_file)['x']/1.0E+16
 
-fig, axs = plt.subplots(2, 1, figsize=(14, 8))
+fig, axs = plt.subplots(2, 1, figsize=(7, 9))
 
 # SILICON ###################################################################
 print('Plotting Silicon ion-fraction for v=1000 km/s and v=3000 km/s ...')
@@ -73,11 +73,11 @@ axs[0].plot(x_v1000, Si12p / X_Si, linestyle='--', linewidth=2.0, label=r'$\rm S
 axs[0].plot(x_v1000, Si13p / X_Si, linestyle='--', linewidth=2.0, label=r'$\rm Si^{12+}$')
 axs[0].plot(x_v1000, Si14p / X_Si, linestyle='--', linewidth=2.0, label=r'$\rm Si^{13+}$')
 
-axs[0].set_ylabel(r'\rm Ionisation fraction', fontsize=22)
+axs[0].set_ylabel(r'\rm Ionisation fraction', fontsize=18)
 #axs[0].set_xlabel(r'\rm x (10$^{16}$ \, cm)', fontsize=22)
 axs[0].set_xlim(0.2, 0.58)
-axs[0].text(0.25, 0.8, r'\rm $|v_x|$ = 1000 km s$^{-1}$', fontsize=20)
-axs[0].legend(fontsize=16, loc='upper center', ncol=7, bbox_to_anchor=(0.5, 1.3),
+axs[0].text(0.25, 0.8, r'\rm $|v_x|$ = 1000 km s$^{-1}$', fontsize=18)
+axs[0].legend(fontsize=14, loc='upper center', ncol=5, bbox_to_anchor=(0.47, 1.3),
               frameon=True, columnspacing=2.5, edgecolor='black')
 axs[0].tick_params(axis='both', labelsize=16, direction='in')
 
@@ -115,17 +115,17 @@ axs[1].plot(x_v3000, Si12p / X_Si, linestyle='--', linewidth=2.0)
 axs[1].plot(x_v3000, Si13p / X_Si, linestyle='--', linewidth=2.0)
 axs[1].plot(x_v3000, Si14p / X_Si, linestyle='--', linewidth=2.0)
 
-axs[1].set_ylabel(r'\rm Ionisation fraction', fontsize=22)
-axs[1].set_xlabel(r'\rm x (10$^{16}$ cm)', fontsize=22)
-axs[1].set_xlim(0.5, 0.643)
-axs[1].text(0.52, 0.8, r'\rm $|v_x|$ = 3000 km s$^{-1}$', fontsize=20)
+axs[1].set_ylabel(r'\rm Ionisation fraction', fontsize=18)
+axs[1].set_xlabel(r'\rm x (10$^{16}$ cm)', fontsize=18)
+axs[1].set_xlim(0.58, 0.643)
+axs[1].text(0.59, 0.8, r'\rm $|v_x|$ = 3000 km s$^{-1}$', fontsize=18)
 axs[1].tick_params(axis='both', labelsize=16, direction='in')
 
 
-plt.subplots_adjust(left=0.05, right=0.98, top=0.9, bottom=0.1, hspace=0.2)
+plt.subplots_adjust(left=0.1, right=0.98, top=0.89, bottom=0.07, hspace=0.12)
 imagename = output_dir + 'NonAdiaSh_v3000_vs_v1000_Si.png'
 print('Saving image ' + imagename)
-plt.savefig(imagename)
+plt.savefig(imagename, dpi=300)
 plt.close()
 #############################################################################
 

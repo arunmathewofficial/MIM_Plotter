@@ -241,12 +241,13 @@ def onedim_master_plotter(plot_data, plot_style):
                     ax[fig_index].plot(plot_data[plot_index][n]['x'], plot_data[plot_index][n]['y'],
                                label=plot_data[plot_index][n]['labels'],
                                linestyle=linestyle, color=color,
-                               marker=marker, markersize=10, linewidth=1.5)
-                    # enable when ploting CIE ionisation fraction
-                    #ax[0].text(6.3, 0.6, "\\textrm{H (black)} \n \\textrm{He (red)}\n \\textrm{C (blue)}", fontsize=12)
-                    #ax[1].text(4.7, 1.0, "\\textrm{N (black)}, \\textrm{O (red)}, \\textrm{Ne (blue)}", fontsize=12)
-                    #ax[2].text(7.6, 0.5, "\\textrm{Si (black)} \n \\textrm{S (red)}", fontsize=12)
-                    #ax[3].text(8, 0.9, "\\textrm{Fe (black)}", fontsize=12)
+                               marker=marker, markersize=10, linewidth=0.8)
+
+                    # enable when plotting CIE ionisation fraction
+                    ax[0].text(5.3, 0.5, "\\textrm{H (black)} \n \\textrm{He (red)}\n \\textrm{C (blue)}", fontsize=8)
+                    ax[1].text(4.5, 1.1, "\\textrm{N (black)}, \\textrm{O (red)}, \\textrm{Ne (blue)}", fontsize=8)
+                    ax[2].text(5.8, 0.84, "\\textrm{Si (black)} \n \\textrm{S (red)}", fontsize=8)
+                    ax[3].text(7, 0.93, "\\textrm{Fe (black)}", fontsize=8)
 
                     if len(plot_data[plot_index][n]['label-position']) == 2:
                         x_position = plot_data[plot_index][n]['label-position'][0]
@@ -256,16 +257,23 @@ def onedim_master_plotter(plot_data, plot_style):
                                    #label_font_size, #default
                                            )
 
-                ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator()) # default on
-                ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator()) # default
+                #ax[fig_index].xaxis.set_minor_locator(AutoMinorLocator()) # default on
+                #ax[fig_index].yaxis.set_minor_locator(AutoMinorLocator()) # default
                 ax[fig_index].tick_params(axis="both", direction="in", which="both",
-                                  bottom=True, top=True, left=True, right=True, length=4)
+                                  bottom=True, top=True, left=True, right=True, length=2)
 
                 ax[fig_index].set_xlim(plot_style['xlimit'][fig_index])
                 ax[fig_index].set_ylim(plot_style['ylimit'][fig_index])
 
-                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=14) # default 18
-                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=14) # default 18
+                # enable when plotting CIE ionisation fraction
+                if fig_index == 1:
+                    ax[fig_index].set_ylim(plot_style['ylimit'][fig_index][0], plot_style['ylimit'][fig_index][1] + 0.1)
+                else:
+                    ax[fig_index].set_ylim(plot_style['ylimit'][fig_index])
+
+
+                ax[fig_index].set_xlabel(plot_style['axis-label'][fig_index][0], fontsize=10) # default 18
+                ax[fig_index].set_ylabel(plot_style['axis-label'][fig_index][1], fontsize=10) # default 18
 
                 if plot_style['legend'] == True:
                     ax[fig_index].legend(frameon=True, loc='upper right')

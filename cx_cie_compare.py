@@ -34,7 +34,7 @@ temperature_cx_off = np.log10(temperature_cx_off)
 temperature_cx_on = get_temperature(cx_on_cie_silo)
 temperature_cx_on = np.log10(temperature_cx_on)
 
-fig, axs = plt.subplots(2, 2, figsize=(14, 8))
+fig, axs = plt.subplots(4, 1, figsize=(7, 15), sharex=True)
 
 # NITROGEN ##############################################################
 # y data - neon species cx off ###########
@@ -45,10 +45,10 @@ N2p = get_tracer(cx_off_cie_silo, "Tr020_N2p")
 N3p = get_tracer(cx_off_cie_silo, "Tr021_N3p")
 N4p = get_tracer(cx_off_cie_silo, "Tr022_N4p")
 
-axs[0, 0].plot(temperature_cx_off, N0 / X_N, color='darkblue', linestyle='--', linewidth=2.0)
-axs[0, 0].plot(temperature_cx_off, N1p / X_N, color='darkblue', linestyle='--', linewidth=2.0)
-axs[0, 0].plot(temperature_cx_off, N2p / X_N, color='darkblue', linestyle='--', linewidth=2.0)
-axs[0, 0].plot(temperature_cx_off, N3p / X_N, color='darkblue', linestyle='--', linewidth=2.0)
+axs[0].plot(temperature_cx_off, N0 / X_N, color='darkblue', linestyle='--', linewidth=2.0)
+axs[0].plot(temperature_cx_off, N1p / X_N, color='darkblue', linestyle='--', linewidth=2.0)
+axs[0].plot(temperature_cx_off, N2p / X_N, color='darkblue', linestyle='--', linewidth=2.0)
+axs[0].plot(temperature_cx_off, N3p / X_N, color='darkblue', linestyle='--', linewidth=2.0)
 
 # y data - neon species cx on ###########
 X_N = get_tracer(cx_on_cie_silo, "Tr003_X_N")
@@ -58,28 +58,29 @@ N2p = get_tracer(cx_on_cie_silo, "Tr020_N2p")
 N3p = get_tracer(cx_on_cie_silo, "Tr021_N3p")
 N4p = get_tracer(cx_on_cie_silo, "Tr022_N4p")
 
-axs[0, 0].plot(temperature_cx_on, N0 / X_N, color='crimson', alpha=0.6, linewidth=2.0)
-axs[0, 0].plot(temperature_cx_on, N1p / X_N, color='crimson', alpha=0.6, linewidth=2.0)
-axs[0, 0].plot(temperature_cx_on, N2p / X_N, color='crimson', alpha=0.6, linewidth=2.0)
-axs[0, 0].plot(temperature_cx_on, N3p / X_N, color='crimson', alpha=0.6, linewidth=2.0)
+axs[0].plot(temperature_cx_on, N0 / X_N, color='crimson', alpha=0.6, linewidth=2.0)
+axs[0].plot(temperature_cx_on, N1p / X_N, color='crimson', alpha=0.6, linewidth=2.0)
+axs[0].plot(temperature_cx_on, N2p / X_N, color='crimson', alpha=0.6, linewidth=2.0)
+axs[0].plot(temperature_cx_on, N3p / X_N, color='crimson', alpha=0.6, linewidth=2.0)
 
-axs[0, 0].text(4.05, 0.7, '$\mathrm{N}$', fontsize=12, color='black')
-axs[0, 0].text(4.4, 0.6, "$\mathrm{N}^{+}$", fontsize=12, color='black')
-axs[0, 0].text(4.85, 0.5, '$\mathrm{N}^{2+}$', fontsize=12, color='black')
-axs[0, 0].text(5.1, 0.5, '$\mathrm{N}^{3+}$', fontsize=12, color='black')
+axs[0].text(4.05, 0.7, '$\mathrm{N}$', fontsize=16, color='black')
+axs[0].text(4.4, 0.6, "$\mathrm{N}^{1+}$", fontsize=16, color='black')
+axs[0].text(4.85, 0.5, '$\mathrm{N}^{2+}$', fontsize=16, color='black')
+axs[0].text(5.1, 0.5, '$\mathrm{N}^{3+}$', fontsize=16, color='black')
 
 #axs[0, 0].text(4.97, 0.09, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
 #axs[0, 0].text(4.97, 0.06, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
-axs[0, 0].tick_params(labelsize=16)
-axs[0, 0].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
-axs[0, 0].set_xlabel(r"\rm T (K)", fontsize=16)
-axs[0, 0].set_yscale('log')
-axs[0, 0].set_ylim(10**-2, 1.1)
-axs[0, 0].set_xlim(4.0, 5.2)
-axs[0, 0].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
-axs[0, 0].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
+axs[0].tick_params(labelsize=16)
+axs[0].set_ylabel(r"\rm Ionisation fraction", fontsize=18)
+#axs[0].set_xlabel(r"\rm T (K)", fontsize=16)
+axs[0].set_yscale('log')
+axs[0].set_ylim(10**-2, 1.1)
+axs[0].set_xlim(4.0, 5.2)
+axs[0].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
+axs[0].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
 
+axs[0].set_yticks([0.1,  1])
 # OXYGEN ################################################################
 # NITROGEN ##############################################################
 # y data - neon species cx off ###########
@@ -90,10 +91,10 @@ O2p = get_tracer(cx_off_cie_silo, "Tr027_O2p")
 O3p = get_tracer(cx_off_cie_silo, "Tr028_O3p")
 O4p = get_tracer(cx_off_cie_silo, "Tr029_O4p")
 
-axs[0, 1].plot(temperature_cx_off, O0 / X_O, color='darkblue', linestyle='--', linewidth=2.0)
-axs[0, 1].plot(temperature_cx_off, O1p / X_O, color='darkblue', linestyle='--', linewidth=2.0)
-axs[0, 1].plot(temperature_cx_off, O2p / X_O, color='darkblue', linestyle='--', linewidth=2.0)
-axs[0, 1].plot(temperature_cx_off, O3p / X_O, color='darkblue', linestyle='--', linewidth=2.0)
+axs[1].plot(temperature_cx_off, O0 / X_O, color='darkblue', linestyle='--', linewidth=2.0, label='$\mathbf{CX\,Diabled}$')
+axs[1].plot(temperature_cx_off, O1p / X_O, color='darkblue', linestyle='--', linewidth=2.0)
+axs[1].plot(temperature_cx_off, O2p / X_O, color='darkblue', linestyle='--', linewidth=2.0)
+axs[1].plot(temperature_cx_off, O3p / X_O, color='darkblue', linestyle='--', linewidth=2.0)
 
 # y data - neon species cx on ###########
 X_O = get_tracer(cx_on_cie_silo, "Tr004_X_O")
@@ -103,27 +104,29 @@ O2p = get_tracer(cx_on_cie_silo, "Tr027_O2p")
 O3p = get_tracer(cx_on_cie_silo, "Tr028_O3p")
 O4p = get_tracer(cx_on_cie_silo, "Tr029_O4p")
 
-axs[0, 1].plot(temperature_cx_on, O0 / X_O, color='crimson', alpha=0.6, linewidth=2.0, label='$\mathbf{CX enabled}$')
-axs[0, 1].plot(temperature_cx_on, O1p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
-axs[0, 1].plot(temperature_cx_on, O2p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
-axs[0, 1].plot(temperature_cx_on, O3p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
+axs[1].plot(temperature_cx_on, O0 / X_O, color='crimson', alpha=0.6, linewidth=2.0, label='$\mathbf{CX\,Enabled}$')
+axs[1].plot(temperature_cx_on, O1p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
+axs[1].plot(temperature_cx_on, O2p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
+axs[1].plot(temperature_cx_on, O3p / X_O, color='crimson', alpha=0.6, linewidth=2.0)
 
-axs[0, 1].text(4.05, 0.7, '$\mathrm{O}$', fontsize=12, color='black')
-axs[0, 1].text(4.4, 0.6, "$\mathrm{O}^{+}$", fontsize=12, color='black')
-axs[0, 1].text(4.85, 0.5, '$\mathrm{O}^{2+}$', fontsize=12, color='black')
-axs[0, 1].text(5.11, 0.45, '$\mathrm{O}^{3+}$', fontsize=12, color='black')
+axs[1].text(4.05, 0.7, '$\mathrm{O}$', fontsize=16, color='black')
+axs[1].text(4.4, 0.6, "$\mathrm{O}^{1+}$", fontsize=16, color='black')
+axs[1].text(4.85, 0.5, '$\mathrm{O}^{2+}$', fontsize=16, color='black')
+axs[1].text(5.11, 0.45, '$\mathrm{O}^{3+}$', fontsize=16, color='black')
 
 #axs[0, 1].text(4.97, 0.09, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
 #axs[0, 1].text(4.97, 0.06, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
-axs[0, 1].tick_params(labelsize=16)
-axs[0, 1].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
-axs[0, 1].set_xlabel(r"\rm T (K)", fontsize=16)
-axs[0, 1].set_yscale('log')
-axs[0, 1].set_ylim(10**-2, 1.1)
-axs[0, 1].set_xlim(4.0, 5.2)
-axs[0, 1].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
-axs[0, 1].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
+axs[1].tick_params(labelsize=16)
+axs[1].set_ylabel(r"\rm Ionisation fraction", fontsize=18)
+#axs[1].set_xlabel(r"\rm T (K)", fontsize=16)
+axs[1].set_yscale('log')
+axs[1].set_ylim(10**-2, 1.1)
+axs[1].set_xlim(4.0, 5.2)
+axs[1].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
+axs[1].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
+axs[1].set_yticks([0.1,  1])
+axs[1].legend(frameon=False, bbox_to_anchor=(0.38, 0.7), loc="center", fontsize=12)
 
 # NEON ###################################################################
 # y data - neon species cx off ###########
@@ -140,9 +143,9 @@ Ne8p = get_tracer(cx_off_cie_silo, "Tr041_Ne8p")
 Ne9p = get_tracer(cx_off_cie_silo, "Tr042_Ne9p")
 Ne10p = X_Ne - (Ne0 + Ne1p + Ne2p + Ne3p + Ne4p + Ne5p + Ne6p + Ne7p + Ne8p + Ne9p)
 
-axs[1, 0].plot(temperature_cx_off, Ne0 / X_Ne, color='darkblue', linestyle='--', linewidth=2.0, label='$\mathrm{CX \ Disabled}$')
-axs[1, 0].plot(temperature_cx_off, Ne1p / X_Ne, color='darkblue', linestyle='--', linewidth=2.0)
-axs[1, 0].plot(temperature_cx_off, Ne2p / X_Ne, color='darkblue', linestyle="--", linewidth=2.0)
+axs[2].plot(temperature_cx_off, Ne0 / X_Ne, color='darkblue', linestyle='--', linewidth=2.0, label='$\mathrm{CX\,Disabled}$')
+axs[2].plot(temperature_cx_off, Ne1p / X_Ne, color='darkblue', linestyle='--', linewidth=2.0)
+axs[2].plot(temperature_cx_off, Ne2p / X_Ne, color='darkblue', linestyle="--", linewidth=2.0)
 #axs[0].plot(temperature_cx_off, Ne3p / X_Ne, label="$\mathrm{Ne}^{3+}$", color='black')
 #axs[0].plot(temperature_cx_off, Ne4p / X_Ne, label="$\mathrm{Ne}^{4+}$", color='black')
 #axs[0].plot(temperature_cx_off, Ne5p / X_Ne, label="$\mathrm{Ne}^{5+}$", color='black')
@@ -166,9 +169,9 @@ Ne8p = get_tracer(cx_on_cie_silo, "Tr041_Ne8p")
 Ne9p = get_tracer(cx_on_cie_silo, "Tr042_Ne9p")
 Ne10p = X_Ne - (Ne0 + Ne1p + Ne2p + Ne3p + Ne4p + Ne5p + Ne6p + Ne7p + Ne8p + Ne9p)
 
-axs[1, 0].plot(temperature_cx_on, Ne0 / X_Ne, color='crimson', alpha=0.6, linewidth=2.0, label='$\mathrm{CX \ Enabled}$')
-axs[1, 0].plot(temperature_cx_on, Ne1p / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
-axs[1, 0].plot(temperature_cx_on, Ne2p / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
+axs[2].plot(temperature_cx_on, Ne0 / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
+axs[2].plot(temperature_cx_on, Ne1p / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
+axs[2].plot(temperature_cx_on, Ne2p / X_Ne, color='crimson', alpha=0.6, linewidth=2.0)
 #axs[0].plot(temperature_cx_on, Ne3p / X_Ne, linestyle='--', color='black')
 #axs[0].plot(temperature_cx_on, Ne4p / X_Ne, linestyle='--', color='black')
 #axs[0].plot(temperature_cx_on, Ne5p / X_Ne, linestyle='--', color='black')
@@ -178,24 +181,23 @@ axs[1, 0].plot(temperature_cx_on, Ne2p / X_Ne, color='crimson', alpha=0.6, linew
 #axs[0].plot(temperature_cx_on, Ne9p / X_Ne, linestyle='--', color='black')
 #axs[0].plot(temperature_cx_on, Ne10p / X_Ne, linestyle='--', color='black')
 
-axs[1, 0].text(4.1, 0.7, '$\mathrm{Ne}$', fontsize=12, color='black')
-axs[1, 0].text(4.5, 0.6, "$\mathrm{Ne}^{+}$", fontsize=12, color='black')
-axs[1, 0].text(4.9, 0.5, '$\mathrm{Ne}^{2+}$', fontsize=12, color='black')
+axs[2].text(4.1, 0.7, '$\mathrm{Ne}$', fontsize=16, color='black')
+axs[2].text(4.5, 0.6, "$\mathrm{Ne}^{1+}$", fontsize=16, color='black')
+axs[2].text(4.9, 0.5, '$\mathrm{Ne}^{2+}$', fontsize=16, color='black')
 
 #axs[1, 0].text(4.75, 0.03, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
 #axs[1, 0].text(4.75, 0.02, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
-axs[1, 0].legend(frameon=False, bbox_to_anchor=(0.7, 0.2), loc="center", fontsize=12)
 
-axs[1, 0].tick_params(labelsize=16)
-axs[1, 0].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
-axs[1, 0].set_xlabel(r"\rm T (K)", fontsize=16)
-axs[1, 0].set_yscale('log')
-axs[1, 0].set_ylim(10**-2, 1.1)
-axs[1, 0].set_xlim(4.0, 5.2)
-axs[1, 0].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
-axs[1, 0].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
-
+axs[2].tick_params(labelsize=16)
+axs[2].set_ylabel(r"\rm Ionisation fraction", fontsize=18)
+#axs[2].set_xlabel(r"\rm T (K)", fontsize=16)
+axs[2].set_yscale('log')
+axs[2].set_ylim(10**-2, 1.1)
+axs[2].set_xlim(4.0, 5.2)
+axs[2].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
+axs[2].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
+axs[2].set_yticks([0.1,  1])
 # Silicon ###################################################################
 # y data - Silicon species cx off ###########
 X_Si = get_tracer(cx_off_cie_silo, "Tr006_X_Si")
@@ -217,9 +219,9 @@ Si14p = X_Si - (Si0 + Si1p + Si2p + Si3p + Si4p + Si5p + Si6p
                 + Si7p + Si8p + Si9p + Si10p + Si11p + Si12p + Si13p)
 
 #axs[1].plot(temperature_cx_off, Si0 / X_Si, label="$\mathrm{Si}^{0}$", color='black')
-axs[1, 1].plot(temperature_cx_off, Si1p / X_Si, color='darkblue', linestyle='--', linewidth=2.0)
-axs[1, 1].plot(temperature_cx_off, Si2p / X_Si, color='darkblue', linestyle='--', linewidth=2.0)
-axs[1, 1].plot(temperature_cx_off, Si3p / X_Si, color='darkblue', linestyle='--', linewidth=2.0)
+axs[3].plot(temperature_cx_off, Si1p / X_Si, color='darkblue', linestyle='--', linewidth=2.0)
+axs[3].plot(temperature_cx_off, Si2p / X_Si, color='darkblue', linestyle='--', linewidth=2.0)
+axs[3].plot(temperature_cx_off, Si3p / X_Si, color='darkblue', linestyle='--', linewidth=2.0)
 #axs[1].plot(temperature_cx_off, Si4p / X_Si, label="$\mathrm{Si}^{4+}$", color='black')
 #axs[1].plot(temperature_cx_off, Si5p / X_Si, label="$\mathrm{Si}^{5+}$", color='black')
 #axs[1].plot(temperature_cx_off, Si6p / X_Si, label="$\mathrm{Si}^{6+}$", color='black')
@@ -252,9 +254,9 @@ Si14p = X_Si - (Si0 + Si1p + Si2p + Si3p + Si4p + Si5p + Si6p
                 + Si7p + Si8p + Si9p + Si10p + Si11p + Si12p + Si13p)
 
 #axs[1].plot(temperature_cx_on, Si0 / X_Si, color='black', linestyle='--')
-axs[1, 1].plot(temperature_cx_on, Si1p / X_Si, color='crimson', alpha=0.6, linewidth=2.0)
-axs[1, 1].plot(temperature_cx_on, Si2p / X_Si, color='crimson', alpha=0.6, linewidth=2.0)
-axs[1, 1].plot(temperature_cx_on, Si3p / X_Si, color='crimson', alpha=0.6, linewidth=2.0)
+axs[3].plot(temperature_cx_on, Si1p / X_Si, color='crimson', alpha=0.6, linewidth=2.0)
+axs[3].plot(temperature_cx_on, Si2p / X_Si, color='crimson', alpha=0.6, linewidth=2.0)
+axs[3].plot(temperature_cx_on, Si3p / X_Si, color='crimson', alpha=0.6, linewidth=2.0)
 #axs[1].plot(temperature_cx_on, Si4p / X_Si, color='black', linestyle='--')
 #axs[1].plot(temperature_cx_on, Si5p / X_Si, color='black', linestyle='--')
 #axs[1].plot(temperature_cx_on, Si6p / X_Si, color='black', linestyle='--')
@@ -268,26 +270,26 @@ axs[1, 1].plot(temperature_cx_on, Si3p / X_Si, color='crimson', alpha=0.6, linew
 #axs[1].plot(temperature_cx_on, Si14p / X_Si, color='black', linestyle='--')
 
 
-axs[1, 1].text(4.1, 0.7, '$\mathrm{Si}$', fontsize=14, color='black')
-axs[1, 1].text(4.6, 0.5, "$\mathrm{Si}^{+}$", fontsize=14, color='black')
-axs[1, 1].text(4.8, 0.1, '$\mathrm{Si}^{2+}$', fontsize=14, color='black')
+axs[3].text(4.1, 0.7, '$\mathrm{Si}$', fontsize=16, color='black')
+axs[3].text(4.6, 0.5, "$\mathrm{Si}^{1+}$", fontsize=16, color='black')
+axs[3].text(4.8, 0.1, '$\mathrm{Si}^{2+}$', fontsize=16, color='black')
 
 #axs[1, 1].text(4.27, 0.03, '$\mathbf{CX-ON}$', fontsize=12, color='crimson', alpha=0.6)
 #axs[1, 1].text(4.27, 0.02, '$\mathbf{CX-OFF}$', fontsize=12, color='darkblue')
 
-axs[1, 1].tick_params(labelsize=16)
-axs[1, 1].set_ylabel(r"\rm Ionisation fraction", fontsize=16)
-axs[1, 1].set_xlabel(r"\rm T (K)", fontsize=16)
-axs[1, 1].set_yscale('log')
-axs[1, 1].set_ylim(10**-2, 1.1)
-axs[1, 1].set_xlim(4.0, 5.0)
+axs[3].tick_params(labelsize=16)
+axs[3].set_ylabel(r"\rm Ionisation fraction", fontsize=18)
+axs[3].set_xlabel(r"\rm T (K)", fontsize=18)
+axs[3].set_yscale('log')
+axs[3].set_ylim(10**-2, 1.1)
+axs[3].set_xlim(4.0, 5.2)
 
-axs[1, 1].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
-axs[1, 1].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
+axs[3].tick_params(axis='both', which='major', length=5, direction='in')  # Major ticks
+axs[3].tick_params(axis='both', which='minor', length=5, direction='in')   # Minor ticks
 
-plt.subplots_adjust(hspace=0.3)  # Increase horizontal space between plots
+plt.subplots_adjust(hspace=0.0)  # Increase horizontal space between plots
 outfile = output_dir + "CX_CIE_Aspulnd09_Compare.png"
 print("saving " + outfile)
-plt.savefig(outfile, bbox_inches="tight")
+plt.savefig(outfile, bbox_inches="tight", dpi=300)
 plt.close(fig)
 del fig

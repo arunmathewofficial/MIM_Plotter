@@ -202,7 +202,7 @@ del dataio
 ############################################################################
 
 
-fig, ax = plt.subplots(2, 1, figsize=(14, 6), sharex=True)
+fig, ax = plt.subplots(2, 1, figsize=(8, 8), sharex=True)
 
 # non-equilibirium oxygen ##################################################
 #ax.plot(pos, O0_0 / XO_0, label="$O$", color='yellow', linewidth=LINEWIDTH)
@@ -241,29 +241,27 @@ ax[0].text(7.7, 0.53, r'O$^{4+}$', fontsize=18)
 ax[0].text(8.4, 0.55, r'O$^{5+}$', fontsize=18)
 ax[0].text(8.8, 0.87, r'O$^{6+}$', fontsize=18)
 
-
-ax[1].set_xlim([3, 10])
+ax[1].set_xlim([4, 10])
 ax[1].legend(fontsize=16, loc="upper right", ncol=1, frameon=False,
-             columnspacing=0.15, bbox_to_anchor=(0.4, 0.7))
+             columnspacing=0.15, bbox_to_anchor=(0.4, 0.6))
 ax[1].set_ylabel('Ionisation  fraction', fontsize=20)
 ax[1].set_xlabel('Radius (pc)', fontsize=18)
 ax[1].tick_params(axis="both", direction="in", which="both", bottom=True,
                     top=True, left=True, right=True, length=4, labelsize=18)
-
 
 ax[1].text(6, 0.85, r'O$^{2+}$', fontsize=18)
 ax[1].text(7.7, 0.85, r'O$^{8+}$', fontsize=18)
 ax[1].text(9.1, 0.85, r'O$^{6+}$', fontsize=18)
 ax[1].text(8.6, 0.1, r'O$^{7+}$', fontsize=18)
 
-ax[0].text(3.3, 0.7, 'time = 35 kyr', fontsize=18)
-ax[1].text(3.3, 0.7, 'time = 1000 kyr', fontsize=18)
+ax[0].text(4.3, 0.7, 'time = 35 kyr', fontsize=18)
+ax[1].text(4.3, 0.7, 'time = 1000 kyr', fontsize=18)
 
-plt.subplots_adjust(left=0.07, right=0.98, top=0.98, bottom=0.1, hspace=0.0)
+plt.subplots_adjust(left=0.11, right=0.98, top=0.98, bottom=0.1, hspace=0.0)
 iy = str(i).zfill(5)
-opf = img_path + "Ofrac_Neq_Eq"+".png"
+opf = img_path + "NEQ-EQ-Ofrac"+".png"
 
-plt.savefig(opf)
+plt.savefig(opf, dpi=300)
 plt.close()
 
 

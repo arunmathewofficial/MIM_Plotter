@@ -277,7 +277,7 @@ del species_data
 
 # plot style ================================================================
 plot_style = {}
-plot_style['figsize'] = (12, 16)
+plot_style['figsize'] = (3.6, 7.8)
 plot_style['label-font-size'] = 12
 plot_style['matrix'] = [4, 1]
 plot_style['legend'] = False  # options: True/False
@@ -297,10 +297,10 @@ plot_style['axis-label'] = [[None, r'$\rm Ioniastion \, fraction$'],
 plot_style['insert-txt'] = []
 
 # plot margin adjustments
-plot_style['left'] = 0.06  # the left side of the subplots of the figure
-plot_style['right'] = 0.96  # the right side of the subplots of the figure
-plot_style['bottom'] = 0.05  # the bottom of the subplots of the figure
-plot_style['top'] = 0.97  # the top of the subplots of the figure
+plot_style['left'] = 0.16  # the left side of the subplots of the figure
+plot_style['right'] = 0.98  # the right side of the subplots of the figure
+plot_style['bottom'] = 0.06  # the bottom of the subplots of the figure
+plot_style['top'] = 0.99  # the top of the subplots of the figure
 plot_style['wspace'] = 0.0  # the amount of width reserved for blank space between subplots
 plot_style['hspace'] = 0.1  # the amount of height reserved for white space between subplots
 
